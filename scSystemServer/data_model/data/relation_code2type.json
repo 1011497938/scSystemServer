@@ -1,0 +1,3777 @@
+{
+    "[缺乏信息]": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "未详": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "入元祐党籍者": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "元符上书入籍者": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "是Y的恩主": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "恩主是Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "党羽为Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "党魁为Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "友": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "同年友": {
+        "type": "同为……之成员",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "弹劾": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y弹劾": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -5
+    },
+    "推荐": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "被Y推荐": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "反对/攻讦": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "遭到Y的反对/攻讦": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "被Y欣赏/器重": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "欣赏/器重": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "为Y之门人": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "门人为Y": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "与Y结党": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "为Y之学生": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "学生为Y": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "辟": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 1
+    },
+    "为Y所辟": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 1
+    },
+    "得到Y的支持": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "支持": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "排挤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "遭Y排挤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "(暂时保留，待删除)": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 0
+    },
+    "为Y所著书作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "书序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y学派的成员": {
+        "type": "同为……之成员",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "该学派的成员为Y": {
+        "type": "同为……之成员",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "为Y之弟子": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "弟子为Y": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "为Y作哀辞 [并入167]": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "哀辞由Y所作[并入166]": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 4
+    },
+    "其志业由Y传承": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "以Y之志业自任": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "研修理学": {
+        "type": "学术主题相近",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "墓志铭由Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 4
+    },
+    "为Y作墓志铭": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "书跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 4
+    },
+    "为Y所著书作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "医愈": {
+        "type": "医疗关系（笼统）",
+        "parent_type": "医疗",
+        "score": 5
+    },
+    "被Y医愈": {
+        "type": "医疗关系（笼统）",
+        "parent_type": "医疗",
+        "score": 5
+    },
+    "从Y游": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "从游者为Y": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "职业被Y继承": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 5
+    },
+    "继承Y的职业": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 5
+    },
+    "被Y推荐参加制科考试": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "推荐Y参加制科考试": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "文风效法Y": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "文风为Y所效法": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "筹划谋杀": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y筹划谋杀": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "不合": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "为Y之部将": {
+        "type": "官场关系（下属）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "部将为Y": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "为Y之幕僚": {
+        "type": "官场关系（下属）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "幕僚为Y": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "节行为Y所称道": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "称道Y之节行": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "诗作为Y所称道": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "称道Y的诗作": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "为Y撰写学术源宗": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "学术源宗由Y撰写": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "王安石新法反对者": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "被Y以诗讽忤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -2
+    },
+    "以诗讽忤Y": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -2
+    },
+    "忌/恶": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -1
+    },
+    "为Y所忌/恶": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "攻击道学": {
+        "type": "学术攻讦",
+        "parent_type": "学术",
+        "score": 1
+    },
+    "被Y养育": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 5
+    },
+    "养育": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 2
+    },
+    "为Y作字说、名述": {
+        "type": "论说文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "字说、名述由Y所作": {
+        "type": "论说文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "同乡": {
+        "type": "同为……之成员",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "相识": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "遭Y新法支持者排挤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "遗奏推荐": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y在遗表中推荐": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "拒绝在Y主政的政府中任职": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 1
+    },
+    "拒绝在Y的主政期出仕": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 1
+    },
+    "论学": {
+        "type": "学术主题相近",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "诗社成员": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "相唱和": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "同学、同门": {
+        "type": "同为……之成员",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "为Y之谋士": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "以Y为谋士": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "同场屋/同应举": {
+        "type": "同为……之成员",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "传Y之学": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "其学由Y所传": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "建议处决Y": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "其处决系由Y建议": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "为Y之门客": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "门客为Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "传记作者为Y": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作传": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "反对/不支持Y的政策": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "其政策被Y反对/不支持": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "遭Y党羽的攻讦": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "其党攻讦Y": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "赞扬Y之学": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "其学得到Y之赞扬": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "拒绝会面": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "会面的邀请被Y拒绝": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "遭Y反秦桧势力排挤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "为Y作祭文": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "祭文由Y所作": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作祝词": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "祝词由Y所作": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之书、画作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "书、画由Y作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作世系碑记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "世系碑记由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "求Y为他人（第三方）作墓志铭": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "受Y的请求为他人（第三方）作墓志铭": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "被Y鞫治": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "鞫治": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y逮捕": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "逮捕": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "为Y作庙碑记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "庙碑记由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作临别赠言(送别诗、序)": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 1
+    },
+    "临别得到Y所作赠言(送别诗、序)": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 1
+    },
+    "哀辞由Y所作": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 1
+    },
+    "为Y作哀辞": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 1
+    },
+    "遭Y反韩侂胄势力排挤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "称道Y之文风": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "文风为Y所称道": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "神道碑的书法由Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之神道碑作书": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "根据Y的命令被处决": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "下令处决": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "攻讦[并入15]": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "遭Y攻讦 [并入16]": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "决定Y的科举次第": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "科举次第由Y决定": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "谥议由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作谥议": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "反对赦免": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "对他的赦免遭到Y的反对": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -5
+    },
+    "对Y执弟子礼": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "受Y之弟子礼": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "出财赡给Y之军": {
+        "type": "军事支持",
+        "parent_type": "军事",
+        "score": 3
+    },
+    "军队得到Y之赡给": {
+        "type": "军事支持",
+        "parent_type": "军事",
+        "score": 4
+    },
+    "同僚": {
+        "type": "官场关系（平级）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "义庄记由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作义庄记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "处决": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y处决": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -9
+    },
+    "抵御或讨平叛军Y": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": 5
+    },
+    "叛军遭到Y的抵御或讨平": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": 5
+    },
+    "宗Y之学": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "其学为Y所宗": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "被Y（或追随者）杀害": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -6
+    },
+    "其（或追随者）杀害Y": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "主Y家之教席": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 6
+    },
+    "聘Y主家之教席": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 6
+    },
+    "受经于Y": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "传经于Y": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "为Y所葬": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 7
+    },
+    "葬": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 7
+    },
+    "丧事由Y经纪": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 7
+    },
+    "经纪Y之丧": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 7
+    },
+    "为Y作砚铭": {
+        "type": "箴铭文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "砚铭由Y所作": {
+        "type": "箴铭文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "排Y之学": {
+        "type": "学术攻讦",
+        "parent_type": "学术",
+        "score": 1
+    },
+    "其学为Y所排": {
+        "type": "学术攻讦",
+        "parent_type": "学术",
+        "score": -3
+    },
+    "从Y学": {
+        "type": "学术主题相近",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "教授Y": {
+        "type": "学术主题相近",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "年谱由Y所作": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作年谱": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作佛寺记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "佛寺记由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "神道碑额篆由Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之神道碑作额篆": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "因与Y的交往受牵连": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "与他的交往导致Y受牵连": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "为Y之义庄规矩作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 4
+    },
+    "义庄规矩序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "在Y的主政期出仕 [暂时保留，待删除]": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "其主政期中Y出仕 [暂时保留，待删除]": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "合撰(编)著作": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "为Y建立祠庙": {
+        "type": "宗教关系（笼统）",
+        "parent_type": "宗教",
+        "score": 4
+    },
+    "Y为之建立祠庙": {
+        "type": "宗教关系（笼统）",
+        "parent_type": "宗教",
+        "score": 4
+    },
+    "遭Y蔡京势力排挤": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "私淑Y之学": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "其学为Y所私淑": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "教授Y之学": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "其学由Y传授学生": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "拒为Y掾属": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "欲辟Y为幕僚但被拒绝": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "拥立Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "得到Y的拥立": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "同会": {
+        "type": "同为……之成员",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "批评": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y批评": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "支持Y的政策 [并入27]": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "其政策得到Y的支持[并入26]": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "家谱由Y作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y之家谱作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "与Y游": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "副Y出使": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "为使团副使Y的正使": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "(暂时保留,待日后分入 429, 430, 431, 432)": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 0
+    },
+    "元丰党人 [删除]": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "被指为Y之同犯": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "举办的乡Ⅰ礼得到Y所作之序": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": -3
+    },
+    "为Y举办的乡Ⅰ礼作序": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": -3
+    },
+    "王安石新法支持者": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "以文章、学问受知于": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "称道Y之文章、学问": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "与Y争权": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "斋、堂铭由Y所作": {
+        "type": "箴铭文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作斋、堂铭": {
+        "type": "箴铭文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "逃离Y的统治区": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "Y自其统治区中逃离": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "聘Y执教族学": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "为Y所聘执教族学": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "拒为Y之党": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "邀Y入党但遭到拒绝": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "庆元党人的指控者": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "庆元被禁的「伪学」人士": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "其后代出于Y之门": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "门人为Y之后代": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "从Y至贬所": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "由Y陪伴至贬所": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "碑阴为Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作碑阴": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "著述为Y所采": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "采Y之著述": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "[并入334]": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 0
+    },
+    "[并入333]": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 0
+    },
+    "墓志铭由Y作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y之墓志铭作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "联姻建议被Y拒绝": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": -4
+    },
+    "拒绝Y的联姻建议": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 2
+    },
+    "拜访": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "受到Y拜访": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 5
+    },
+    "编辑Y之诗文": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "诗文由Y编辑": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "战胜": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": 7
+    },
+    "败于": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": -4
+    },
+    "提议封赠Y": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "以Y言得到封赠": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "以宦官事Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "为宦官Y所事": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "(暂时保留，待删除：吏部供职)": {
+        "type": "官场关系（平级）",
+        "parent_type": "政治",
+        "score": 0
+    },
+    "得到Y的喜爱": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "喜爱": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "研读Y的著作": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "其著作为Y所研读": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "礼待": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "受Y之礼待": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 5
+    },
+    "为Y侍女": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "以Y为侍女": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "政见趋同": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "书风为Y所模仿": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 5
+    },
+    "模仿Y的书风": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "降于": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": 2
+    },
+    "接受Y之纳降": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": 2
+    },
+    "废除Y的君位": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "君位被Y废除": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "向Y致贺": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "从Y处收到贺词 (occasion)": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "家传为Y所作": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作家传": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作名说": {
+        "type": "论说文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y家谱作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "名说由Y所作": {
+        "type": "论说文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "战友": {
+        "type": "军事支持",
+        "parent_type": "军事",
+        "score": 5
+    },
+    "神道碑由Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作神道碑": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "受Y请求作神道碑": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 4
+    },
+    "向Y求神道碑": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓表由Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作墓表": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "受Y请求作墓表": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "向Y求墓表": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓志铭序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y墓志铭作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "神道碑序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y神道碑作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "神道碑跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y神道碑作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓表序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y墓表作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓表跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y墓表作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "挽诗、词由Y所作": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作挽诗、词": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "行状由Y所作": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作行状": {
+        "type": "传记文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "画赞(画像记)由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作画赞(画像记)": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "致书Y": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "被致书由Y": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "答Y书": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "收到Y的答书": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "致Y启": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "收到Y的启": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "答Y启": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "收到Y的答启": {
+        "type": "书札文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "赠诗、文": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "收到Y的赠诗、文": {
+        "type": "应酬文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "题Y的书帖": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "其书帖由Y作题": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "题Y之画作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "题画诗文的作者为Y": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之建筑物题咏、记、命名": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "建筑物得到Y的题咏、记、命名": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "同道": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "贷给Y": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 3
+    },
+    "向Y贷": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 3
+    },
+    "给Y钱物": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 3
+    },
+    "接受Y的钱物": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 3
+    },
+    "向Y购买": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 3
+    },
+    "卖给Y": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 3
+    },
+    "佃户为Y": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 4
+    },
+    "地主为Y": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 4
+    },
+    "家仆为Y": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "家主为Y": {
+        "type": "财务关系（笼统）",
+        "parent_type": "财务",
+        "score": 2
+    },
+    "编辑Y的学术作品": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "其学术作品由Y编辑": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "学记（书院记）由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y作学记（书院记）": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "夺Y之妻": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 3
+    },
+    "妻被Y夺": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": -5
+    },
+    "圹记由Y所作": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y作圹记": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "其同犯被指为Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": -4
+    },
+    "为Y之收藏作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "收藏品由Y作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "向Y问学": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "指教Y": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "为Y之诗文作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "诗文跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "陷害Y": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "被Y陷害": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "画风师法Y": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "画风为Y所师法": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "书、画为Y所称道": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "称道Y的书、画": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "以医术事Y": {
+        "type": "医疗关系（笼统）",
+        "parent_type": "医疗",
+        "score": 3
+    },
+    "被Y以医术所事": {
+        "type": "医疗关系（笼统）",
+        "parent_type": "医疗",
+        "score": 3
+    },
+    "为Y所作诗文作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "诗文序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "上司为Y": {
+        "type": "官场关系（下属）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "下属为Y": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "为Y篆匾额、器铭": {
+        "type": "箴铭文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "匾额、器铭由Y所篆": {
+        "type": "箴铭文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y明冤": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "其冤因Y得明": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 6
+    },
+    "奏录Y之文": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "其文为Y所奏录": {
+        "type": "学术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "代Y作文": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "由Y代作文": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "拒Y游说": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "游说Y被拒绝": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "为Y所佑": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "护佑Y": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "为Y之潜邸旧人": {
+        "type": "官场关系（下属）",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "潜邸旧人为Y": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "为Y之生祠作记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "其生祠由Y作记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "聘Y执教官学、书院": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "为Y所聘执教官学、书院": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "送别": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "被送别": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "赠画": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "得到赠画": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "献文、书于Y": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "收到Y所献诗、文、书": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "蛊惑Y": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "被Y蛊惑": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": -3
+    },
+    "请Y作序、记": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "受Y之请作序、记": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "向Y借书": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "借书给Y": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 3
+    },
+    "反对Y称帝": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "称帝为Y所反对": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "得罪Y": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "被Y得罪": {
+        "type": "政治对抗",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "题Y之墓": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓由Y题": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "献策于Y": {
+        "type": "官场关系（下属）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "采纳Y之献策": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "结义": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": 2
+    },
+    "与Y共赴难": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": -2
+    },
+    "为Y之行状作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "行状跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之家传作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "家传跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "帮助Y": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "得到Y之帮助": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "评论Y之著作": {
+        "type": "论说文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "著作被Y评论": {
+        "type": "论说文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓志铭额篆由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y的墓志铭作额篆": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "赠Y物": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "受Y之赠物": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 4
+    },
+    "为Y取名、字": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "名、字由Y所取": {
+        "type": "社会交际",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "祭文跋由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "为Y祭文作跋": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "政绩为Y所称道": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "称道Y之政绩": {
+        "type": "政治奥援",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "刊刻Y之著述": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "著述由Y刊刻": {
+        "type": "学术襄助",
+        "parent_type": "学术",
+        "score": 4
+    },
+    "求他人（第三方）为Y作墓志铭": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "墓志铭系由Y向他人（第三方）求得": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 4
+    },
+    "求Y为他人（第三方）作神道碑": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 1
+    },
+    "受Y的请求为他人（第三方）作神道碑": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 3
+    },
+    "求他人（第三方）为Y作神道碑": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 1
+    },
+    "神道碑系由Y向他人（第三方）求得": {
+        "type": "墓志文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之义女": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 6
+    },
+    "义女为Y": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 6
+    },
+    "为Y乞某事": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "某事由Y所乞": {
+        "type": "荐举保任",
+        "parent_type": "政治",
+        "score": 2
+    },
+    "上奏论Y": {
+        "type": "政治关系（笼统）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "被Y奏论": {
+        "type": "政治关系（笼统）",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "与Y旅游": {
+        "type": "朋友关系（笼统）",
+        "parent_type": "朋友",
+        "score": 4
+    },
+    "为Y作道观记": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "道观记由Y所作": {
+        "type": "礼仪文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之考官": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "考官为Y": {
+        "type": "师生关系",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "为Y作祠记": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "祠记由Y所作": {
+        "type": "记咏文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之家仆": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "世交父执为Y": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 3
+    },
+    "为Y之世交父执": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 3
+    },
+    "为Y主婚": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 3
+    },
+    "Y为之主婚": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 6
+    },
+    "录Y为假子(养子)": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 5
+    },
+    "为Y之假子(养子)": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 6
+    },
+    "与Y攀亲戚叙族属": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 3
+    },
+    "Y与之攀亲戚叙族属": {
+        "type": "家庭关系（笼统）",
+        "parent_type": "家庭",
+        "score": 4
+    },
+    "校订Y之著述": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "著述由Y校订": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 3
+    },
+    "为Y之婢": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 2
+    },
+    "婢为Y": {
+        "type": "社会关系（笼统）",
+        "parent_type": "社会关系（笼统）",
+        "score": 1
+    },
+    "献诗集给Y": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 2
+    },
+    "被Y献诗集": {
+        "type": "文学艺术交往",
+        "parent_type": "学术",
+        "score": 6
+    },
+    "家传序由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之家传作序": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "为Y之书题词": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "书之题词由Y所作": {
+        "type": "序跋文字",
+        "parent_type": "著述",
+        "score": 2
+    },
+    "军事支持Y": {
+        "type": "军事支持",
+        "parent_type": "军事",
+        "score": 2
+    },
+    "受Y之军事支持": {
+        "type": "军事支持",
+        "parent_type": "军事",
+        "score": 5
+    },
+    "军事对抗Y": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": -3
+    },
+    "被Y军事对抗Y": {
+        "type": "军事对抗",
+        "parent_type": "军事",
+        "score": -3
+    },
+    "谄事Y": {
+        "type": "官场关系（下属）",
+        "parent_type": "政治",
+        "score": 1
+    },
+    "被Y谄事": {
+        "type": "官场关系（上司）",
+        "parent_type": "政治",
+        "score": -3
+    },
+    "推荐Y给他人（第三方）": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 2
+    },
+    "被Y推荐给他人（第三方）": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 5
+    },
+    "为Y请祀": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 2
+    },
+    "Y为之请祀": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 3
+    },
+    "出财赡给Y": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 2
+    },
+    "Y为之出财赡给": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 4
+    },
+    "为Y求谥号": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 2
+    },
+    "Y为之求谥号": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 4
+    },
+    "与Y为讲学": {
+        "type": "未知",
+        "parent_type": "未知",
+        "score": 2
+    },
+    "升职": {
+        "type": "职务变迁",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "就任": {
+        "type": "职务变迁",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "籍贯(基本地址)": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "迁住地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "前住地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "最后所知地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "祖籍": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "落籍(实际居住地)": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "本贯": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "出生地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "葬地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "死所": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "本族支裔迁徙路线": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "游历或曾经到过": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "八旗清代": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "另一籍贯(基本地址)": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "避兵之地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": -4
+    },
+    "户籍地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "流放之地": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": -4
+    },
+    "卜居": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": -4
+    },
+    "侨居": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "坐徙": {
+        "type": "迁徙",
+        "parent_type": "迁徙",
+        "score": 0
+    },
+    "[Missing Data]": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 0
+    },
+    "未知": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 0
+    },
+    "前帝逊位": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 9
+    },
+    "临时保留，待考。": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "胥吏出职": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "进纳补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩荫: 大礼荫补": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "废前帝自立": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 9
+    },
+    "画院待诏": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "征辟": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "募入军伍": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "待删除(内容多种，未知所属，故临时保留)。": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "开国君主": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 9
+    },
+    "封土建藩(始封)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "贡生: 恩贡": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "册封为妃嫔": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举 (笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 童子举": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 制举 (笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 特奏名进士、特奏名诸科 、大挑": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 举制科不第": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 举进士、诸科不第": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 漕试举人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 进士(笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 进士(八行科)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 乡贡举人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 明法": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 医科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 武举进士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 武举人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "学校: 生员(庠生)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 正奏名诸科(不含明经、明法)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "学校: 上舍及第": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 秀才(宋及以前)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "科举学校: 恩赐出身、特赐出身等": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "以耆行等赐爵": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩荫: 遗表荫补": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩荫: 致仕荫补": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩荫: 死事荫补": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "世袭": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "册封为皇后": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "立储": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "其他与皇室联姻关系": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "尚宗女 = 驸马": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "宗子该恩": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "军员转补": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "学校: 武学博士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "归明归正补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "以文学、文艺补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "得度": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "军功补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "割据自立": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "封赠": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "上书献颂": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "荐举 (保任)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "纳土授官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "辟为幕僚": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "贡生 = 贡监生(笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "监生(笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "贡生: 岁贡": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "继位": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "弑君自立": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "易代变节": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "以方技进": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩荫(笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 国子监进士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 词科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "杂色补授 (笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "摄官转正": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "特赐补官、准赦文除授等": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩荫: 圣节荫补": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "军功补授(笼统)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "拣汰军人补授": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "招降补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "保甲补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "借补入官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "宗室女夫曾得解者": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "戚里女夫及捧香": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "异姓恩泽": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "阵亡人女夫": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "随奉使补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "吏人特恩减年": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "贡生: 拔贡": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "贡生: 选贡(优贡 after 1628)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "贡生: 副贡": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "贡生: 纳贡(例贡)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "监生: 举监": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "监生: 荫监(含明代官生、恩生，或清代恩荫s生、难荫生)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "监生: 例监": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "监生: 恩监": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "监生: 优监": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "科举: 明经": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "赐师号": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "其他荫补(确定非圣节、大礼、致仕、遗表、死事荫补)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "其他": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 正奏名进士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "书艺补官": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 四川类省试": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "太学生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 明通榜": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "县学附生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "官学生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "县学生员": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 5
+    },
+    "恩科孝廉": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "以优行贡太学": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "副贡生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "附贡生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "副车": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "恩科乡试举人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "廪生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "领催": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "廪贡生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "廪监生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "附生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 6
+    },
+    "钦赐举人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "繙译举人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "繙译进士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "副榜": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 4
+    },
+    "二品荫生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "挑补拜唐阿": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "增广生; 增广生员": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "文生员": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "武生员": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "宗室": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "觉罗": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "义学生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "一品荫生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "三品荫生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "优贡生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "马甲": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "护军": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "前锋": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "外戚": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "外藩蒙古王公": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "披甲": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "民人": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "布衣": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "幼丁": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "亲军": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "乡勇": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 3
+    },
+    "笔帖式": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "俊秀": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "外国大学生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "乐舞生;佾生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "内阁中书": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "书院": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "专门学校": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "闲散": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "大考翰詹": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "考取教习": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "清朝: 考取官位": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "经济特科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "宗教: 受洗": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "宗教: 做喇嘛": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "以茂才,才行,武功,廉仁等科举/授官 （非制科）": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 博学鸿词/博学宏词科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 下笔成章科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 八科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "吏部试 (隋唐)": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 大礼科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 孝廉": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 宏词科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 射策": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 幽素科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 手笔俊拔科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 手笔俊拔超越流辈科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 才识兼茂明于体用科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文辞清丽科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文辞雅丽科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 拔萃科；书判拔萃科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 直言极谏科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 绝伦科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 临难不顾徇节宁邦科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 茂才异等科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 茂才异行科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 万言科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 藻思清华科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 贤良方正科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 贤良方正能直言极谏科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 超拔群类科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 军谋越众科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 开元礼科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 三史": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 九经": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 五经": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 通五经科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 五经秀才科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 博学三史科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 博通坟典科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 博通坟典达于教化科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 博通文词科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 哲人奇士科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 四子科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 天下奇佚科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 孝悌廉洁科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 孝悌廉让科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 学究科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 平判入等": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 廉科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 志烈秋霜科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 才可宰百里科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 才膺管乐科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 才高未达沈迹下僚科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文以经国科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文可以经邦科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文坛词场科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文学优赡科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文艺优长科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文藻宏丽科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文藻流誉科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 文词秀逸科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 明两经": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 明于政理科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 智谋将帅科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 经学优深科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 有道科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 材堪经邦科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 武举科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 武足安边科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 洞晓玄经科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 清廉守节政术可称堪县令科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 牧宰科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 百篇": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 良才异等科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 英才杰出业奥大经科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 英材杰出科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 藏器下僚科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 词擅文场科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 词藻宏丽制举": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 详明政术可以理人科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 讽谏主文科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 辞殚文律科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 道侔伊吕科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 隠居丘园不求闻达科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 韬晦贤才": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 风雅古调科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 高才沈沦草泽自举科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 拔萃出类科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 军谋宏远科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举制举: 举或诏": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "科举: 考上会试/贡士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "行伍": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "武童": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "文童/儒童": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "博学鸿儒": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "皇子/亲王": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 9
+    },
+    "五品荫生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "六品荫生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "举为孝廉方正": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "州、府学生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "出身军职": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "内务府 （清朝）": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "于国内公立私立大学就学、毕业": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "庠生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 7
+    },
+    "郡庠生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "邑庠生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "武贡士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "策试": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "特恩保举经学科": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "宾贡": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "翻译生员": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "祠生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "法政科进士": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "奉祀生": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "乡宾": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "大宾": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "冠带": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    },
+    "介宾": {
+        "type": "入仕",
+        "parent_type": "政治",
+        "score": 8
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "assoc_data": {
+        "c_assoc_year": "c_assoc_range"
+    },
+    "biog_addr_data": {
+        "c_firstyear": "c_fy_range",
+        "c_lastyear": "c_ly_range"
+    },
+    "biog_inst_data": {
+        "c_bi_begin_year": "c_bi_by_range",
+        "c_bi_end_year": "c_bi_ey_range"
+    },
+    "biog_main": {
+        "c_birthyear": "c_by_range",
+        "c_deathyear": "c_dy_range"
+    },
+    "entry_data": {
+        "c_year": "c_entry_range"
+    },
+    "events_addr": {
+        "c_year": "c_yr_range"
+    },
+    "events_data": {
+        "c_year": "c_yr_range"
+    },
+    "posted_to_office_data": {
+        "c_firstyear": "c_fy_range",
+        "c_lastyear": "c_ly_range"
+    },
+    "social_institution_codes": {
+        "c_inst_begin_year": "c_by_year_range",
+        "c_inst_end_year": "c_ey_year_range"
+    },
+    "status_data": {
+        "c_firstyear": "c_fy_range",
+        "c_lastyear": "c_ly_range"
+    },
+    "text_codes": {
+        "c_text_year": "c_text_range_code",
+        "c_pub_year": "c_pub_range_code"
+    },
+    "text_data": {
+        "c_year": "c_range_code"
+    }
+}

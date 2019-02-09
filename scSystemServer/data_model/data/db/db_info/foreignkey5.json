@@ -1,0 +1,1458 @@
+{
+    "addr_belongs_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "addr_belongs_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "属于",
+        "inverse": "1"
+    },
+    "addr_belongs_data/addr_codes/c_belongs_to_c_addr_id": {
+        "table1": "addr_belongs_data",
+        "table2": "addr_codes",
+        "key": "c_belongs_to",
+        "foreignkey": "c_addr_id",
+        "name": "属于",
+        "inverse": "0"
+    },
+    "addr_belongs_data/text_codes/c_source_c_textid": {
+        "table1": "addr_belongs_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "addr_xy/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "addr_xy",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "经纬度",
+        "inverse": "1"
+    },
+    "altname_data/altname_codes/c_alt_name_type_code_c_name_type_code": {
+        "table1": "altname_data",
+        "table2": "altname_codes",
+        "key": "c_alt_name_type_code",
+        "foreignkey": "c_name_type_code",
+        "name": "类别",
+        "inverse": "0"
+    },
+    "altname_data/biog_main/c_personid_c_personid": {
+        "table1": "altname_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "别名",
+        "inverse": "1"
+    },
+    "altname_data/text_codes/c_source_c_textid": {
+        "table1": "altname_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "assoc_code_type_rel/assoc_codes/c_assoc_code_c_assoc_code": {
+        "table1": "assoc_code_type_rel",
+        "table2": "assoc_codes",
+        "key": "c_assoc_code",
+        "foreignkey": "c_assoc_code",
+        "name": "类别",
+        "inverse": "1"
+    },
+    "assoc_code_type_rel/assoc_types/c_assoc_type_id_c_assoc_type_id": {
+        "table1": "assoc_code_type_rel",
+        "table2": "assoc_types",
+        "key": "c_assoc_type_id",
+        "foreignkey": "c_assoc_type_id",
+        "name": "类别",
+        "inverse": "0"
+    },
+    "assoc_code_type_rel/assoc_code_type_rel/c_assoc_type_id_c_assoc_type_parent_id": {
+        "table1": "assoc_code_type_rel",
+        "table2": "assoc_code_type_rel",
+        "key": "c_assoc_type_id",
+        "foreignkey": "c_assoc_type_parent_id",
+        "name": "属于",
+        "inverse": "0"
+    },
+    "assoc_codes/assoc_codes/c_assoc_pair2_c_assoc_code": {
+        "table1": "assoc_codes",
+        "table2": "assoc_codes",
+        "key": "c_assoc_pair2",
+        "foreignkey": "c_assoc_code",
+        "name": "成对",
+        "inverse": "0"
+    },
+    "assoc_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "assoc_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "assoc_data/biog_main/c_assoc_claimer_id_c_personid": {
+        "table1": "assoc_data",
+        "table2": "biog_main",
+        "key": "c_assoc_claimer_id",
+        "foreignkey": "c_personid",
+        "name": "关系指证人",
+        "inverse": "0"
+    },
+    "assoc_data/assoc_codes/c_assoc_code_c_assoc_code": {
+        "table1": "assoc_data",
+        "table2": "assoc_codes",
+        "key": "c_assoc_code",
+        "foreignkey": "c_assoc_code",
+        "name": "关系类别",
+        "inverse": "0"
+    },
+    "assoc_data/ganzhi_codes/c_assoc_day_gz_c_ganzhi_code": {
+        "table1": "assoc_data",
+        "table2": "ganzhi_codes",
+        "key": "c_assoc_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "日干支",
+        "inverse": "0"
+    },
+    "assoc_data/biog_main/c_assoc_id_c_personid": {
+        "table1": "assoc_data",
+        "table2": "biog_main",
+        "key": "c_assoc_id",
+        "foreignkey": "c_personid",
+        "name": "关系_对象",
+        "inverse": "0"
+    },
+    "assoc_data/biog_main/c_assoc_kin_id_c_personid": {
+        "table1": "assoc_data",
+        "table2": "biog_main",
+        "key": "c_assoc_kin_id",
+        "foreignkey": "c_personid",
+        "name": "亲戚",
+        "inverse": "0"
+    },
+    "assoc_data/nian_hao/c_assoc_nh_code_c_nianhao_id": {
+        "table1": "assoc_data",
+        "table2": "nian_hao",
+        "key": "c_assoc_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "社会关系_年号",
+        "inverse": "0"
+    },
+    "assoc_data/year_range_codes/c_assoc_range_c_range_code": {
+        "table1": "assoc_data",
+        "table2": "year_range_codes",
+        "key": "c_assoc_range",
+        "foreignkey": "c_range_code",
+        "name": "社会关系_时限",
+        "inverse": "0"
+    },
+    "assoc_data/social_institution_codes/c_inst_code_c_inst_code": {
+        "table1": "assoc_data",
+        "table2": "social_institution_codes",
+        "key": "c_inst_code",
+        "foreignkey": "c_inst_code",
+        "name": "社会机构",
+        "inverse": "0"
+    },
+    "assoc_data/social_institution_name_codes/c_inst_name_code_c_inst_name_code": {
+        "table1": "assoc_data",
+        "table2": "social_institution_name_codes",
+        "key": "c_inst_name_code",
+        "foreignkey": "c_inst_name_code",
+        "name": "社会机构名",
+        "inverse": "0"
+    },
+    "assoc_data/kinship_codes/c_kin_code_c_kincode": {
+        "table1": "assoc_data",
+        "table2": "kinship_codes",
+        "key": "c_kin_code",
+        "foreignkey": "c_kincode",
+        "name": "亲属关系",
+        "inverse": "0"
+    },
+    "assoc_data/biog_main/c_kin_id_c_personid": {
+        "table1": "assoc_data",
+        "table2": "biog_main",
+        "key": "c_kin_id",
+        "foreignkey": "c_personid",
+        "name": "亲属_对象",
+        "inverse": "0"
+    },
+    "assoc_data/literarygenre_codes/c_litgenre_code_c_lit_genre_code": {
+        "table1": "assoc_data",
+        "table2": "literarygenre_codes",
+        "key": "c_litgenre_code",
+        "foreignkey": "c_lit_genre_code",
+        "name": "文学样式",
+        "inverse": "0"
+    },
+    "assoc_data/occasion_codes/c_occasion_code_c_occasion_code": {
+        "table1": "assoc_data",
+        "table2": "occasion_codes",
+        "key": "c_occasion_code",
+        "foreignkey": "c_occasion_code",
+        "name": "事件",
+        "inverse": "0"
+    },
+    "assoc_data/biog_main/c_personid_c_personid": {
+        "table1": "assoc_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "关系",
+        "inverse": "1"
+    },
+    "assoc_data/text_codes/c_source_c_textid": {
+        "table1": "assoc_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "assoc_data/biog_main/c_tertiary_personid_c_personid": {
+        "table1": "assoc_data",
+        "table2": "biog_main",
+        "key": "c_tertiary_personid",
+        "foreignkey": "c_personid",
+        "name": "见证者",
+        "inverse": "0"
+    },
+    "assoc_data/scholarlytopic_codes/c_topic_code_c_topic_code": {
+        "table1": "assoc_data",
+        "table2": "scholarlytopic_codes",
+        "key": "c_topic_code",
+        "foreignkey": "c_topic_code",
+        "name": "文学主题",
+        "inverse": "0"
+    },
+    "biog_addr_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "biog_addr_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "biog_addr_data/biog_addr_codes/c_addr_type_c_addr_type": {
+        "table1": "biog_addr_data",
+        "table2": "biog_addr_codes",
+        "key": "c_addr_type",
+        "foreignkey": "c_addr_type",
+        "name": "类别",
+        "inverse": "0"
+    },
+    "biog_addr_data/ganzhi_codes/c_fy_day_gz_c_ganzhi_code": {
+        "table1": "biog_addr_data",
+        "table2": "ganzhi_codes",
+        "key": "c_fy_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "始年_日干支",
+        "inverse": "0"
+    },
+    "biog_addr_data/nian_hao/c_fy_nh_code_c_nianhao_id": {
+        "table1": "biog_addr_data",
+        "table2": "nian_hao",
+        "key": "c_fy_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "始年_年号",
+        "inverse": "0"
+    },
+    "biog_addr_data/year_range_codes/c_fy_range_c_range_code": {
+        "table1": "biog_addr_data",
+        "table2": "year_range_codes",
+        "key": "c_fy_range",
+        "foreignkey": "c_range_code",
+        "name": "始年_时限",
+        "inverse": "0"
+    },
+    "biog_addr_data/ganzhi_codes/c_ly_day_gz_c_ganzhi_code": {
+        "table1": "biog_addr_data",
+        "table2": "ganzhi_codes",
+        "key": "c_ly_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "终年_日干支",
+        "inverse": "0"
+    },
+    "biog_addr_data/nian_hao/c_ly_nh_code_c_nianhao_id": {
+        "table1": "biog_addr_data",
+        "table2": "nian_hao",
+        "key": "c_ly_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "终年年号",
+        "inverse": "0"
+    },
+    "biog_addr_data/year_range_codes/c_ly_range_c_range_code": {
+        "table1": "biog_addr_data",
+        "table2": "year_range_codes",
+        "key": "c_ly_range",
+        "foreignkey": "c_range_code",
+        "name": "终年_时限",
+        "inverse": "0"
+    },
+    "biog_addr_data/biog_main/c_personid_c_personid": {
+        "table1": "biog_addr_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "前往",
+        "inverse": "1"
+    },
+    "biog_addr_data/text_codes/c_source_c_textid": {
+        "table1": "biog_addr_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "biog_inst_data/nian_hao/c_bi_by_nh_code_c_nianhao_id": {
+        "table1": "biog_inst_data",
+        "table2": "nian_hao",
+        "key": "c_bi_by_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "成立_年号",
+        "inverse": "0"
+    },
+    "biog_inst_data/year_range_codes/c_bi_by_range_c_range_code": {
+        "table1": "biog_inst_data",
+        "table2": "year_range_codes",
+        "key": "c_bi_by_range",
+        "foreignkey": "c_range_code",
+        "name": "成立时限_年号",
+        "inverse": "0"
+    },
+    "biog_inst_data/nian_hao/c_bi_ey_nh_code_c_nianhao_id": {
+        "table1": "biog_inst_data",
+        "table2": "nian_hao",
+        "key": "c_bi_ey_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "成立始年_年号",
+        "inverse": "0"
+    },
+    "biog_inst_data/year_range_codes/c_bi_ey_range_c_range_code": {
+        "table1": "biog_inst_data",
+        "table2": "year_range_codes",
+        "key": "c_bi_ey_range",
+        "foreignkey": "c_range_code",
+        "name": "成立始年_时限",
+        "inverse": "0"
+    },
+    "biog_inst_data/biog_inst_codes/c_bi_role_code_c_bi_role_code": {
+        "table1": "biog_inst_data",
+        "table2": "biog_inst_codes",
+        "key": "c_bi_role_code",
+        "foreignkey": "c_bi_role_code",
+        "name": "成立_角色",
+        "inverse": "0"
+    },
+    "biog_inst_data/social_institution_codes/c_inst_code_c_inst_code": {
+        "table1": "biog_inst_data",
+        "table2": "social_institution_codes",
+        "key": "c_inst_code",
+        "foreignkey": "c_inst_code",
+        "name": "社会机构",
+        "inverse": "0"
+    },
+    "biog_inst_data/social_institution_codes/c_inst_name_code_c_inst_name_code": {
+        "table1": "biog_inst_data",
+        "table2": "social_institution_codes",
+        "key": "c_inst_name_code",
+        "foreignkey": "c_inst_name_code",
+        "name": "社会机构名",
+        "inverse": "0"
+    },
+    "biog_inst_data/biog_main/c_personid_c_personid": {
+        "table1": "biog_inst_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "相关社会机构",
+        "inverse": "1"
+    },
+    "biog_inst_data/text_codes/c_source_c_textid": {
+        "table1": "biog_inst_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "biog_main/ganzhi_codes/c_by_day_gz_c_ganzhi_code": {
+        "table1": "biog_main",
+        "table2": "ganzhi_codes",
+        "key": "c_by_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "生年_日干支",
+        "inverse": "0"
+    },
+    "biog_main/nian_hao/c_by_nh_code_c_nianhao_id": {
+        "table1": "biog_main",
+        "table2": "nian_hao",
+        "key": "c_by_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "生年_年号",
+        "inverse": "0"
+    },
+    "biog_main/year_range_codes/c_by_range_c_range_code": {
+        "table1": "biog_main",
+        "table2": "year_range_codes",
+        "key": "c_by_range",
+        "foreignkey": "c_range_code",
+        "name": "生年时限",
+        "inverse": "0"
+    },
+    "biog_main/choronym_codes/c_choronym_code_c_choronym_code": {
+        "table1": "biog_main",
+        "table2": "choronym_codes",
+        "key": "c_choronym_code",
+        "foreignkey": "c_choronym_code",
+        "name": "中古家族",
+        "inverse": "0"
+    },
+    "biog_main/year_range_codes/c_death_age_approx_c_range_code": {
+        "table1": "biog_main",
+        "table2": "year_range_codes",
+        "key": "c_death_age_approx",
+        "foreignkey": "c_range_code",
+        "name": "卒年_时限",
+        "inverse": "0"
+    },
+    "biog_main/dynasties/c_dy_c_dy": {
+        "table1": "biog_main",
+        "table2": "dynasties",
+        "key": "c_dy",
+        "foreignkey": "c_dy",
+        "name": "朝代",
+        "inverse": "0"
+    },
+    "biog_main/ganzhi_codes/c_dy_day_gz_c_ganzhi_code": {
+        "table1": "biog_main",
+        "table2": "ganzhi_codes",
+        "key": "c_dy_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "卒年_日干支",
+        "inverse": "0"
+    },
+    "biog_main/nian_hao/c_dy_nh_code_c_nianhao_id": {
+        "table1": "biog_main",
+        "table2": "nian_hao",
+        "key": "c_dy_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "卒年_年号",
+        "inverse": "0"
+    },
+    "biog_main/year_range_codes/c_dy_range_c_range_code": {
+        "table1": "biog_main",
+        "table2": "year_range_codes",
+        "key": "c_dy_range",
+        "foreignkey": "c_range_code",
+        "name": "卒年_时限",
+        "inverse": "0"
+    },
+    "biog_main/ethnicity_codes/c_ethnicity_code_c_ethnicity_code": {
+        "table1": "biog_main",
+        "table2": "ethnicity_codes",
+        "key": "c_ethnicity_code",
+        "foreignkey": "c_ethnicity_code",
+        "name": "种族",
+        "inverse": "0"
+    },
+    "biog_main/nian_hao/c_fl_ey_nh_code_c_nianhao_id": {
+        "table1": "biog_main",
+        "table2": "nian_hao",
+        "key": "c_fl_ey_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "在世始年_年号",
+        "inverse": "0"
+    },
+    "biog_main/nian_hao/c_fl_ly_nh_code_c_nianhao_id": {
+        "table1": "biog_main",
+        "table2": "nian_hao",
+        "key": "c_fl_ly_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "在世终年_年号",
+        "inverse": "0"
+    },
+    "biog_main/household_status_codes/c_household_status_code_c_household_status_code": {
+        "table1": "biog_main",
+        "table2": "household_status_codes",
+        "key": "c_household_status_code",
+        "foreignkey": "c_household_status_code",
+        "name": "户籍代码",
+        "inverse": "0"
+    },
+    "biog_source_data/biog_main/c_personid_c_personid": {
+        "table1": "biog_source_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "信息来源",
+        "inverse": "1"
+    },
+    "biog_source_data/text_codes/c_textid_c_textid": {
+        "table1": "biog_source_data",
+        "table2": "text_codes",
+        "key": "c_textid",
+        "foreignkey": "c_textid",
+        "name": "著述代码",
+        "inverse": "0"
+    },
+    "entry_code_type_rel/entry_codes/c_entry_code_c_entry_code": {
+        "table1": "entry_code_type_rel",
+        "table2": "entry_codes",
+        "key": "c_entry_code",
+        "foreignkey": "c_entry_code",
+        "name": "入世类型",
+        "inverse": "1"
+    },
+    "entry_code_type_rel/entry_types/c_entry_type_c_entry_type": {
+        "table1": "entry_code_type_rel",
+        "table2": "entry_types",
+        "key": "c_entry_type",
+        "foreignkey": "c_entry_type",
+        "name": "入世类型",
+        "inverse": "0"
+    },
+    "entry_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "entry_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地点",
+        "inverse": "0"
+    },
+    "entry_data/assoc_codes/c_assoc_code_c_assoc_code": {
+        "table1": "entry_data",
+        "table2": "assoc_codes",
+        "key": "c_assoc_code",
+        "foreignkey": "c_assoc_code",
+        "name": "类别",
+        "inverse": "0"
+    },
+    "entry_data/biog_main/c_assoc_id_c_personid": {
+        "table1": "entry_data",
+        "table2": "biog_main",
+        "key": "c_assoc_id",
+        "foreignkey": "c_personid",
+        "name": "社会关系",
+        "inverse": "0"
+    },
+    "entry_data/entry_codes/c_entry_code_c_entry_code": {
+        "table1": "entry_data",
+        "table2": "entry_codes",
+        "key": "c_entry_code",
+        "foreignkey": "c_entry_code",
+        "name": "入仕法",
+        "inverse": "0"
+    },
+    "entry_data/nian_hao/c_entry_nh_id_c_nianhao_id": {
+        "table1": "entry_data",
+        "table2": "nian_hao",
+        "key": "c_entry_nh_id",
+        "foreignkey": "c_nianhao_id",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "entry_data/year_range_codes/c_entry_range_c_range_code": {
+        "table1": "entry_data",
+        "table2": "year_range_codes",
+        "key": "c_entry_range",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "entry_data/social_institution_codes/c_inst_code_c_inst_code": {
+        "table1": "entry_data",
+        "table2": "social_institution_codes",
+        "key": "c_inst_code",
+        "foreignkey": "c_inst_code",
+        "name": "社会机构",
+        "inverse": "0"
+    },
+    "entry_data/social_institution_name_codes/c_inst_name_code_c_inst_name_code": {
+        "table1": "entry_data",
+        "table2": "social_institution_name_codes",
+        "key": "c_inst_name_code",
+        "foreignkey": "c_inst_name_code",
+        "name": "机构名",
+        "inverse": "0"
+    },
+    "entry_data/kinship_codes/c_kin_code_c_kincode": {
+        "table1": "entry_data",
+        "table2": "kinship_codes",
+        "key": "c_kin_code",
+        "foreignkey": "c_kincode",
+        "name": "亲属关系",
+        "inverse": "0"
+    },
+    "entry_data/nian_hao/c_nianhao_id_c_nianhao_id": {
+        "table1": "entry_data",
+        "table2": "nian_hao",
+        "key": "c_nianhao_id",
+        "foreignkey": "c_nianhao_id",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "entry_data/parental_status_codes/c_parental_status_code_c_parental_status_code": {
+        "table1": "entry_data",
+        "table2": "parental_status_codes",
+        "key": "c_parental_status_code",
+        "foreignkey": "c_parental_status_code",
+        "name": "父母状态",
+        "inverse": "0"
+    },
+    "entry_data/biog_main/c_personid_c_personid": {
+        "table1": "entry_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "参与人",
+        "inverse": "1"
+    },
+    "entry_data/posting_data/c_posting_id_c_posting_id": {
+        "table1": "entry_data",
+        "table2": "posting_data",
+        "key": "c_posting_id",
+        "foreignkey": "c_posting_id",
+        "name": "就职",
+        "inverse": "0"
+    },
+    "entry_data/text_codes/c_source_c_textid": {
+        "table1": "entry_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "event_codes/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "event_codes",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "event_codes/dynasties/c_dy_c_dy": {
+        "table1": "event_codes",
+        "table2": "dynasties",
+        "key": "c_dy",
+        "foreignkey": "c_dy",
+        "name": "朝代",
+        "inverse": "0"
+    },
+    "event_codes/nian_hao/c_fy_nh_code_c_nianhao_id": {
+        "table1": "event_codes",
+        "table2": "nian_hao",
+        "key": "c_fy_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "始年_年号",
+        "inverse": "0"
+    },
+    "event_codes/year_range_codes/c_fy_range_c_range_code": {
+        "table1": "event_codes",
+        "table2": "year_range_codes",
+        "key": "c_fy_range",
+        "foreignkey": "c_range_code",
+        "name": "始年_时限",
+        "inverse": "0"
+    },
+    "event_codes/nian_hao/c_ly_nh_code_c_nianhao_id": {
+        "table1": "event_codes",
+        "table2": "nian_hao",
+        "key": "c_ly_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "终年_年号",
+        "inverse": "0"
+    },
+    "event_codes/year_range_codes/c_ly_range_c_range_code": {
+        "table1": "event_codes",
+        "table2": "year_range_codes",
+        "key": "c_ly_range",
+        "foreignkey": "c_range_code",
+        "name": "终年_时限",
+        "inverse": "0"
+    },
+    "event_codes/text_codes/c_source_c_textid": {
+        "table1": "event_codes",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "events_addr/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "events_addr",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "events_addr/ganzhi_codes/c_day_ganzhi_c_ganzhi_code": {
+        "table1": "events_addr",
+        "table2": "ganzhi_codes",
+        "key": "c_day_ganzhi",
+        "foreignkey": "c_ganzhi_code",
+        "name": "日干支",
+        "inverse": "0"
+    },
+    "events_addr/nian_hao/c_nh_code_c_nianhao_id": {
+        "table1": "events_addr",
+        "table2": "nian_hao",
+        "key": "c_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "events_addr/biog_main/c_personid_c_personid": {
+        "table1": "events_addr",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "参与",
+        "inverse": "0"
+    },
+    "events_addr/year_range_codes/c_yr_range_c_range_code": {
+        "table1": "events_addr",
+        "table2": "year_range_codes",
+        "key": "c_yr_range",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "events_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "events_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地点",
+        "inverse": "0"
+    },
+    "events_data/ganzhi_codes/c_day_ganzhi_c_ganzhi_code": {
+        "table1": "events_data",
+        "table2": "ganzhi_codes",
+        "key": "c_day_ganzhi",
+        "foreignkey": "c_ganzhi_code",
+        "name": "日干支",
+        "inverse": "0"
+    },
+    "events_data/event_codes/c_event_code_c_event_code": {
+        "table1": "events_data",
+        "table2": "event_codes",
+        "key": "c_event_code",
+        "foreignkey": "c_event_code",
+        "name": "事件",
+        "inverse": "0"
+    },
+    "events_data/nian_hao/c_nh_code_c_nianhao_id": {
+        "table1": "events_data",
+        "table2": "nian_hao",
+        "key": "c_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "events_data/biog_main/c_personid_c_personid": {
+        "table1": "events_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "参与",
+        "inverse": "1"
+    },
+    "events_data/text_codes/c_source_c_textid": {
+        "table1": "events_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "events_data/year_range_codes/c_yr_range_c_range_code": {
+        "table1": "events_data",
+        "table2": "year_range_codes",
+        "key": "c_yr_range",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "kin_data/kinship_codes/c_kin_code_c_kincode": {
+        "table1": "kin_data",
+        "table2": "kinship_codes",
+        "key": "c_kin_code",
+        "foreignkey": "c_kincode",
+        "name": "类别",
+        "inverse": "0"
+    },
+    "kin_data/biog_main/c_personid_c_personid": {
+        "table1": "kin_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "亲属关系",
+        "inverse": "1"
+    },
+    "kin_data/text_codes/c_source_c_textid": {
+        "table1": "kin_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "kin_data/biog_main/c_personid_c_personid": {
+        "table1": "kin_data",
+        "table2": "biog_main",
+        "key": "c_kin_id",
+        "foreignkey": "c_personid",
+        "name": "对象",
+        "inverse": "0"
+    },
+    "nian_hao/dynasties/c_dy_c_dy": {
+        "table1": "nian_hao",
+        "table2": "dynasties",
+        "key": "c_dy",
+        "foreignkey": "c_dy",
+        "name": "朝代",
+        "inverse": "0"
+    },
+    "office_code_type_rel/office_codes/c_office_id_c_office_id": {
+        "table1": "office_code_type_rel",
+        "table2": "office_codes",
+        "key": "c_office_id",
+        "foreignkey": "c_office_id",
+        "name": "属于",
+        "inverse": "1"
+    },
+    "office_code_type_rel/office_type_tree/c_office_tree_id_c_office_type_node_id": {
+        "table1": "office_code_type_rel",
+        "table2": "office_type_tree",
+        "key": "c_office_tree_id",
+        "foreignkey": "c_office_type_node_id",
+        "name": "属于",
+        "inverse": "0"
+    },
+    "office_codes/dynasties/c_dy_c_dy": {
+        "table1": "office_codes",
+        "table2": "dynasties",
+        "key": "c_dy",
+        "foreignkey": "c_dy",
+        "name": "朝代",
+        "inverse": "0"
+    },
+    "office_codes/text_codes/c_source_c_textid": {
+        "table1": "office_codes",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "office_type_tree/office_type_tree/c_parent_id_c_office_type_node_id": {
+        "table1": "office_type_tree",
+        "table2": "office_type_tree",
+        "key": "c_parent_id",
+        "foreignkey": "c_office_type_node_id",
+        "name": "属于",
+        "inverse": "0"
+    },
+    "possession_addr/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "possession_addr",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "possession_addr/biog_main/c_personid_c_personid": {
+        "table1": "possession_addr",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "拥有",
+        "inverse": "0"
+    },
+    "possession_addr/possession_data/c_possession_record_id_c_possession_record_id": {
+        "table1": "possession_addr",
+        "table2": "possession_data",
+        "key": "c_possession_record_id",
+        "foreignkey": "c_possession_record_id",
+        "name": "纪录号",
+        "inverse": "0"
+    },
+    "possession_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "possession_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "possession_data/measure_codes/c_measure_code_c_measure_code": {
+        "table1": "possession_data",
+        "table2": "measure_codes",
+        "key": "c_measure_code",
+        "foreignkey": "c_measure_code",
+        "name": "单位",
+        "inverse": "0"
+    },
+    "possession_data/biog_main/c_personid_c_personid": {
+        "table1": "possession_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "拥有",
+        "inverse": "0"
+    },
+    "possession_data/possession_act_codes/c_possession_act_code_c_possession_act_code": {
+        "table1": "possession_data",
+        "table2": "possession_act_codes",
+        "key": "c_possession_act_code",
+        "foreignkey": "c_possession_act_code",
+        "name": "行为",
+        "inverse": "0"
+    },
+    "possession_data/nian_hao/c_possession_nh_code_c_nianhao_id": {
+        "table1": "possession_data",
+        "table2": "nian_hao",
+        "key": "c_possession_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "possession_data/year_range_codes/c_possession_yr_range_c_range_code": {
+        "table1": "possession_data",
+        "table2": "year_range_codes",
+        "key": "c_possession_yr_range",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "possession_data/text_codes/c_source_c_textid": {
+        "table1": "possession_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "posted_to_addr_data/addr_codes/c_addr_id_c_addr_id": {
+        "table1": "posted_to_addr_data",
+        "table2": "addr_codes",
+        "key": "c_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "posted_to_addr_data/office_codes/c_office_id_c_office_id": {
+        "table1": "posted_to_addr_data",
+        "table2": "office_codes",
+        "key": "c_office_id",
+        "foreignkey": "c_office_id",
+        "name": "官职",
+        "inverse": "0"
+    },
+    "posted_to_addr_data/biog_main/c_personid_c_personid": {
+        "table1": "posted_to_addr_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "任职",
+        "inverse": "1"
+    },
+    "posted_to_addr_data/posting_data/c_posting_id_c_posting_id": {
+        "table1": "posted_to_addr_data",
+        "table2": "posting_data",
+        "key": "c_posting_id",
+        "foreignkey": "c_posting_id",
+        "name": "对应",
+        "inverse": "1"
+    },
+    "posted_to_office_data/appointment_type_codes/c_appt_type_code_c_appt_type_code": {
+        "table1": "posted_to_office_data",
+        "table2": "appointment_type_codes",
+        "key": "c_appt_type_code",
+        "foreignkey": "c_appt_type_code",
+        "name": "除授类别",
+        "inverse": "0"
+    },
+    "posted_to_office_data/assume_office_codes/c_assume_office_code_c_assume_office_code": {
+        "table1": "posted_to_office_data",
+        "table2": "assume_office_codes",
+        "key": "c_assume_office_code",
+        "foreignkey": "c_assume_office_code",
+        "name": "是否赴任",
+        "inverse": "0"
+    },
+    "posted_to_office_data/dynasties/c_dy_c_dy": {
+        "table1": "posted_to_office_data",
+        "table2": "dynasties",
+        "key": "c_dy",
+        "foreignkey": "c_dy",
+        "name": "朝代",
+        "inverse": "0"
+    },
+    "posted_to_office_data/ganzhi_codes/c_fy_day_gz_c_ganzhi_code": {
+        "table1": "posted_to_office_data",
+        "table2": "ganzhi_codes",
+        "key": "c_fy_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "始年_日干支",
+        "inverse": "0"
+    },
+    "posted_to_office_data/nian_hao/c_fy_nh_code_c_nianhao_id": {
+        "table1": "posted_to_office_data",
+        "table2": "nian_hao",
+        "key": "c_fy_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "始年_年号",
+        "inverse": "0"
+    },
+    "posted_to_office_data/year_range_codes/c_fy_range_c_range_code": {
+        "table1": "posted_to_office_data",
+        "table2": "year_range_codes",
+        "key": "c_fy_range",
+        "foreignkey": "c_range_code",
+        "name": "始年_时限",
+        "inverse": "0"
+    },
+    "posted_to_office_data/social_institution_codes/c_inst_code_c_inst_code": {
+        "table1": "posted_to_office_data",
+        "table2": "social_institution_codes",
+        "key": "c_inst_code",
+        "foreignkey": "c_inst_code",
+        "name": "社会机构",
+        "inverse": "0"
+    },
+    "posted_to_office_data/social_institution_name_codes/c_inst_name_code_c_inst_name_code": {
+        "table1": "posted_to_office_data",
+        "table2": "social_institution_name_codes",
+        "key": "c_inst_name_code",
+        "foreignkey": "c_inst_name_code",
+        "name": "社会机构名",
+        "inverse": "0"
+    },
+    "posted_to_office_data/ganzhi_codes/c_ly_day_gz_c_ganzhi_code": {
+        "table1": "posted_to_office_data",
+        "table2": "ganzhi_codes",
+        "key": "c_ly_day_gz",
+        "foreignkey": "c_ganzhi_code",
+        "name": "终年_日干支",
+        "inverse": "0"
+    },
+    "posted_to_office_data/nian_hao/c_ly_nh_code_c_nianhao_id": {
+        "table1": "posted_to_office_data",
+        "table2": "nian_hao",
+        "key": "c_ly_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "终年_年号",
+        "inverse": "0"
+    },
+    "posted_to_office_data/year_range_codes/c_ly_range_c_range_code": {
+        "table1": "posted_to_office_data",
+        "table2": "year_range_codes",
+        "key": "c_ly_range",
+        "foreignkey": "c_range_code",
+        "name": "终年_时限",
+        "inverse": "0"
+    },
+    "posted_to_office_data/office_categories/c_office_category_id_c_office_category_id": {
+        "table1": "posted_to_office_data",
+        "table2": "office_categories",
+        "key": "c_office_category_id",
+        "foreignkey": "c_office_category_id",
+        "name": "职官类别",
+        "inverse": "0"
+    },
+    "posted_to_office_data/office_codes/c_office_id_c_office_id": {
+        "table1": "posted_to_office_data",
+        "table2": "office_codes",
+        "key": "c_office_id",
+        "foreignkey": "c_office_id",
+        "name": "官职",
+        "inverse": "0"
+    },
+    "posted_to_office_data/biog_main/c_personid_c_personid": {
+        "table1": "posted_to_office_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "赴任",
+        "inverse": "1"
+    },
+    "posted_to_office_data/posting_data/c_posting_id_c_posting_id": {
+        "table1": "posted_to_office_data",
+        "table2": "posting_data",
+        "key": "c_posting_id",
+        "foreignkey": "c_posting_id",
+        "name": "记录号",
+        "inverse": "0"
+    },
+    "posted_to_office_data/text_codes/c_source_c_textid": {
+        "table1": "posted_to_office_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "posting_data/biog_main/c_personid_c_personid": {
+        "table1": "posting_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "任职",
+        "inverse": "1"
+    },
+    "social_institution_addr/addr_codes/c_inst_addr_id_c_addr_id": {
+        "table1": "social_institution_addr",
+        "table2": "addr_codes",
+        "key": "c_inst_addr_id",
+        "foreignkey": "c_addr_id",
+        "name": "地址",
+        "inverse": "0"
+    },
+    "social_institution_addr/social_institution_addr_types/c_inst_addr_type_code_c_inst_addr_type_code": {
+        "table1": "social_institution_addr",
+        "table2": "social_institution_addr_types",
+        "key": "c_inst_addr_type_code",
+        "foreignkey": "c_inst_addr_type_code",
+        "name": "地址类型",
+        "inverse": "0"
+    },
+    "social_institution_addr/social_institution_codes/c_inst_code_c_inst_code": {
+        "table1": "social_institution_addr",
+        "table2": "social_institution_codes",
+        "key": "c_inst_code",
+        "foreignkey": "c_inst_code",
+        "name": "地址",
+        "inverse": "1"
+    },
+    "social_institution_addr/social_institution_codes/c_inst_name_code_c_inst_name_code": {
+        "table1": "social_institution_addr",
+        "table2": "social_institution_codes",
+        "key": "c_inst_name_code",
+        "foreignkey": "c_inst_name_code",
+        "name": "社会机构名_地址",
+        "inverse": "1"
+    },
+    "social_institution_addr/text_codes/c_source_c_textid": {
+        "table1": "social_institution_addr",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "social_institution_codes/nian_hao/c_by_nianhao_code_c_nianhao_id": {
+        "table1": "social_institution_codes",
+        "table2": "nian_hao",
+        "key": "c_by_nianhao_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "创立年号",
+        "inverse": "0"
+    },
+    "social_institution_codes/year_range_codes/c_by_year_range_c_range_code": {
+        "table1": "social_institution_codes",
+        "table2": "year_range_codes",
+        "key": "c_by_year_range",
+        "foreignkey": "c_range_code",
+        "name": "创立时限",
+        "inverse": "0"
+    },
+    "social_institution_codes/nian_hao/c_ey_nianhao_code_c_nianhao_id": {
+        "table1": "social_institution_codes",
+        "table2": "nian_hao",
+        "key": "c_ey_nianhao_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "始年_年号",
+        "inverse": "0"
+    },
+    "social_institution_codes/year_range_codes/c_ey_year_range_c_range_code": {
+        "table1": "social_institution_codes",
+        "table2": "year_range_codes",
+        "key": "c_ey_year_range",
+        "foreignkey": "c_range_code",
+        "name": "始年_时限",
+        "inverse": "0"
+    },
+    "social_institution_codes/dynasties/c_inst_begin_dy_c_dy": {
+        "table1": "social_institution_codes",
+        "table2": "dynasties",
+        "key": "c_inst_begin_dy",
+        "foreignkey": "c_dy",
+        "name": "始年_朝代",
+        "inverse": "0"
+    },
+    "social_institution_codes/dynasties/c_inst_floruit_dy_c_dy": {
+        "table1": "social_institution_codes",
+        "table2": "dynasties",
+        "key": "c_inst_floruit_dy",
+        "foreignkey": "c_dy",
+        "name": "全盛朝代",
+        "inverse": "0"
+    },
+    "social_institution_codes/social_institution_name_codes/c_inst_name_code_c_inst_name_code": {
+        "table1": "social_institution_codes",
+        "table2": "social_institution_name_codes",
+        "key": "c_inst_name_code",
+        "foreignkey": "c_inst_name_code",
+        "name": "社会机构名",
+        "inverse": "0"
+    },
+    "social_institution_codes/social_institution_type_codes/c_inst_type_code_c_inst_type_code": {
+        "table1": "social_institution_codes",
+        "table2": "social_institution_type_codes",
+        "key": "c_inst_type_code",
+        "foreignkey": "c_inst_type_code",
+        "name": "社会机构类型",
+        "inverse": "0"
+    },
+    "social_institution_codes/text_codes/c_source_c_textid": {
+        "table1": "social_institution_codes",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "social_institution_codes/year_range_codes/c_year_range_c_range_code": {
+        "table1": "social_institution_codes",
+        "table2": "year_range_codes",
+        "key": "c_year_range",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "status_code_type_rel/status_codes/c_status_code_c_status_code": {
+        "table1": "status_code_type_rel",
+        "table2": "status_codes",
+        "key": "c_status_code",
+        "foreignkey": "c_status_code",
+        "name": "社会区分",
+        "inverse": "0"
+    },
+    "status_code_type_rel/status_types/c_status_type_code_c_status_type_code": {
+        "table1": "status_code_type_rel",
+        "table2": "status_types",
+        "key": "c_status_type_code",
+        "foreignkey": "c_status_type_code",
+        "name": "社会地位",
+        "inverse": "0"
+    },
+    "status_data/nian_hao/c_fy_nh_code_c_nianhao_id": {
+        "table1": "status_data",
+        "table2": "nian_hao",
+        "key": "c_fy_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "始年_年号",
+        "inverse": "0"
+    },
+    "status_data/year_range_codes/c_fy_range_c_range_code": {
+        "table1": "status_data",
+        "table2": "year_range_codes",
+        "key": "c_fy_range",
+        "foreignkey": "c_range_code",
+        "name": "始年_时限",
+        "inverse": "0"
+    },
+    "status_data/nian_hao/c_ly_nh_code_c_nianhao_id": {
+        "table1": "status_data",
+        "table2": "nian_hao",
+        "key": "c_ly_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "终年_年号",
+        "inverse": "0"
+    },
+    "status_data/year_range_codes/c_ly_range_c_range_code": {
+        "table1": "status_data",
+        "table2": "year_range_codes",
+        "key": "c_ly_range",
+        "foreignkey": "c_range_code",
+        "name": "终年_时限",
+        "inverse": "0"
+    },
+    "status_data/biog_main/c_personid_c_personid": {
+        "table1": "status_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "社会区分",
+        "inverse": "1"
+    },
+    "status_data/text_codes/c_source_c_textid": {
+        "table1": "status_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "status_data/status_codes/c_status_code_c_status_code": {
+        "table1": "status_data",
+        "table2": "status_codes",
+        "key": "c_status_code",
+        "foreignkey": "c_status_code",
+        "name": "社会区分",
+        "inverse": "0"
+    },
+    "text_biblcat_code_type_rel/text_cat_codes/c_text_cat_code_c_text_cat_code": {
+        "table1": "text_biblcat_code_type_rel",
+        "table2": "text_cat_codes",
+        "key": "c_text_cat_code",
+        "foreignkey": "c_text_cat_code",
+        "name": "著述类别",
+        "inverse": "0"
+    },
+    "text_biblcat_code_type_rel/text_cat_types/c_text_cat_type_id_c_text_cat_type_id": {
+        "table1": "text_biblcat_code_type_rel",
+        "table2": "text_cat_types",
+        "key": "c_text_cat_type_id",
+        "foreignkey": "c_text_cat_type_id",
+        "name": "类别",
+        "inverse": "1"
+    },
+    "text_codes/extant_codes/c_extant_c_extant_code": {
+        "table1": "text_codes",
+        "table2": "extant_codes",
+        "key": "c_extant",
+        "foreignkey": "c_extant_code",
+        "name": "存佚状况",
+        "inverse": "0"
+    },
+    "text_codes/country_codes/c_pub_country_c_country_code": {
+        "table1": "text_codes",
+        "table2": "country_codes",
+        "key": "c_pub_country",
+        "foreignkey": "c_country_code",
+        "name": "出版_国",
+        "inverse": "0"
+    },
+    "text_codes/dynasties/c_pub_dy_c_dy": {
+        "table1": "text_codes",
+        "table2": "dynasties",
+        "key": "c_pub_dy",
+        "foreignkey": "c_dy",
+        "name": "出版_朝代",
+        "inverse": "0"
+    },
+    "text_codes/nian_hao/c_pub_nh_code_c_nianhao_id": {
+        "table1": "text_codes",
+        "table2": "nian_hao",
+        "key": "c_pub_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "出版_年号",
+        "inverse": "0"
+    },
+    "text_codes/year_range_codes/c_pub_range_code_c_range_code": {
+        "table1": "text_codes",
+        "table2": "year_range_codes",
+        "key": "c_pub_range_code",
+        "foreignkey": "c_range_code",
+        "name": "出版_时限",
+        "inverse": "0"
+    },
+    "text_codes/text_codes/c_source_c_textid": {
+        "table1": "text_codes",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "text_codes/text_biblcat_codes/c_text_cat_code_c_text_cat_code": {
+        "table1": "text_codes",
+        "table2": "text_biblcat_codes",
+        "key": "c_text_cat_code",
+        "foreignkey": "c_text_cat_code",
+        "name": "类别",
+        "inverse": "0"
+    },
+    "text_codes/country_codes/c_text_country_c_country_code": {
+        "table1": "text_codes",
+        "table2": "country_codes",
+        "key": "c_text_country",
+        "foreignkey": "c_country_code",
+        "name": "国",
+        "inverse": "0"
+    },
+    "text_codes/dynasties/c_text_dy_c_dy": {
+        "table1": "text_codes",
+        "table2": "dynasties",
+        "key": "c_text_dy",
+        "foreignkey": "c_dy",
+        "name": "朝代",
+        "inverse": "0"
+    },
+    "text_codes/nian_hao/c_text_nh_code_c_nianhao_id": {
+        "table1": "text_codes",
+        "table2": "nian_hao",
+        "key": "c_text_nh_code",
+        "foreignkey": "c_nianhao_id",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "text_codes/year_range_codes/c_text_range_code_c_range_code": {
+        "table1": "text_codes",
+        "table2": "year_range_codes",
+        "key": "c_text_range_code",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "text_data/nian_hao/c_nh_code_c_nianhao_code": {
+        "table1": "text_data",
+        "table2": "nian_hao",
+        "key": "c_nh_code",
+        "foreignkey": "c_nianhao_code",
+        "name": "年号",
+        "inverse": "0"
+    },
+    "text_data/biog_main/c_personid_c_personid": {
+        "table1": "text_data",
+        "table2": "biog_main",
+        "key": "c_personid",
+        "foreignkey": "c_personid",
+        "name": "著作",
+        "inverse": "0"
+    },
+    "text_data/year_range_codes/c_range_code_c_range_code": {
+        "table1": "text_data",
+        "table2": "year_range_codes",
+        "key": "c_range_code",
+        "foreignkey": "c_range_code",
+        "name": "时限",
+        "inverse": "0"
+    },
+    "text_data/text_role_codes/c_role_id_c_role_id": {
+        "table1": "text_data",
+        "table2": "text_role_codes",
+        "key": "c_role_id",
+        "foreignkey": "c_role_id",
+        "name": "角色",
+        "inverse": "0"
+    },
+    "text_data/text_codes/c_source_c_textid": {
+        "table1": "text_data",
+        "table2": "text_codes",
+        "key": "c_source",
+        "foreignkey": "c_textid",
+        "name": "出处",
+        "inverse": "0"
+    },
+    "text_data/text_codes/c_textid_c_textid": {
+        "table1": "text_data",
+        "table2": "text_codes",
+        "key": "c_textid",
+        "foreignkey": "c_textid",
+        "name": "著述代码",
+        "inverse": "0"
+    }
+}
