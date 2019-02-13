@@ -10,6 +10,9 @@ from .time_manager import timeManager
 from .relation2type import getRelTypes
 import threading
 import time
+from .common_function import dist_dif 
+
+# kin_data没有存
 
 class EventManager(object):
 	"""docstring for Event_Extract"""
@@ -22,6 +25,8 @@ class EventManager(object):
 		self.is_all = False
 		self.is_sort = False
 		# self.trigger_manager =EventTriggerManager()
+		self.all2vec = None
+		self.person_graph = None
 
 	def getAll(self, get_times = 30):
 		if not self.is_all:	
@@ -30,28 +35,29 @@ class EventManager(object):
 			threading_array = []
 			for times in range(0,get_times):
 				t1= threading.Thread(target=self.loadRelationEvents,args=(10000,10000*times, None))
-				# t2= threading.Thread(target=self.loadPostOfficeEvents,args=(10000,10000*times, None))
+				t2= threading.Thread(target=self.loadPostOfficeEvents,args=(10000,10000*times, None))
 				t3= threading.Thread(target=self.loadTextEvents,args=(10000,10000*times, None))
 				# t4= threading.Thread(target=self.loadEntryEvents,args=(10000,10000*times, None))
 				t5= threading.Thread(target=self.loadAddrEvents,args=(10000,10000*times, None))
 
 				t1.start()
 				time.sleep(0.1)
-				threading_array.append(t1)
-				# t2.start()
-				# time.sleep(0.1)
+				# threading_array.append(t1)
+				t2.start()
+				time.sleep(0.1)
 				# threading_array.append(t2)
 				t3.start()
 				time.sleep(0.1)
-				threading_array.append(t3)
+				# threading_array.append(t3)
 				# t4.start()
 				# time.sleep(1)
 				# threading_array.append(t4)
 				t5.start()
 				time.sleep(0.1)
-				threading_array.append(t5)
+				# threading_array.append(t5)
 
 				t1.join()
+				t2.join()
 				t3.join()
 				t5.join()
 				# if has1:
@@ -281,16 +287,13 @@ class EventManager(object):
 		results = graph.run(query).data()
 		id_list1 = []
 		id_list2 = []
-		id_list3 = []
 		id2id = {}
 		for node_data in results:
 			node_id1 = str(node_data['id(n1)'])
 			node_id2 = str(node_data['id(n2)'])
-			# node_id3 = str(node_data['id(n3)'])
 
 			node_data1 = node_data['n1']
-			node_data2 = node_data['n2']
-			node_data3 = node_data['n3']
+			# node_data2 = node_data['n2']
 
 			event1 = self.createEvents('担任'+node_id1)  #担任
 			event2 = self.createEvents('卸任'+node_id1)  #卸任
@@ -376,16 +379,17 @@ class EventManager(object):
 		print('加载仕途官职')
 
 		# 加载官职的授予方式
-		results = graph.run('START n=node({}) MATCH (office:Appointment_type_codes)-[r]-(n) RETURN office, id(n)'.format(id_list_str1))
-		results = results.data()
-		# print('START n=node({}) MATCH (addr:Addr_codes)-[r]-(n) RETURN addr.c_addr_id as addr_id, id(n)'.format(id_list_str3))
-		# print(results)
-		for result in results:
-			office_code =  result['office']['c_appt_type_desc_chn']
-			event_id = str(result['id(n)'])
-			self.createEvents('担任'+id2id[event_id]).detail += '授予方式' + str(office_code)
-			# self.createEvents('担任'+id2id[event_id]).setTrigger('担任'+str(office_code['c_office_chn']))
-			# self.createEvents('卸任'+id2id[event_id]).setTrigger('卸任'+str(office_code['c_office_chn']))
+		# results = graph.run('START n=node({}) MATCH (office:Appointment_type_codes)-[r]-(n) RETURN office, id(n)'.format(id_list_str1))
+		# results = results.data()
+		# # print('START n=node({}) MATCH (addr:Addr_codes)-[r]-(n) RETURN addr.c_addr_id as addr_id, id(n)'.format(id_list_str3))
+		# # print(results)
+		# for result in results:
+		# 	office_code =  result['office']['c_appt_type_desc_chn']
+		# 	event_id = str(result['id(n)'])
+		# 	self.createEvents('担任'+id2id[event_id]).detail += '授予方式' + str(office_code)
+		# 	# self.createEvents('担任'+id2id[event_id]).setTrigger('担任'+str(office_code['c_office_chn']))
+		# 	# self.createEvents('卸任'+id2id[event_id]).setTrigger('卸任'+str(office_code['c_office_chn']))
+		
 		print('加载仕途官职')
 		if len(id_list1)<LIMIT:
 			return False
@@ -520,6 +524,74 @@ class EventManager(object):
 			self.event_id_set.add(node_id)
 			return new_event
 
+	def registAll2vec(self, all2vec):
+		self.all2vec = all2vec
+
+	# 对不同的确实信息应该有不同的计算方式
+	def caclute_sim(self, event1, event2):
+		all2vec = self.all2vec
+		# 计算地点的最小距离
+		addr_diff = 1
+		trigger_diff = 1
+		person_diff = 0
+		time_diff = 1
+		def isValidRange(event):
+			return event.time_range[0]!=-9999 and event.time_range[1]!=9999
+		if isValidRange(event1) and isValidRange(event2):
+			time_diff = dist_dif(event1.time_range, event2.time_range)/9999
+			# cos_sim( event1.time_range, event2.time_range )
+
+
+		for addr1 in event1.addrs:
+			for addr2 in event2.addrs:
+				if addr1.id in all2vec.addr2vec and addr2.id in all2vec.addr2vec:
+					# v1 = all2vec.addr2vec[addr1.id]
+					# v2 = all2vec.addr2vec[addr2.id]
+					diff = all2vec.addr_model.similarity(addr1.id, addr2.id)
+					if addr_diff>diff:
+						addr_diff = diff
+				else:
+					if addr1.id not in all2vec.addr2vec:
+						print(addr1.name + '不存在')
+					if addr2.id not in all2vec.addr2vec:
+						print(addr2.name + '不存在')	
+
+		for role1 in event1.roles:
+			for role2 in event2.roles:
+				trigger_id1 = event1.trigger.name + ' ' + role1['role']
+				trigger_id2 = event2.trigger.name + ' ' + role2['role']
+				if trigger_id1 in all2vec.trigger2vec and trigger_id2 in all2vec.trigger2vec:
+					# v1 = all2vec.trigger2vec[trigger_id1]
+					# v2 = all2vec.trigger2vec[trigger_id2]
+					diff = all2vec.trigger_model.similarity(trigger_id1, trigger_id2)
+					if trigger_diff>diff:
+						trigger_diff = diff
+
+		allperson = set()
+		for role1 in event1.roles:
+			for role2 in event2.roles:
+				person1 = role1['person']
+				person2 = role2['person']
+				allperson.add(person1)
+				allperson.add(person2)
+		allperson = list(allperson)
+		for person1 in allperson:
+			for person2 in allperson:
+				person_diff += self.person_graph.getSim(person1, person2)
+		person_diff /= 10   #理论上最大为10
+
+		return (addr_diff+trigger_diff*3+time_diff+person_diff*4)/9
+
+# # 给每个事件返回一个多维的打分
+# class ScoreManager:
+# 	def __init__(self):
+# 		self.all2vec = eventManager.all2vec
+# 		self.score = triggerManager.trigger2type_score
+# 		return 
+
+# 	def getScore(self, event, person):
+
+
 class Event(object):
 	def __init__(self, event_id):
 		self.id = event_id
@@ -533,6 +605,40 @@ class Event(object):
 		self.related_nodes = {}
 		self.setTrigger('未知')
 		self.detail = ''
+		self.related_tables = set()
+
+	def getScore(self, person):
+		trigger = self.trigger
+		if trigger.type == '官职':
+			guanzhi = self.detail
+			score = triggerManager.getGuanZhiScore(guanzhi)
+		else:
+			trigger_id = trigger.name
+			person_role = None
+			for role in self.roles:
+				if role['person'] == person:
+					# trigger_id += ' ' + role['role']
+					person_role = role['role']
+					break
+			if trigger_id not in triggerManager.trigger2type_score:
+				# print(trigger_id, '没有对应的评分')
+				return 0
+			if person_role is None:
+				print(person, '没有参与', self)
+				return 0
+
+			score = triggerManager.trigger2type_score[trigger_id]['score']
+		if person_role == '主角':
+			return score['score']
+		else:
+			return score['score']/2
+
+	def getTriggerId(self, person):
+		for role in self.roles:
+			if role['person'] == person:
+				person_role = role['role']
+				return self.trigger.name + ' ' + person_role
+		return "未知 getTriggerId"
 
 	def setAddr(self, new_addr):
 		if new_addr not in self.addrs:
@@ -548,6 +654,7 @@ class Event(object):
 		# 	print('重复给事件添加地址')
 		# 	pass
 
+	# 没有用过
 	def addRelatedNodes(self, node):
 		self.related_tables.add(node)
 
@@ -663,14 +770,38 @@ class EventTriggerManager(object):
 		self.trigger_set = set()
 
 		# self.now_id = 0
-
 		self.trigger2type_score = json.loads(open('scSystemServer/data_model/data/relation_code2type.json', 'r', encoding='utf-8').read())
-		
 		self.trigger2type_score['反对攻讦'] = {
-			'score': 8,
+			'score': 4,
 			'type': '政治对抗',
 			'parent_type': '政治'
 		}
+		self.trigger2type_score['担任'] = {
+			'score': 8,
+			'type': '官职',
+			'parent_type': '政治'
+		}
+		self.trigger_types = set()
+		self.trigger_parent_types = set()
+		for trigger in self.trigger2type_score:
+			elm = self.trigger2type_score[trigger]
+			self.trigger_types.add(elm['type'])
+			self.trigger_parent_types.add(elm['parent_type'])
+		self.trigger_types = list(self.trigger_types)
+		self.trigger_parent_types = list(self.trigger_parent_types)
+
+		self.guanzhi_score = json.loads(open('scSystemServer/data_model/data/官职品级.json', 'r', encoding='utf-8').read())
+		self.ping_words =['正一品','从一品','正二品','从二品','正三品','从三品','正四品上','正四品','正四品下','从四品上', '从四品', '从四品下','正五品上','正五品', '正五品下','从五品上', '从五品','从五品下','正六品上','正六品','正六品下','从六品上', '从六品', '从六品下','正七品上', '正七品', '正七品下', '从七品上', '从七品', '从七品下', '正八品上','正八品', '正八品下','从八品上','从八品', '从八品下', '正九品下', '正九品', '正九品下','从九品上', '从九品', '从九品下']
+		# print(self.ping_words)
+		self.ping_words.reverse()
+
+		self.ping_words2score = {}
+		for index, word in enumerate(self.ping_words):
+			self.ping_words2score[word] = index
+
+	def getGuanZhiScore(self, guanzhi):
+		pingji = self.guanzhi_score[guanzhi]
+		return self.ping_words2score[pingji]
 
 	def getTriggerType(self, trigger_name):
 		if trigger_name in self.name2trigger.keys():
@@ -736,7 +867,7 @@ class Trigger(object):
 
 triggerManager = EventTriggerManager()
 eventManager = EventManager()
-
+# scoreManager = ScoreManager()
 if __name__ == '__main__':
 	print('测试事件模块')
 	# event_extractor = EventExtractor()

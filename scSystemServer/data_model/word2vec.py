@@ -21,7 +21,7 @@ class All2vec(object):
         # self.relationEmbedding(personManager)
         self.addr_model, self.addr2vec = self.allAddr2vec(addrManager)
         self.trigger_model, self.trigger2vec = self.allEvents2Vec(personManager)
-        self.event2idf = self.getEventIdf(eventManager, personManager)
+        # self.event2idf = self.getEventIdf(eventManager, personManager)
 
     def allAddr2vec(self, addrManager):
         print('地点embedding')
@@ -105,7 +105,7 @@ class All2vec(object):
                         if role['person'] == person:
                             year_events.append(event.trigger.name + ' ' + role['role'])
 
-                for year in range(year-1, year+2):
+                for year in range(year-2, year+3):
                     if year in year2event:
                         events = year2event[year]
                         for event in events:
@@ -133,6 +133,7 @@ class All2vec(object):
             else:
                 return (person2, person1)
 
+        # 人生暂时注释掉了
         for person in person_array:
             events = person.getAllEvents()
             for event in events:

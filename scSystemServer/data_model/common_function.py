@@ -35,7 +35,7 @@ def levenshtein(string1,string2):
     return distance_matrix[str1_length-1][str2_length-1]
 
 
-def cos_sim(vector_a, vector_b):
+def cos_dif(vector_a, vector_b):
     vector_a = np.mat(vector_a)
     vector_b = np.mat(vector_b)
     num = float(vector_a * vector_b.T)
@@ -45,5 +45,5 @@ def cos_sim(vector_a, vector_b):
     # print('sim'+ str(sim))
     return sim
 
-def dist_sim(vector_a, vector_b):
+def dist_dif(vector_a, vector_b):
 	return np.linalg.norm(np.mat(vector_a) - np.mat(vector_b))

@@ -26,6 +26,10 @@ urlpatterns = [
     path('test/', test.test_response),
     path('getPersonEvents/', expose_function.getPersonEvents),
     path('init/', expose_function.init),
+    path('infer_person/', expose_function.inferPersonsEvent),
+    path('getRelatedEvents/', expose_function.getRelatedEvents),
+    path('getPersonScore/', expose_function.getPersonScore),
+    path('getSimLife/', expose_function.getSimLife),
     # url(r'^index/$', neo4jQuery.neo4jQuery),
     # url(r'^getPersonDetail/.*$', getPersonDetail.getPersonDetail),
 ]

@@ -154,16 +154,9 @@ def caclute_sim(event1, event2):
 			if trigger_id1 in all2vec.trigger2vec and trigger_id2 in all2vec.trigger2vec:
 				v1 = all2vec.trigger2vec[trigger_id1]
 				v2 = all2vec.trigger2vec[trigger_id2]
-				# diff = cos_sim(v1,v2)
 				diff = all2vec.trigger_model.similarity(trigger_id1, trigger_id2)
 				if trigger_diff>diff:
 					trigger_diff = diff
-				# print(trigger_id1 + ' 存在')
-			# else:
-			# 	if trigger_id1 not in all2vec.trigger2vec:
-			# 		print(trigger_id1 + ' 不存在')
-			# 	if trigger_id2 not in all2vec.trigger2vec:
-			# 		print(trigger_id2 + ' 不存在')	
 
 	allperson = set()
 	for role1 in event1.roles:
@@ -178,9 +171,6 @@ def caclute_sim(event1, event2):
 			person_diff += person_graph.getSim(person1, person2)
 	person_diff /= 10   #理论上最大为10
 
-	# print(event1, event2, addr_diff,trigger_diff,time_diff,person_diff)
-	# 计算事件的最小距离
-	# 
 	return (addr_diff+trigger_diff*3+time_diff+person_diff*4)/9
 
 reuslts = {}
@@ -190,23 +180,9 @@ thread_array = []
 # 如果是两个人的关系
 # 如果是有时间的
 # 如果是有地点的
-def thread_func(event):
-	# # 在两年中找关系
-	# if len(event.roles)>1:
-	# 	person1 = event.roles[0]['person']
-	# 	person2 = event.roles[1]['person']
-	# 	related_events = personManager.getEventsBetween(person1, person2)
-	# 	for role in event.roles:
-	# 		this_person = role['person']
-	# 		trigger_id = event.trigger.name + ' ' + role['role']
-	# 		most_similar = all2vec.trigger_model.most_similar(positive=[trigger_id], topn=30)
-	# 		for related_event in related_events:
-	# 			if related_events:
-	# 				pass
-
+def getRelatedEvents(event):
 	related_events = []
 	# 找到另一个人
-	ops_person = None
 	for role in event.roles:
 		this_person = role['person']
 		trigger_id = event.trigger.name + ' ' + role['role']
@@ -251,11 +227,7 @@ def thread_func(event):
 # for t in thread_array:
 # 	t.join()
 
-def getTriggerId(event, person):
-	for role in event.roles:
-		if role['person'] == person:
-			return event.trigger.name + ' ' + role['role']
-	return None
+
 
 
 

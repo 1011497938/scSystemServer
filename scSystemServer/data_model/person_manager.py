@@ -5,6 +5,8 @@ import json
 from .db_manager import dbManager as db
 from .neo4j_manager import graph
 from .addr_manager import addrManager
+import math
+import numpy as np
 
 class PersonManager(object):
 	"""docstring for PersonManager"""
@@ -13,6 +15,7 @@ class PersonManager(object):
 		self.id_set = set()
 		self.person_array = []
 		self.event_manager = None
+		self.all2vec = None
 		print('初始化人物')
 
 	def createPerson(self,bio_main_node):
@@ -86,7 +89,8 @@ class Person(object):
 				birth_event.addPerson(self, '主角')
 				birth_event.setTrigger('出生')
 			# 	self.range[0] = birth_year
-			# else:
+			else:
+				self.birth_year = -9999
 			# 	self.birth_year = self.range[0]
 			if death_year!=0 and death_year!='0' and death_year!='null' and death_year is not None:
 				death_event = event_manager.createEvents('death'+ self.id)
@@ -94,13 +98,16 @@ class Person(object):
 				death_event.addPerson(self, '主角')
 				death_event.setTrigger('死亡')
 				# self.range[1] = death_year
-			# else:
+			else:
+				self.death_year = 9999
 				# self.death_year = self.range[1]
 			self.event_manager = event_manager
 		else:
 			print("WARNNING: 没有给person_manager注册event_manager")
 
 		self.has_all_events = False
+		self.year2event = None
+		self.score_array = None
 
 	def getSortedEvents(self):
 		# 还要加入sequence的比较
@@ -109,8 +116,10 @@ class Person(object):
 			if event.time_range[1]-event.time_range[0]<2:    #True:# 
 				sort_events.append(event)
 		return sorted(sort_events, key=lambda event: float(event.time_range[0])+float(event.sequence)*0.1) 
-
+	
 	def getYear2event(self):
+		# 注意浅拷贝！！！！
+		# if self.year2event is None:
 		self.getAllEvents()
 		year2event = {}
 		# print(len(self.event_array))
@@ -123,10 +132,13 @@ class Person(object):
 					year2event[year].append(event)
 
 		for year in year2event.keys():
-			year2event[year] = sorted(year2event[year], key=lambda event: float(event.time_range[0])+float(event.sequence)*0.1) 
+			year2event[year] = sorted(year2event[year], key=lambda event: float(event.time_range[0])+float(event.sequence)*0.1)
+		self.year2event = year2event
 		# print(len(year2event.keys()))
-		return year2event
+		return self.year2event
 
+
+	# -9999也加进去了
 	def temp_getYear2event(self):
 		self.getAllEvents()
 		year2event = {}
@@ -146,6 +158,31 @@ class Person(object):
 			year2event[year] = sorted(year2event[year], key=lambda event: float(event.time_range[0])+float(event.sequence)*0.1) 
 		# print(len(year2event.keys()))
 		return year2event
+
+	def getScoreArray(self, Align=False):
+		if self.score_array is None:
+			year2event = self.getYear2event()
+			year2score = {}
+			year2score_array = []
+			for year in year2event:
+				events = year2event[year]
+				total_score = 0
+				# event_length = 0
+				for event in events:
+					# idf = personManager.all2vec.event2idf[event.getTriggerId(self)]
+					total_score += event.getScore(self)
+					# event_length += idf
+				# print(event_length, total_score)
+				# min_score = total_score/event_length*math.log(event_length+1)
+				min_score = total_score/len(events)*math.log(len(events)+1)
+				year2score[year] = min_score
+				year2score_array.append([int(year), min_score])
+			year2score_array = sorted(year2score_array, key=lambda elm: elm[0])
+			self.score_array = year2score_array
+			if Align and len(self.score_array)>0: 
+				self.score_array = [[elm[0]-self.score_array[0][0], elm[1]]  for elm in self.score_array]
+			self.score_array = np.array(self.score_array)
+		return list(self.score_array)
 
 	def getAllEvents(self):
 		# if not self.has_all_events:
@@ -194,12 +231,73 @@ class Person(object):
 			'name': self.name,
 			'birth_year': self.birth_year,
 			'death_year': self.death_year,
+			'certain_events_num': self.getCertaintyLength(),
+			'events_num': len(self.event_array)
 			# 'events': [event.id for event in self.event_array]
 			# 'time_range': self.range
 		}
 
 	def isSong(self):
-		return (self.dy==15 or self.dy=='15') and len(self.event_array)>=10
+		return (self.dy==15 or self.dy=='15') # and len(self.event_array)>=10
+
+	def inferUncertainty(self, all2vec):
+		all_events = set()
+
+		def getTriggerId(event, person):
+			for role in event.roles:
+				if role['person'] == person:
+					return event.trigger.name + ' ' + role['role']
+			return None
+
+		year2events = self.getYear2event()
+		events_with_infer = {}
+		for year in year2events:
+			events =year2events[year]
+			# infer = set()
+			events_with_infer[year] = {}
+
+			# 记得分个类
+			type2event = {}
+			for event in events:
+				trigger_type = event.trigger.parent_type
+				if trigger_type in type2event:
+					type2event[trigger_type].append(event)
+				else:
+					type2event[trigger_type] = [event]
+			# print(type2event)
+			for trigger_type in type2event:
+				events = type2event[trigger_type]	
+				triggers = [getTriggerId(event, self)  for event in events]
+				most_similar = all2vec.trigger_model.most_similar(positive=triggers, topn=30)
+				# print(triggers, most_similar)
+				count = 0
+				for sim_trigger, sim in most_similar:
+					if sim<0.45:
+						continue
+					for event in self.event_array:
+						if count>20:
+							continue
+						time_range = event.time_range
+						# print(time_range, year, getTriggerId(event, self), sim_trigger)
+						year = int(year)
+						if year<=time_range[1] and year>=time_range[0] and getTriggerId(event, self)==sim_trigger and time_range[1]!=time_range[0]:
+							count += 1
+							# print(event)
+							if event.id in events_with_infer[year]:
+								now_sim = events_with_infer[year][event.id]['sim']
+								if now_sim<sim:
+									events_with_infer[year][event.id]['sim'] = sim
+							else:
+								# print(event)
+								events_with_infer[year][event.id] = {
+									'event': event,
+									'sim': sim
+								}
+							all_events.add(event)
+		return events_with_infer, list(all_events)
+
+	def getCertaintyLength(self):
+		return len([ event for event in self.event_array if event.time_range[0]==event.time_range[1] and event.time_range[0]!=-9999])
 
 personManager = PersonManager()
 
