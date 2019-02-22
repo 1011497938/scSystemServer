@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 class All2vec(object):
     """docstring for AllToVec"""
     def __init__(self, personManager, addrManager, eventManager):
-        self.vec_size = 200
+        self.vec_size = 20
 
         # self.personManager = personManager
 
@@ -21,7 +21,9 @@ class All2vec(object):
         # self.relationEmbedding(personManager)
         self.addr_model, self.addr2vec = self.allAddr2vec(addrManager)
         self.trigger_model, self.trigger2vec = self.allEvents2Vec(personManager)
-        # self.event2idf = self.getEventIdf(eventManager, personManager)
+        self.event2idf = self.getEventIdf(eventManager, personManager)
+        self.person_model, self.person2vec = self.allPerson2Vec(personManager)
+        self.year_person_model, self.year_person2vec = self.yearPerson2vec(eventManager, personManager)
 
     def allAddr2vec(self, addrManager):
         print('地点embedding')
@@ -116,13 +118,13 @@ class All2vec(object):
                 corpus.append(list(year_events))
 
             # 按人生分
-            # life_events = [] 
-            # events = person.getSortedEvents()
-            # for event in events:
-            #     for role in event.roles:
-            #         if role['person'] == person:
-            #             life_events.append(event.trigger.name + ' ' + role['role'])
-            # corpus.append(life_events)
+            life_events = [] 
+            events = person.getAllEvents()
+            for event in events:
+                for role in event.roles:
+                    if role['person'] == person:
+                        life_events.append(event.trigger.name + ' ' + role['role'])
+            corpus.append(life_events)
         
         # 两两关系
         relation_set = {}
@@ -227,7 +229,7 @@ class All2vec(object):
                     count[trigger2index[trigger]] = trigger_count[trigger]
                 counts.append(count)
 
-        transformer = TfidfTransformer()
+        transformer = TfidfTransformer(smooth_idf=True)
         tfidf = transformer.fit_transform(counts)
 
         # 标准化
@@ -237,7 +239,7 @@ class All2vec(object):
         idf = [value[0] for value in idf]
 
         event2idf = { index2trigger[index]: value for index,value in enumerate(idf)}
-        # open('scSystemServer/data_model/temp_data/event2idf.json', 'w', encoding='utf-8').write(json.dumps(event2idf, indent=4, ensure_ascii = False))
+        open('scSystemServer/data_model/temp_data/event2idf.json', 'w', encoding='utf-8').write(json.dumps(event2idf, indent=4, ensure_ascii = False))
         return event2idf
 
     # 根本用不了，大概要换社交关系相关的算法，关系应该有个权重
@@ -248,41 +250,48 @@ class All2vec(object):
         corpus = []
         all_events = []
         for person in person_array:
-            sort_events = person.getSortedEvents()
+            if not person.isSong():
+                continue
+            events = person.getAllEvents()
             persons = []
-            for event in sort_events:
+            for event in events:
                 roles = event.roles
+                event_corup = []
                 for role in roles:
                     persons.append(role['person'].id)
                     all_events.append(role['person'].id)
-
-            corpus.append(persons)
+                    event_corup.append(role['person'].id)
+                corpus.append(event_corup)
+            # corpus.append(persons)
                 
         # print(corpus)
 
-        print('数据加载完成')
-        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=5, min_count=1, size=self.vec_size, sg=1)
-        # model.train(corpus, total_examples=len(corpus), epochs=10)
+        print('人物数据加载完成')
+        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=10, min_count=1, size=self.vec_size)
+        model.train(corpus, total_examples=len(corpus), epochs=30)
 
-        # # 输出向量
-        # fvec = open("scSystemServer/data_model/temp_data/person_vec","w",encoding='utf-8')
-        # for key in model.wv.vocab:
-        #     fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
-        # fvec.close()
+        # 输出向量
+        fvec = open("scSystemServer/data_model/temp_data/person_vec","w",encoding='utf-8')
+        for key in model.wv.vocab:
+            person = personManager.getPerson(key)
+            if person.isSong():
+                fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
+        fvec.close()
 
-        # counts = {}
-        # for event in all_events:
-        #     if event in counts.keys():
-        #         counts[event] += 1
-        #     else:
-        #         counts[event] = 1
+        counts = {}
+        for event in all_events:
+            if event in counts.keys():
+                counts[event] += 1
+            else:
+                counts[event] = 1
 
-        # fmetia = open("scSystemServer/data_model/temp_data/person_meta","w",encoding='utf-8')
-        # fmetia.writelines("word\tcount\tname\tbirth_year\tdeath_year\n")
-        # for key in model.wv.vocab:
-        #     person = personManager.getPerson(key)
-        #     fmetia.writelines(key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
-        # fmetia.close()
+        fmetia = open("scSystemServer/data_model/temp_data/person_meta","w",encoding='utf-8')
+        fmetia.writelines("word\tcount\tname\tbirth_year\tdeath_year\n")
+        for key in model.wv.vocab:
+            person = personManager.getPerson(key)
+            if person.isSong():
+                fmetia.writelines(key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
+        fmetia.close()
 
 
         # event2vec = {}
@@ -294,9 +303,78 @@ class All2vec(object):
         id2vec = {}
         for key in model.wv.vocab:
             id2vec[key] = model.wv[key]
-        return id2vec
+        return model, id2vec
 
 
+    def yearPerson2vec(self, eventManager, personManager):
+        print('人物 + 年份 embedding')
+        person_array = personManager.person_array
+        # 还要按时间进行排序
+        corpus = []
+        all_events = []
+        for person in person_array:
+            if not person.isSong():
+                continue
+            events = person.getAllEvents()
+            persons = []
+            this_persons = []
+            for event in events:
+                roles = event.roles
+                event_corup = []
+                year = str(event.time_range[0])
+                this_persons.append(person.id + ',' + year)
+                for role in roles:
+                    persons.append(role['person'].id + ',' + year)
+                    all_events.append(role['person'].id + ',' + year)
+                    event_corup.append(role['person'].id + ',' + year)
+                corpus.append(event_corup)
+            corpus.append(persons)
+            corpus.append(this_persons)
+
+        # print(corpus)
+
+        print('人物数据加载完成')
+        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=10, min_count=1, size=self.vec_size)
+        model.train(corpus, total_examples=len(corpus), epochs=30)
+
+        # 输出向量
+        fvec = open("scSystemServer/data_model/temp_data/year_person_vec","w",encoding='utf-8')
+        for key in model.wv.vocab:
+            person_id = key.split(',')[0]
+            year = key.split(',')[1]
+            person = personManager.getPerson(person_id)
+            if person.isSong():
+                fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
+        fvec.close()
+
+        counts = {}
+        for event in all_events:
+            if event in counts.keys():
+                counts[event] += 1
+            else:
+                counts[event] = 1
+
+        fmetia = open("scSystemServer/data_model/temp_data/year_person_meta","w",encoding='utf-8')
+        fmetia.writelines("year\tword\tcount\tname\tbirth_year\tdeath_year\n")
+        for key in model.wv.vocab:
+            person_id = key.split(',')[0]
+            year = key.split(',')[1]
+            person = personManager.getPerson(person_id)
+            if person.isSong():
+                fmetia.writelines(year + '\t' + key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
+        fmetia.close()
+
+
+        # event2vec = {}
+        # for key in model.wv.vocab:
+        #     event2vec[key] = str(model.wv[key][0])
+
+        # open('./temp_data/person2vec.json', 'w', encoding='utf-8').write(json.dumps(event2vec, indent=4, ensure_ascii = False))
+
+        id2vec = {}
+        for key in model.wv.vocab:
+            id2vec[key] = model.wv[key]
+        return model, id2vec
 
 
     # 两两之间关系 以及关系对事件影响 的embedding

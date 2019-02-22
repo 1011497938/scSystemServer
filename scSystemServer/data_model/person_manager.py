@@ -18,6 +18,32 @@ class PersonManager(object):
 		self.all2vec = None
 		print('初始化人物')
 
+		self.song_people = set()  #整理所有的宋朝人物
+
+	def calculateAllSongPeople(self):
+		self.song_people = set()
+		for person in self.person_array:
+			if person.isSong():
+				self.song_people.add(person)
+
+		for event in self.event_manager.event_array:
+			if event.isCertain():
+				if event.time_range[0] < 1500 or event.time_range[0]>800:
+					for elm in event.roles:
+						this_person = elm['person']
+						self.song_people.add(this_person)
+		for depth in range(0,2):
+			literal_song_people = list(self.song_people)
+			for person in literal_song_people:
+				events = person.getAllEvents()
+				for event in events:
+					for elm in event.roles:
+						this_person = elm['person']
+						# if not this_person.isSong():
+						self.song_people.add(this_person)
+
+
+
 	def createPerson(self,bio_main_node):
 		new_id = bio_main_node['c_personid']
 		if new_id in self.id_set:
@@ -79,6 +105,8 @@ class Person(object):
 
 		self.tribe = bio_main_node['c_tribe']   #"部、族"
 
+		self.page_rank = 0
+
 		if event_manager is not None:
 			# 创建出生死亡事件
 			birth_year = self.birth_year
@@ -108,6 +136,46 @@ class Person(object):
 		self.has_all_events = False
 		self.year2event = None
 		self.score_array = None
+
+	def getRelatedEvents(self, limit_depth = 3):
+		print('开始爬取所有相关人员事件', self, limit_depth)
+		has_pull = set()
+		need_pull = set()
+		person2depth = {}
+
+		start_person = self
+		need_pull.add(start_person)
+		person2depth[hash(start_person)] = 1
+
+		all_events = set()
+
+		while(len(need_pull)!=0):
+			person = need_pull.pop()
+			has_pull.add(person)
+
+			now_depth = person2depth[hash(person)]
+			events = person.getAllEvents()
+			for event in events:
+				all_events.add(event)
+				roles = event.roles
+				for role in roles:
+					related_person = role['person']
+					hash_vale = hash(related_person)
+					if hash_vale in person2depth:    #更新子节点的depth
+						this_depth = person2depth[hash_vale]
+						if this_depth>now_depth+1:
+							person2depth[hash_vale] = now_depth+1
+							if this_depth>=limit_depth and now_depth+1<limit_depth and related_person in has_pull:   #如果发现层数更近恢复
+								has_pull.remove(related_person)
+								need_pull.add(related_person)
+					else:
+						person2depth[hash_vale] = now_depth+1
+						if now_depth<limit_depth and related_person not in has_pull:
+							need_pull.add(related_person)
+			# print(len(has_pull), person, person2depth[hash(person)])
+
+		return list(all_events)
+
 
 	def getSortedEvents(self):
 		# 还要加入sequence的比较
@@ -226,19 +294,23 @@ class Person(object):
 		return hash(str(self.id)+'人物')
 
 	def toDict(self):
+		year2event = self.getYear2event()
+		years = year2event.keys()
 		return {
 			'id': self.id,
 			'name': self.name,
 			'birth_year': self.birth_year,
 			'death_year': self.death_year,
 			'certain_events_num': self.getCertaintyLength(),
-			'events_num': len(self.event_array)
+			'events_num': len(self.event_array),
+			'page_rank': self.page_rank,
+			'year2vec': { year:personManager.all2vec.year_person2vec[self.id + ',' + str(year)].tolist()  for year in years}
 			# 'events': [event.id for event in self.event_array]
 			# 'time_range': self.range
 		}
 
 	def isSong(self):
-		return (self.dy==15 or self.dy=='15') # and len(self.event_array)>=10
+		return (self.dy==15 or self.dy=='15' or self in personManager.song_people) # and len(self.event_array)>=10
 
 	def inferUncertainty(self, all2vec):
 		all_events = set()

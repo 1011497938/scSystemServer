@@ -18,6 +18,7 @@ class AddrManager(object):
 
         self.place2xy = self.xyParser()
         self.place2xy_set = set(self.place2xy.keys())
+        self.all2vec = None
 
         # 加载CBDB上的所有地址
         addr_data = graph.run('MATCH (n:Addr_codes) RETURN id(n), n').data()
@@ -267,7 +268,8 @@ class Addr(object):
             'alt_names':self.alt_names,
             # 'time_range': self.time_range,
             'parents': [addr.id for addr in self.parents],
-            'sons': [addr.id for addr in self.sons]
+            'sons': [addr.id for addr in self.sons],
+            'vec': addrManager.all2vec.addr2vec[self.id].tolist()
         }
 
     # 宋朝地点会直接预加载

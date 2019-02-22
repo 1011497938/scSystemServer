@@ -27,9 +27,11 @@ urlpatterns = [
     path('getPersonEvents/', expose_function.getPersonEvents),
     path('init/', expose_function.init),
     path('infer_person/', expose_function.inferPersonsEvent),
-    path('getRelatedEvents/', expose_function.getRelatedEvents),
+    path('getRelatedEvents/', expose_function.getRelatedEvents),   #推荐有可能帮助推断的事件
     path('getPersonScore/', expose_function.getPersonScore),
     path('getSimLife/', expose_function.getSimLife),
+    path('getRelatedPeopleEvents/', expose_function.getRelatedPeopleEvents),
+    path('getAllRelatedEvents/', expose_function.getAllRelatedEvents),
     # url(r'^index/$', neo4jQuery.neo4jQuery),
     # url(r'^getPersonDetail/.*$', getPersonDetail.getPersonDetail),
 ]
