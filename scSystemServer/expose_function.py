@@ -27,7 +27,7 @@ import math
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll()
+eventManager.getAll(1)
 
 all2vec = All2vec(personManager, addrManager, eventManager)
 personManager.all2vec = all2vec
