@@ -304,7 +304,8 @@ class Person(object):
 			'certain_events_num': self.getCertaintyLength(),
 			'events_num': len(self.event_array),
 			'page_rank': self.page_rank,
-			'year2vec': { year:personManager.all2vec.year_person2vec[self.id + ',' + str(year)].tolist()  for year in years}
+			'year2vec': { year:personManager.all2vec.year_person2vec[self.id + ',' + str(year)].tolist()  for year in years},
+			'dy': self.dy
 			# 'events': [event.id for event in self.event_array]
 			# 'time_range': self.range
 		}

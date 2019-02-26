@@ -32,6 +32,7 @@ urlpatterns = [
     path('getSimLife/', expose_function.getSimLife),
     path('getRelatedPeopleEvents/', expose_function.getRelatedPeopleEvents),
     path('getAllRelatedEvents/', expose_function.getAllRelatedEvents),
+    path('getPersonRelation/', expose_function.getPersonRelation),
     # url(r'^index/$', neo4jQuery.neo4jQuery),
     # url(r'^getPersonDetail/.*$', getPersonDetail.getPersonDetail),
 ]

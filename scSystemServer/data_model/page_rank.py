@@ -6,6 +6,7 @@ from .relation2type import getEventScore
 import json
 import networkx as nx 
 import numpy as np
+import traceback 
 
 # import matplotlib.pyplot as plt 
 
@@ -19,8 +20,6 @@ def pageRank(event_array):
 		roles = event.roles
 		if len(roles)==1:
 			person = roles[0]['person']
-			# if not person.isSong():
-			# 	continue
 			node_id = person.id
 			G.add_node(node_id)
 			if G.has_edge(node_id,node_id):
@@ -28,14 +27,12 @@ def pageRank(event_array):
 					G.add_weighted_edges_from([(node_id, node_id, score)])
 			else:
 				G.add_weighted_edges_from([(node_id, node_id, score)])
-			G.add_weighted_edges_from([(node_id, node_id, score)])
+			# G.add_weighted_edges_from([(node_id, node_id, score)])
 		else:
 			from_node = None
 			to_node = None
 			for elm in roles:
 				person = elm['person']
-				# if not person.isSong():
-				# 	continue
 				role = elm['role']
 				if role == '主角':
 					from_node = person.id
@@ -49,10 +46,7 @@ def pageRank(event_array):
 						G.add_weighted_edges_from([(from_node, to_node, score)])
 				else:
 					G.add_weighted_edges_from([(from_node, to_node, score)])
-				# G.add_weighted_edges_from([(from_node, to_node, score)])
-			# else:
-			# 	# print('Error:没有凑齐一对节点')
-			# 	print(str(event))
+
 	person_rank = {}
 	# print(len(G.nodes))
 	pr=nx.pagerank(G, weight='weight', max_iter=1000)
@@ -89,8 +83,7 @@ class PersonGraph(object):
 			roles = event.roles
 			if len(roles)==1:
 				node_id = roles[0]['person'].id
-				if node_id not in G:
-					G.add_node(node_id)
+				G.add_node(node_id)
 				G.add_weighted_edges_from([(node_id, node_id, 1/abs(score))])
 			else:
 				from_node = None
@@ -102,9 +95,20 @@ class PersonGraph(object):
 						from_node = person.id
 					else:
 						to_node = person.id
-				G.add_node(from_node)
-				G.add_node(to_node)
-				G.add_weighted_edges_from([(from_node, to_node,  1/abs(score))])
+				if from_node is not None and to_node is not None:
+					G.add_node(from_node)
+					G.add_node(to_node)
+					G.add_weighted_edges_from([(from_node, to_node,  1/abs(score))])
 
 	def getSim(self, person1, person2):
-		return nx.shortest_path_length(self.G,source=person1.id,target=person2.id)
+		# if person1.id not in self.G or person2.id not in self.G:
+		# 	return 9999
+		try:
+			# print(person1, person2, nx.shortest_path_length(self.G,source=person1.id,target=person2.id))
+			return nx.shortest_path_length(self.G,source=person1.id,target=person2.id)
+		except:  
+			traceback.print_exc()
+			print(person1, person2, '中间没得路径')
+			return 9999
+		
+		

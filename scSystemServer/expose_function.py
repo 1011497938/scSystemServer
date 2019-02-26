@@ -28,16 +28,16 @@ import math
 # 初始化
 personManager.registEventManager(eventManager)
 eventManager.getAll()
-all2vec = All2vec(personManager, addrManager, eventManager)
 
+all2vec = All2vec(personManager, addrManager, eventManager)
+personManager.all2vec = all2vec
+addrManager.all2vec = all2vec
 eventManager.registAll2vec(all2vec)
 
 person_graph = PersonGraph(eventManager)
 person_rank = pageRank(eventManager.event_array)
 
 eventManager.person_graph = person_graph
-personManager.all2vec = all2vec
-addrManager.all2vec = all2vec
 
 # year2events =  eventManager.getYear2Events()
 # year2pagerank = {year:pageRank(year2events[year])  for year in year2events}
@@ -237,6 +237,34 @@ def getPersonScore(request):
             year_score += event.getScore(person)
         year2score[year] = year_score/len(events)*math.log(len(events))
     return HttpResponse(json.dumps({'score':year2score, 'info': '找到相关事件'}))
+
+# 找到多个人的所有关系（可以在前端实现交集并集的处理）
+def getPersonRelation(request):
+    person_ids = request.GET.get('person_ids')
+    person_ids = person_ids.split(',')
+    mian_people = [ personManager.getPerson(person_id) for person_id in person_ids]
+    all_people = set()
+    for main_person in mian_people:
+        if main_person is None:
+            print('没有找到', person_ids, '中的对应的人物')
+            continue
+        for event in main_person.event_array:
+            for role in event.roles:
+                person = role['person']
+                all_people.add(person)
+    result_events = set()
+    for person in all_people:
+        for event in person.event_array:
+            all_person_is_in = True
+            for role in event.roles:
+                if role['person'] not in all_people:
+                    all_person_is_in = False
+            if all_person_is_in:
+                result_events.add(event)
+    result_events = list(result_events)
+    print('找到了',len(all_people), '个人,共', len(result_events),'事件')
+    result_events = events2dict(result_events)
+    return HttpResponse(json.dumps({'data':result_events, 'info': '找到某人的所有关系'}))
 
 def getSimLife(request):
     person_id = request.GET.get('person_id')
