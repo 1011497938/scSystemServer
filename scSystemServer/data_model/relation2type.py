@@ -81,7 +81,7 @@ for entry_code in entry_codes:
 	}
 
 
-open('scSystemServer/data_model/temp_data/relation_code2type.json', 'w', encoding='utf-8').write(json.dumps(code2rel, indent=5, ensure_ascii = False) )
+# open('scSystemServer/data_model/temp_data/relation_code2type.json', 'w', encoding='utf-8').write(json.dumps(code2rel, indent=5, ensure_ascii = False) )
 
 data = open('scSystemServer/data_model/data/relation_code2type.csv', 'r', encoding='utf-8').read().strip('\n').split('\n')
 trigger2score = {}
@@ -93,7 +93,7 @@ for row in data[1:]:
 		'parent_type': code2rel[name]['parent_type'],
 		'score': int(row[3])
 	}
-open('scSystemServer/data_model/data/relation_code2type.json','w', encoding='utf-8').write(json.dumps(trigger2score, indent=4, ensure_ascii = False))
+# open('scSystemServer/data_model/data/relation_code2type.json','w', encoding='utf-8').write(json.dumps(trigger2score, indent=4, ensure_ascii = False))
 
 
 # fs = open('scSystemServer/data_model/temp_data/relation_code2type.csv', 'w', encoding='utf-8')

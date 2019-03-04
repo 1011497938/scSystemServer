@@ -20,6 +20,16 @@ class PersonManager(object):
 
 		self.song_people = set()  #整理所有的宋朝人物
 
+	def selfDestory(self):
+		for person in self.person_array:
+			person.selfDestory()
+		self.id2person = None  #c_personid
+		self.id_set = None
+		self.person_array = None
+		self.event_manager = None
+		self.all2vec = None
+		self.song_people = None
+
 	def calculateAllSongPeople(self):
 		self.song_people = set()
 		for person in self.person_array:
@@ -45,7 +55,7 @@ class PersonManager(object):
 
 
 	def createPerson(self,bio_main_node):
-		new_id = bio_main_node['c_personid']
+		new_id = 'person_' + bio_main_node['c_personid']
 		if new_id in self.id_set:
 			return self.id2person[new_id]
 		else:
@@ -57,11 +67,13 @@ class PersonManager(object):
 		# 之后可以添加序列化功能
 
 	def getPerson(self, person_id):
-		person_id = str(person_id)
+		if 'person_' not in str(person_id):
+			person_id = 'person_' + str(person_id)
 		if person_id in self.id_set:
 			return self.id2person[person_id]
 		else:
-			print('run')
+			print(person_id, '没有找到，到数据库中查找')
+			# print('run')
 			data = graph.run('MATCH (n:Biog_main{{c_personid:"{}"}}) RETURN n'.format(str(person_id))).data()
 			if len(data)!=0:
 				# print(data[0])
@@ -83,7 +95,7 @@ class Person(object):
 	"""docstring for Person"""
 	def __init__(self, bio_main_node, event_manager):
 		# from event_manager import eventManager
-		self.id = bio_main_node['c_personid']
+		self.id = 'person_' + bio_main_node['c_personid']
 		self.name = bio_main_node['c_name_chn']
 
 		self.birth_year = bio_main_node['c_birthyear']
@@ -136,6 +148,21 @@ class Person(object):
 		self.has_all_events = False
 		self.year2event = None
 		self.score_array = None
+
+	def selfDestory(self):
+		self.id = None
+		self.name = None
+		self.birth_year = None
+		self.death_year = None
+		self.event_array = None
+		self.index_year = None
+		self.dy_nh_code = None          #在世始年
+		self.index_year = None          #在世始年
+
+		self.dy = None
+		self.tribe = None
+
+		self.page_rank = None
 
 	def getRelatedEvents(self, limit_depth = 3):
 		print('开始爬取所有相关人员事件', self, limit_depth)
@@ -304,8 +331,9 @@ class Person(object):
 			'certain_events_num': self.getCertaintyLength(),
 			'events_num': len(self.event_array),
 			'page_rank': self.page_rank,
-			'year2vec': { year:personManager.all2vec.year_person2vec[self.id + ',' + str(year)].tolist()  for year in years},
-			'dy': self.dy
+			# 'year2vec': { year:personManager.all2vec.year_person2vec[self.id + ',' + str(year)].tolist()  for year in years},
+			'dy': self.dy,
+			'vec': personManager.all2vec.person2vec[self.id].tolist()
 			# 'events': [event.id for event in self.event_array]
 			# 'time_range': self.range
 		}

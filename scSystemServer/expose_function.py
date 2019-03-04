@@ -9,6 +9,7 @@ from .data_model.time_manager import timeManager
 from .data_model.page_rank import pageRank,PersonGraph
 from .data_model.word2vec import All2vec
 from .data_model.common_function import dist_dif
+from .data_model.event2vec import Event2Vec
 
 from scipy.spatial.distance import euclidean
 from fastdtw import fastdtw
@@ -27,7 +28,12 @@ import math
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll(1)
+eventManager.getAll()
+
+event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
+event2vec.train(TOTAL_TIMES=100)
+event2vec.load()
+# event2vec.saveToView()
 
 all2vec = All2vec(personManager, addrManager, eventManager)
 personManager.all2vec = all2vec
@@ -38,6 +44,11 @@ person_graph = PersonGraph(eventManager)
 person_rank = pageRank(eventManager.event_array)
 
 eventManager.person_graph = person_graph
+
+
+
+
+# event2vec.train()
 
 # year2events =  eventManager.getYear2Events()
 # year2pagerank = {year:pageRank(year2events[year])  for year in year2events}
@@ -62,7 +73,7 @@ init_data = json.dumps({
     'trigger2vec': { key: all2vec.trigger2vec[key].tolist() for key in all2vec.trigger2vec},
     'info': '初始化数据'
     })
-open('scSystemServer/data_model/temp_data/预加载数据/data', 'w', encoding='utf-8').write(init_data)
+# open('scSystemServer/data_model/temp_data/预加载数据/data', 'w', encoding='utf-8').write(init_data)
 
 # fs_vec = open('scSystemServer/data_model/temp_data/事件vec', 'w', encoding='utf-8')
 # fs_meta = open('scSystemServer/data_model/temp_data/事件meta', 'w', encoding='utf-8')
@@ -175,11 +186,18 @@ def getRelatedEvents(request):
     data = events2dict(related_events)
     return HttpResponse(json.dumps({'data':data, 'sim': dif, 'center_event':event_id, 'info': '找到相关事件'}))
 
+
+require2renponse = {}
 def getAllRelatedEvents(request):
     event_id = request.GET.get('event_id')
     depth = int(request.GET.get('depth'))
     trigger_num = int(request.GET.get('trigger_num'))
     max_event_num = int(request.GET.get('event_num'))
+
+    require_id = 'getAllRelatedEvents_{}_{}_{}_{}'.format(event_id, depth, trigger_num, max_event_num)
+    if require_id in require2renponse:
+        print(require_id, '重复调用，直接使用纪录')
+        return HttpResponse(json.dumps(require2renponse[require_id]))
 
     if event_id in eventManager.event_id_set:
         event = eventManager.id2event[event_id]
@@ -214,7 +232,9 @@ def getAllRelatedEvents(request):
     dif = {related_event.id: sim[related_event]  for related_event in sim}
     data = events2dict(events)
 
-    return HttpResponse(json.dumps({'data':data, 'dif': dif, 'event_id': event_id, 'info': '找到事件的所有相关事件'}))
+    result = {'data':data, 'dif': dif, 'event_id': event_id, 'info': '找到事件的所有相关事件'}
+    require2renponse[require_id] = result
+    return HttpResponse(json.dumps(result))
 
 def getRelatedPeopleEvents(request):
     person_id = request.GET.get('person_id')

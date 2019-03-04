@@ -30,6 +30,15 @@ class EventManager(object):
         self.all2vec = None
         self.person_graph = None
 
+    def selfDestory(self):
+        for event in self.event_array:
+            event.selfDestory()
+        self.event_array = None
+        self.id2event = None
+        self.event_id_set = None
+        self.all2vec = None
+        self.person_graph = None
+
     # 需要对关系数据清洗，洗掉重叠的数据，被全改为主动
     def clean(self):
         print('开始清理')
@@ -116,12 +125,14 @@ class EventManager(object):
             # threading_array = []
             has1 = has2 = has3 = has4 = True
             threading_array = []
+
+            EVENT_NUM_PER_TIMES = 10000
             for times in range(0,get_times):
-                t1= threading.Thread(target=self.loadRelationEvents,args=(10000,10000*times, None))
-                t2= threading.Thread(target=self.loadPostOfficeEvents,args=(10000,10000*times, None))
-                t3= threading.Thread(target=self.loadTextEvents,args=(10000,10000*times, None))
-                t4= threading.Thread(target=self.loadEntryEvents,args=(10000,10000*times, None))
-                t5= threading.Thread(target=self.loadAddrEvents,args=(10000,10000*times, None))
+                t1= threading.Thread(target=self.loadRelationEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                t2= threading.Thread(target=self.loadPostOfficeEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                t3= threading.Thread(target=self.loadTextEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                t4= threading.Thread(target=self.loadEntryEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                t5= threading.Thread(target=self.loadAddrEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
 
                 t1.start()
                 time.sleep(0.1)
@@ -145,13 +156,13 @@ class EventManager(object):
                 t4.join()
                 t5.join()
                 # if has1:
-                # 	has1 = eventManager.loadRelationEvents(LIMIT = 10000,SKIP = 10000*times)   #person_id=3767 苏轼
+                # 	has1 = eventManager.loadRelationEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)   #person_id=3767 苏轼
                 # if has2:
-                # 	has2 = eventManager.loadPostOfficeEvents(LIMIT = 10000,SKIP = 10000*times)
+                # 	has2 = eventManager.loadPostOfficeEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)
                 # if has3:
-                # 	has3 = eventManager.loadTextEvents(LIMIT = 10000,SKIP = 10000*times)
+                # 	has3 = eventManager.loadTextEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)
                 # if has4:
-                # 	has4 = eventManager.loadEntryEvents(LIMIT = 10000,SKIP = 10000*times)
+                # 	has4 = eventManager.loadEntryEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)
                 # if not has1  and not has2 and not has3 and not has4:
                 # 	break
 
@@ -606,7 +617,7 @@ class EventManager(object):
 
 
     def createEvents(self, node_id):
-        node_id = str(node_id)
+        node_id = 'event_' + str(node_id)
         id2event = self.id2event
         if node_id in self.event_id_set:
             return id2event[node_id]
@@ -678,7 +689,7 @@ class EventManager(object):
         max = np.max(scores)
         # trigger_name_imp = { trigger_name:(trigger_name_imp[trigger_name]-imp_mean)/imp_std   for trigger_name in trigger_name_imp}
         trigger_name_imp = { trigger_name:(trigger_name_imp[trigger_name]-min)/(max-min)  for trigger_name in trigger_name_imp}
-        open('scSystemServer/data_model/temp_data/事件重要性第一项.json', 'w', encoding='utf-8').write(json.dumps(trigger_name_imp, indent=3, ensure_ascii = False) )
+        # open('scSystemServer/data_model/temp_data/事件重要性第一项.json', 'w', encoding='utf-8').write(json.dumps(trigger_name_imp, indent=3, ensure_ascii = False) )
         return trigger_name_imp
 
     # 对不同的确实信息应该有不同的计算方式
@@ -736,6 +747,9 @@ class EventManager(object):
 
         return (addr_diff+trigger_diff*3+time_diff+person_diff*4)/9
 
+    def getCertainEvents(self):
+        return [event for event in self.event_array if event.isCertain()]
+        
 # # 给每个事件返回一个多维的打分
 # class ScoreManager:
 # 	def __init__(self):
@@ -761,6 +775,20 @@ class Event(object):
         self.detail = ''
         self.related_tables = set()
     
+    def selfDestory(self):
+        self.id = None
+        self.time_range = None
+        self.type = None  #类型,没啥用，以后以trigger为主
+        self.trigger = None  #触发词
+        self.is_state = None
+        self.roles = None
+        self.addrs = None
+        self.sequence = None
+        self.related_nodes = None
+        self.detail = None
+        self.related_tables = None
+    
+
     # 将各元素拼接生成一个数组
     def toVec(self):
         init_vec = np.array([])
@@ -1014,11 +1042,11 @@ class Event(object):
         self.trigger = trigger
 
     def __str__(self):
-        string = '[(事件) id:{}, 时间:{}, 地点:{}, 触发词:{}, 角色: {}]'.format(
+        string = '[(事件) id:{}, 时间:{}, 地点:{}, 触发词:{}, 角色: {}, 细节{}]'.format(
             str(self.id), str(self.time_range),
             '[' + ','.join([str(addr.name) for addr in self.addrs]) + ']', 
             str(self.trigger.name), 
-            str(','.join([ '【{}/{}】'.format(elm['person'].name, elm['role']) for elm in self.roles])))
+            str(','.join([ '【{}/{}】'.format(elm['person'].name, elm['role'], self.detail) for elm in self.roles])))
         return string
 
     def __hash__(self):
@@ -1050,12 +1078,13 @@ class Event(object):
         return self.time_range[0]==self.time_range[1] and self.time_range[0]!=-9999 and self.time_range[1]!=9999
 
 
+
 # 管理触发词的分类计算
 class EventTriggerManager(object):
     """docstring for EventTriggerManager"""
     def __init__(self):
         self.name2trigger = {}
-        # self.triggers = []   #Trigger
+        # self.trigger_arrray = []   #Trigger
         # self.relationship_cat = self._getRelationshipCat()   #暂时没有用到
         self.trigger_set = set()
 
@@ -1088,6 +1117,12 @@ class EventTriggerManager(object):
         self.ping_words2score = {}
         for index, word in enumerate(self.ping_words):
             self.ping_words2score[word] = index
+            
+    def selfDestory(self):
+        for trigger in self.trigger_set:
+            trigger.selfDestory()
+        self.name2trigger = None
+        self.trigger_set = None
 
     def getGuanZhiScore(self, guanzhi):
         pingji = self.guanzhi_score[guanzhi]
@@ -1138,7 +1173,14 @@ class Trigger(object):
         self.type = '未分类'
         self.parent_type = '未分类'
         self.score = 0
-        self.id = hash(self)
+        self.id = 'trigger_' + str(name)
+
+    def selfDestory(self):
+        self.name = None
+        self.type = None
+        self.parent_type = None
+        self.score = None
+        self.id = None
 
     def __str__(self):
         return '[(触发词) 触发词:{}, 分类:{}]'.format(str(self.name), str(self.type))

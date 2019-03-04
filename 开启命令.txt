@@ -4,3 +4,4 @@ pip install django-cors-headers
 pip install Django==2.1.5
 pip install fastdtw
 pip install networkX
+pip install  cylouvain

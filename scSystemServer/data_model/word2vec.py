@@ -23,7 +23,7 @@ class All2vec(object):
         self.trigger_model, self.trigger2vec = self.allEvents2Vec(personManager)
         self.event2idf = self.getEventIdf(eventManager, personManager)
         self.person_model, self.person2vec = self.allPerson2Vec(personManager)
-        self.year_person_model, self.year_person2vec = self.yearPerson2vec(eventManager, personManager)
+        # self.year_person_model, self.year_person2vec = self.yearPerson2vec(eventManager, personManager)
 
     def allAddr2vec(self, addrManager):
         print('地点embedding')
@@ -239,7 +239,7 @@ class All2vec(object):
         idf = [value[0] for value in idf]
 
         event2idf = { index2trigger[index]: value for index,value in enumerate(idf)}
-        open('scSystemServer/data_model/temp_data/event2idf.json', 'w', encoding='utf-8').write(json.dumps(event2idf, indent=4, ensure_ascii = False))
+        # open('scSystemServer/data_model/temp_data/event2idf.json', 'w', encoding='utf-8').write(json.dumps(event2idf, indent=4, ensure_ascii = False))
         return event2idf
 
     # 根本用不了，大概要换社交关系相关的算法，关系应该有个权重
@@ -250,8 +250,9 @@ class All2vec(object):
         corpus = []
         all_events = []
         for person in person_array:
-            if not person.isSong():
-                continue
+            # if not person.isSong():
+            #     continue
+            corpus.append([person.id])
             events = person.getAllEvents()
             persons = []
             for event in events:
@@ -267,31 +268,31 @@ class All2vec(object):
         # print(corpus)
 
         print('人物数据加载完成')
-        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=10, min_count=1, size=self.vec_size)
+        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=10, min_count=0, size=self.vec_size)
         model.train(corpus, total_examples=len(corpus), epochs=30)
 
         # 输出向量
-        fvec = open("scSystemServer/data_model/temp_data/person_vec","w",encoding='utf-8')
-        for key in model.wv.vocab:
-            person = personManager.getPerson(key)
-            if person.isSong():
-                fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
-        fvec.close()
+        # fvec = open("scSystemServer/data_model/temp_data/person_vec","w",encoding='utf-8')
+        # for key in model.wv.vocab:
+        #     person = personManager.getPerson(key)
+        #     if person.isSong():
+        #         fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
+        # fvec.close()
 
-        counts = {}
-        for event in all_events:
-            if event in counts.keys():
-                counts[event] += 1
-            else:
-                counts[event] = 1
+        # counts = {}
+        # for event in all_events:
+        #     if event in counts.keys():
+        #         counts[event] += 1
+        #     else:
+        #         counts[event] = 1
 
-        fmetia = open("scSystemServer/data_model/temp_data/person_meta","w",encoding='utf-8')
-        fmetia.writelines("word\tcount\tname\tbirth_year\tdeath_year\n")
-        for key in model.wv.vocab:
-            person = personManager.getPerson(key)
-            if person.isSong():
-                fmetia.writelines(key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
-        fmetia.close()
+        # fmetia = open("scSystemServer/data_model/temp_data/person_meta","w",encoding='utf-8')
+        # fmetia.writelines("word\tcount\tname\tbirth_year\tdeath_year\n")
+        # for key in model.wv.vocab:
+        #     person = personManager.getPerson(key)
+        #     if person.isSong():
+        #         fmetia.writelines(key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
+        # fmetia.close()
 
 
         # event2vec = {}
@@ -313,8 +314,8 @@ class All2vec(object):
         corpus = []
         all_events = []
         for person in person_array:
-            if not person.isSong():
-                continue
+            # if not person.isSong():
+            #     continue
             events = person.getAllEvents()
             persons = []
             this_persons = []
@@ -334,35 +335,35 @@ class All2vec(object):
         # print(corpus)
 
         print('人物数据加载完成')
-        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=10, min_count=1, size=self.vec_size)
+        model = gensim.models.Word2Vec(corpus, workers=cpu_count(), window=10, min_count=0, size=self.vec_size)
         model.train(corpus, total_examples=len(corpus), epochs=30)
 
         # 输出向量
-        fvec = open("scSystemServer/data_model/temp_data/year_person_vec","w",encoding='utf-8')
-        for key in model.wv.vocab:
-            person_id = key.split(',')[0]
-            year = key.split(',')[1]
-            person = personManager.getPerson(person_id)
-            if person.isSong():
-                fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
-        fvec.close()
+        # fvec = open("scSystemServer/data_model/temp_data/year_person_vec","w",encoding='utf-8')
+        # for key in model.wv.vocab:
+        #     person_id = key.split(',')[0]
+        #     year = key.split(',')[1]
+        #     person = personManager.getPerson(person_id)
+        #     if person.isSong():
+        #         fvec.writelines("\t".join([str(elm) for elm in model.wv[key] ])+"\n")
+        # fvec.close()
 
-        counts = {}
-        for event in all_events:
-            if event in counts.keys():
-                counts[event] += 1
-            else:
-                counts[event] = 1
+        # counts = {}
+        # for event in all_events:
+        #     if event in counts.keys():
+        #         counts[event] += 1
+        #     else:
+        #         counts[event] = 1
 
-        fmetia = open("scSystemServer/data_model/temp_data/year_person_meta","w",encoding='utf-8')
-        fmetia.writelines("year\tword\tcount\tname\tbirth_year\tdeath_year\n")
-        for key in model.wv.vocab:
-            person_id = key.split(',')[0]
-            year = key.split(',')[1]
-            person = personManager.getPerson(person_id)
-            if person.isSong():
-                fmetia.writelines(year + '\t' + key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
-        fmetia.close()
+        # fmetia = open("scSystemServer/data_model/temp_data/year_person_meta","w",encoding='utf-8')
+        # fmetia.writelines("year\tword\tcount\tname\tbirth_year\tdeath_year\n")
+        # for key in model.wv.vocab:
+        #     person_id = key.split(',')[0]
+        #     year = key.split(',')[1]
+        #     person = personManager.getPerson(person_id)
+        #     if person.isSong():
+        #         fmetia.writelines(year + '\t' + key + '\t' + str(counts[key]) +  '\t' + str(person.name) + '\t' + str(person.birth_year) + '\t' + str(person.death_year) + '\n')
+        # fmetia.close()
 
 
         # event2vec = {}

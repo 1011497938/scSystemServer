@@ -55,15 +55,17 @@ def pageRank(event_array):
 	max = np.max(ranks)
 	min = np.min(ranks)
 
+	# 这里输出的pr没有归一化呀
+
 	for person_id in pr:
 		rank = pr[person_id]
 		rank = (rank-min)/(max-min)
 		person = personManager.getPerson(person_id)
 		person_name = person.name
 		person.page_rank = rank
-		person_rank[person_name] = rank
-	open('scSystemServer/data_model/temp_data/pageRank.json', 'w', encoding='utf-8').write(json.dumps(person_rank, indent=3, ensure_ascii = False) )
-	return pr
+		person_rank[person_id] = rank
+	# open('scSystemServer/data_model/temp_data/pageRank.json', 'w', encoding='utf-8').write(json.dumps(person_rank, indent=3, ensure_ascii = False) )
+	return person_rank
 
 # 计算一下每年的page_rank
 
@@ -107,8 +109,8 @@ class PersonGraph(object):
 			# print(person1, person2, nx.shortest_path_length(self.G,source=person1.id,target=person2.id))
 			return nx.shortest_path_length(self.G,source=person1.id,target=person2.id)
 		except:  
-			traceback.print_exc()
-			print(person1, person2, '中间没得路径')
+			# traceback.print_exc()
+			print(person1, person2, '中间没得路径或者两者不存在')
 			return 9999
 		
 		

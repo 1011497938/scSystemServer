@@ -70,6 +70,16 @@ class AddrManager(object):
 
         print('加载地址管理器')
 
+    def selfDestory(self):
+        for addr in self.addr_array:
+            addr.selfDestory()
+        self.id2addr = None
+        self.addr_id_set = None
+        self.addr_array = None
+        self.place2xy = None
+        self.place2xy_set = None
+        self.all2vec = None
+
     def _getXY(self, place_name):
         place2xy = self.place2xy
         place2xy_set = self.place2xy_set
@@ -146,7 +156,7 @@ class AddrManager(object):
         return place2xy
 
     def createAddr(self, addr_node):
-        addr_id = addr_node['c_addr_id']
+        addr_id = 'addr_' + addr_node['c_addr_id']
         if addr_id not in self.addr_id_set:
             self.id2addr[addr_id] = Addr(addr_node)
             self.addr_id_set.add(addr_id)
@@ -157,9 +167,12 @@ class AddrManager(object):
     #     return []
 
     def getAddr(self, addr):
-        if match('[0-9]+', str(addr)):  #如果是'c_addr_id'
-            if addr in self.id2addr.keys():
-                return self.id2addr[addr]
+        if 'addr_' not in addr:
+            addr = 'addr_' + addr
+        # addr = str(addr).replace('addr_', '')
+        # if match('[0-9]+', str(addr)):  #如果是'c_addr_id'
+        if addr in self.addr_id_set:
+            return self.id2addr[addr]
         print('ERROR:没有找到地址', addr)
         return None
         # 如果是名字,需要遍历
@@ -224,6 +237,19 @@ class Addr(object):
         
     def isSong(self):
         return (self.name=='宋朝' or (self.first_year<800 and self.last_year>1300))
+
+    def selfDestory(self):
+        self.id = None
+        self.name = None
+        self.first_year = None
+        self.last_year = None
+        self.x = None
+        self.y = None
+        self.notes = None
+        self.alt_names = None
+        self.parents = None
+        self.sons = None
+
 
     # 输入是否为他的父节点
     def isParent(self, addr):
