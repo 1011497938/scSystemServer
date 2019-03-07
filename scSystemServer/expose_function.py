@@ -6,8 +6,8 @@ from .data_model.neo4j_manager import graph
 from py2neo import Graph,Node,Relationship,cypher
 from .data_model.time_manager import timeManager
 # from relation2type import getRelTypes
-from .data_model.page_rank import pageRank,PersonGraph
-from .data_model.word2vec import All2vec
+from .data_model.page_rank import pageRank  #,PersonGraph
+# from .data_model.word2vec import All2vec
 from .data_model.common_function import dist_dif
 from .data_model.event2vec import Event2Vec
 
@@ -33,27 +33,15 @@ eventManager.getAll()
 event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
 event2vec.train(TOTAL_TIMES=100)
 event2vec.load()
-# event2vec.saveToView()
+event2vec.load2Manager()
+event2vec.saveToView()
 
-all2vec = All2vec(personManager, addrManager, eventManager)
-personManager.all2vec = all2vec
-addrManager.all2vec = all2vec
-eventManager.registAll2vec(all2vec)
+# all2vec = All2vec(personManager, addrManager, eventManager)
 
-person_graph = PersonGraph(eventManager)
-person_rank = pageRank(eventManager.event_array)
-
-eventManager.person_graph = person_graph
-
-
-
-
-# event2vec.train()
-
-# year2events =  eventManager.getYear2Events()
-# year2pagerank = {year:pageRank(year2events[year])  for year in year2events}
-# print(year2pagerank)
-# open('scSystemServer/data_model/temp_data/year2pagerank.json', 'w', encoding='utf-8').write(json.dumps(year2pagerank, indent=3, ensure_ascii = False))
+# person_graph = PersonGraph(eventManager)
+person_rank = pageRank(eventManager.event_array, personManager.person_array)
+for person in personManager.person_array:
+    person.page_rank = person_rank[person.id]
 
 
 trigger_name_imp = eventManager.calculateImporatnce1()
@@ -70,21 +58,10 @@ init_data = json.dumps({
     'addrs': song_addrs, 
     'triggers': triggers, 
     'trigger_imp': trigger_name_imp,
-    'trigger2vec': { key: all2vec.trigger2vec[key].tolist() for key in all2vec.trigger2vec},
     'info': '初始化数据'
     })
 # open('scSystemServer/data_model/temp_data/预加载数据/data', 'w', encoding='utf-8').write(init_data)
 
-# fs_vec = open('scSystemServer/data_model/temp_data/事件vec', 'w', encoding='utf-8')
-# fs_meta = open('scSystemServer/data_model/temp_data/事件meta', 'w', encoding='utf-8')
-# for event in personManager.getPerson('3767').getRelatedEvents(limit_depth=2):
-#     if event.isCertain(): # and event.time_range[0]<1100 and event.time_range[0]>1060:
-#         vec = list(event.toVec())
-#         # print(len(vec))
-#         fs_vec.write( '\t'.join([str(item) for item in vec]) + '\n' )
-#         fs_meta.write( str(event) + '\n')
-# fs_vec.close()
-# fs_meta.close()
 
 print('共加载', len(eventManager.event_array), '事件')
 
@@ -116,7 +93,6 @@ def events2dict(event_array):
         'people': { item.id: item.toDict()  for item in people  if not item.isSong()},
         # 'triggers': { item.id: item.toDict()  for item in triggers},   
     }
-
     return results
 
 # 获得一个人的所有事件
@@ -127,120 +103,73 @@ def getPersonEvents(request):
     print(person_id + '事件数共有' + str(len(events)))
     return HttpResponse(json.dumps(events2dict(events)))
 
-# 推断一些可能事件的可能位置
+# 推断一些可能事件的可能时间  （还可以加上地点）
 def inferPersonsEvent(request):
     person_id = request.GET.get('person_id')
     print('推测' + person_id + '事件')
-    infer, events = personManager.getPerson(person_id).inferUncertainty(all2vec)
 
-    infer_data = {}
-    for year in infer:
-        for event_id in infer[year]:
-            if event_id not in infer_data:
-                infer_data[event_id] = {}
-            infer_data[event_id][year] =  infer[year][event_id]['sim']
-    extra_data = events2dict(events)
+    person = personManager.getPerson(person_id)
+    events = person.getAllEvents()
+    events = [event  for event in events if not event.isCertain()]
+
+    event2prob_year = {}
+    for event in events:
+        prob_year = event2vec.getEventProbYear(event)
+        print(event, prob_year)
+        prob_year = {year: prob_year[year] for year in prob_year.keys() if prob_year[year]>0.45 }
+        event2prob_year[event.id] = prob_year
+
     print('推测结束')
-    return HttpResponse(json.dumps({ 'data':extra_data, 'infer': infer_data, 'info': '推测数据'}))
-
-# 如果是两个人的关系
-# 如果是有时间的
-# 如果是有地点的
-def getRelatedEvents(request):
-    event_id = request.GET.get('event_id')
-    if event_id in eventManager.event_id_set:
-        event = eventManager.id2event[event_id]
-    else:
-        print('没有找到', event_id, '对应的事件')
-        return HttpResponse(json.dumps({'info': '没有找到事件'}))
-
-    related_events = []
-    for role in event.roles:
-        this_person = role['person']
-        trigger_id = event.trigger.name + ' ' + role['role']
-        if trigger_id in all2vec.trigger2vec:
-            most_similar = all2vec.trigger_model.most_similar(trigger_id, topn=50)
-            most_similar = [item[0] for item in most_similar]
-
-            this_person_events = this_person.getAllEvents() 
-            for this_event in this_person_events:
-                for role in this_event.roles:
-                    if this_person == role['person']:
-                        trigger_id = this_event.trigger.name + ' ' + role['role']
-                        if trigger_id in most_similar:
-                            related_events.append(this_event)
-
-    #看情况判断要不要加
-    related_events = [this_event for this_event in related_events if (len(this_event.addrs)!=0 or this_event.time_range[0]!=-9999 or this_event.time_range[1]!=9999)]
-    related_events = list(set(related_events))
-    sim = {}
-    for related_event in related_events:
-        sim[(event, related_event)] = eventManager.caclute_sim(event, related_event)
-
-    related_events = sorted(related_events, key=lambda related_event: sim[(event, related_event)])
-    if len(related_events)>40:
-        related_events = related_events[0:40]
-
-    dif = {related_event.id: sim[(event, related_event)]  for event, related_event in sim}
-    related_events.append(event)
-    data = events2dict(related_events)
-    return HttpResponse(json.dumps({'data':data, 'sim': dif, 'center_event':event_id, 'info': '找到相关事件'}))
-
+    return HttpResponse(json.dumps({ 'data':events2dict(events), 'infer': event2prob_year, 'info': '推测数据'}))
 
 require2renponse = {}
-def getAllRelatedEvents(request):
+def getRelatedEvents(request):
     event_id = request.GET.get('event_id')
-    depth = int(request.GET.get('depth'))
-    trigger_num = int(request.GET.get('trigger_num'))
-    max_event_num = int(request.GET.get('event_num'))
+    max_num = int(request.GET.get('event_num'))
 
-    require_id = 'getAllRelatedEvents_{}_{}_{}_{}'.format(event_id, depth, trigger_num, max_event_num)
+    require_id = 'getAllRelatedEvents_{}_{}'.format(event_id, max_num)
     if require_id in require2renponse:
         print(require_id, '重复调用，直接使用纪录')
         return HttpResponse(json.dumps(require2renponse[require_id]))
 
     if event_id in eventManager.event_id_set:
-        event = eventManager.id2event[event_id]
+        center_event = eventManager.id2event[event_id]
     else:
         print('没有找到', event_id, '对应的事件')
         return HttpResponse(json.dumps({'info': '没有找到事件'}))
+
+    positive = [center_event]
+    main_people = center_event.getPeople()
+    # positive += main_people
+    # positive += event.addrs
+
     events = []
-    for role in event.roles:
-        person = role['person']
-        events += person.getRelatedEvents(limit_depth=depth)
+    for person in main_people:
+        events += person.getRelatedEvents(limit_depth=3)
     events = list(set(events))
+    sim2event = {this_event: event2vec.similar_by_object(center_event, this_event)  for this_event in events}
+    related_events = sorted(events , key=lambda this_event: sim2event[this_event])[-max_num:]
+    related_events.append(center_event)
+    # related_events = event2vec.getRelatedObject(positive=positive, num=max_num*2)
+    # related_events = [event for event in related_events if not isinstance(event, int) and event.type=='event'][:max_num]
+    # related_events.append(event)
+    data = events2dict(related_events)
+    
+    response = {'data':data, 'center_event':event_id, 'info': '找到相关事件'}
+    require2renponse[require_id] = response
+    return HttpResponse(json.dumps(response))
 
-    # 只留下相关类型的
-    related_triggers = []
-    for role in event.roles:
-        # this_person = role['person']
-        trigger_id = event.trigger.name + ' ' + role['role']
-        if trigger_id in all2vec.trigger2vec:
-            most_similar = all2vec.trigger_model.most_similar(trigger_id, topn=trigger_num)
-            most_similar = [item[0] for item in most_similar]
-            related_triggers += most_similar
-    related_triggers = list(set([trigger.split(' ')[0] for trigger in related_triggers]))
-    print(related_triggers)
-    events = [event for event in events if event.trigger.name in related_triggers]
-
-    sim = {}
-    for related_event in events:
-        sim[related_event] = eventManager.caclute_sim(event, related_event)
-    events = sorted(events, key=lambda related_event: sim[related_event])
-    if len(events)>max_event_num:
-        events = events[0:max_event_num]
-    dif = {related_event.id: sim[related_event]  for related_event in sim}
-    data = events2dict(events)
-
-    result = {'data':data, 'dif': dif, 'event_id': event_id, 'info': '找到事件的所有相关事件'}
-    require2renponse[require_id] = result
-    return HttpResponse(json.dumps(result))
 
 def getRelatedPeopleEvents(request):
-    person_id = request.GET.get('person_id')
+    person_ids = request.GET.get('person_ids')
+    person_ids = person_ids.split(',')
     depth = int(request.GET.get('depth'))
-    person = personManager.getPerson(person_id)
-    events = person.getRelatedEvents(limit_depth=depth)
+    
+    events = []
+    for person_id in person_ids:
+        person = personManager.getPerson(person_id)
+        events += person.getRelatedEvents(limit_depth=depth)
+    events = list(set(events))
     data = events2dict(events)
     return HttpResponse(json.dumps({'data':data, 'person_id': person_id, 'person_name': person.name, 'info': '找到所有与此人有关的事件'}))
 

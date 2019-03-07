@@ -70,6 +70,7 @@ class AddrManager(object):
 
         print('加载地址管理器')
 
+
     def selfDestory(self):
         for addr in self.addr_array:
             addr.selfDestory()
@@ -207,7 +208,8 @@ class AddrManager(object):
 class Addr(object):
     """docstring for Addr"""
     def __init__(self, addr_node):
-        self.id = addr_node['c_addr_id']
+        # 3/5日加入，导致原先的模型不可用
+        self.id = 'addr_' + addr_node['c_addr_id']
         self.name = addr_node['c_name_chn']
 
         self.first_year = addr_node['c_firstyear']
@@ -221,7 +223,7 @@ class Addr(object):
 
         self.parents = []
         self.sons = []
-
+        self.type = 'addr'
         self.time_range = [-9999,9999]
 
         if self.first_year is not None and self.first_year!=0 and self.first_year!='0' and self.first_year!='None':
@@ -234,7 +236,15 @@ class Addr(object):
             self.time_range[1] = year
         else:
             self.last_year = self.time_range[1]
-        
+
+        self.vec = []
+
+    # 将各元素拼接生成一个数组,现在八成没用了
+    def toVec(self):
+        if(len(self.vec)==0):
+            print('没有计算向量表达了', self)
+        return list(self.vec)
+
     def isSong(self):
         return (self.name=='宋朝' or (self.first_year<800 and self.last_year>1300))
 
@@ -295,7 +305,7 @@ class Addr(object):
             # 'time_range': self.time_range,
             'parents': [addr.id for addr in self.parents],
             'sons': [addr.id for addr in self.sons],
-            'vec': addrManager.all2vec.addr2vec[self.id].tolist()
+            'vec': self.vec
         }
 
     # 宋朝地点会直接预加载

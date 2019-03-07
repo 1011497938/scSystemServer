@@ -11,17 +11,20 @@ import traceback
 # import matplotlib.pyplot as plt 
 
 
-def pageRank(event_array):
+def pageRank(event_array, person_array):
 	# event_array = eventManager.event_array
 	G = nx.DiGraph()
 	# nx.MultiDigraph() 版本没有
+	for person in person_array:
+		G.add_node(person.id)
+
 	for event in event_array:
 		score = 1 #getEventScore(event)
 		roles = event.roles
 		if len(roles)==1:
 			person = roles[0]['person']
 			node_id = person.id
-			G.add_node(node_id)
+			# G.add_node(node_id)
 			if G.has_edge(node_id,node_id):
 				if G[node_id][node_id]['weight']<score:
 					G.add_weighted_edges_from([(node_id, node_id, score)])
@@ -39,8 +42,8 @@ def pageRank(event_array):
 				else:
 					to_node = person.id
 			if from_node is not None and to_node is not None:
-				G.add_node(from_node)
-				G.add_node(to_node)
+				# G.add_node(from_node)
+				# G.add_node(to_node)
 				if G.has_edge(from_node,to_node):
 					if G[from_node][to_node]['weight']<score:
 						G.add_weighted_edges_from([(from_node, to_node, score)])

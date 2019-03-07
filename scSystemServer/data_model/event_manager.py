@@ -10,7 +10,7 @@ from .time_manager import timeManager
 from .relation2type import getRelTypes
 import threading
 import time
-from .common_function import dist_dif 
+from .common_function import dist_dif,cos_dif
 import math
 import numpy as np 
 
@@ -26,9 +26,6 @@ class EventManager(object):
 
         self.is_all = False
         self.is_sort = False
-        # self.trigger_manager =EventTriggerManager()
-        self.all2vec = None
-        self.person_graph = None
 
     def selfDestory(self):
         for event in self.event_array:
@@ -36,8 +33,6 @@ class EventManager(object):
         self.event_array = None
         self.id2event = None
         self.event_id_set = None
-        self.all2vec = None
-        self.person_graph = None
 
     # 需要对关系数据清洗，洗掉重叠的数据，被全改为主动
     def clean(self):
@@ -249,7 +244,7 @@ class EventManager(object):
             role =  result['r']['RELATION_TYPE']
             if role =='关系':
                 role = '主角'
-            self.createEvents(event_id).addPerson(person, role)
+            self.get(event_id).addPerson(person, role)
         print('加载关系事件角色')
 
 
@@ -259,7 +254,7 @@ class EventManager(object):
         for result in results:
             addr_id =  result['addr_id']
             event_id = result['id(n)']
-            self.createEvents(event_id).setAddr(addrManager.getAddr(addr_id))
+            self.get(event_id).setAddr(addrManager.getAddr(addr_id))
         print('加载关系数据地址')
 
         # 加载触发词
@@ -268,7 +263,7 @@ class EventManager(object):
         for result in results:
             trigger_name =  result['assoc.c_assoc_desc_chn']
             event_id = result['id(n)']
-            self.createEvents(event_id).setTrigger(trigger_name)
+            self.get(event_id).setTrigger(trigger_name)
             # print(self.createEvents(event_id).trigger)
         print('加载事件触发词')
 
@@ -346,13 +341,13 @@ class EventManager(object):
             event_id = str(result['id(n)'])
             # print(addr_id)
 
-            event = self.createEvents(event_id)
+            event = self.get(event_id)
             addr = addrManager.getAddr(addr_id)
             event.setAddr(addr)
             event.detail = '前往'+ str(addr.name)
 
 
-            event = self.createEvents('离开'+event_id)
+            event = self.get('离开'+event_id)
             addr = addrManager.getAddr(addr_id)
             event.setAddr(addr)
             event.detail = '离开'+ str(addr.name)
@@ -368,7 +363,7 @@ class EventManager(object):
             event_id = str(result['id(n)'])
             # print(addr_id)
 
-            event = self.createEvents(event_id)
+            event = self.get(event_id)
             event.setTrigger(desc)
             event.detail = event.detail + '由于' + desc
         print('加载迁移原因')
@@ -463,8 +458,8 @@ class EventManager(object):
             addr_id =  result['addr_id']
             event_id = str(result['id(n)'])
             # print(addr_id)
-            self.createEvents('担任'+id2id[event_id]).setAddr(addrManager.getAddr(addr_id))
-            self.createEvents('卸任'+id2id[event_id]).setAddr(addrManager.getAddr(addr_id))
+            self.get('担任'+id2id[event_id]).setAddr(addrManager.getAddr(addr_id))
+            self.get('卸任'+id2id[event_id]).setAddr(addrManager.getAddr(addr_id))
         print('加载仕途数据地址')
 
         # 加载职位
@@ -475,8 +470,8 @@ class EventManager(object):
         for result in results:
             office_code =  result['office']
             event_id = str(result['id(n)'])
-            event1 = self.createEvents('担任'+id2id[event_id])
-            event2 = self.createEvents('卸任'+id2id[event_id])
+            event1 = self.get('担任'+id2id[event_id])
+            event2 = self.get('卸任'+id2id[event_id])
             event1.detail = str(office_code['c_office_chn'])
             event2.detail = str(office_code['c_office_chn'])
 
@@ -546,7 +541,7 @@ class EventManager(object):
         for result in results:
             role =  result['role']
             event_id = str(result['id(event)'])
-            self.createEvents(event_id).addPerson(person, role)
+            self.get(event_id).addPerson(person, role)
             event.setTrigger('文学作品'+role)
         print('加载文学事件角色')
 
@@ -555,7 +550,7 @@ class EventManager(object):
             return False
         return True
 
-    # 入仕事件(还有很多信息没存储)
+    # 入仕事件(还有很多信息没存储)， id要改！！！！
     def loadEntryEvents(self, LIMIT = 1000000,SKIP = 0, person_id = None):
         print('开始加载入仕数据', SKIP)
         if person_id is None:
@@ -566,10 +561,11 @@ class EventManager(object):
         results = graph.run(query).data()
         id_list = []
         for node_data in results:
-            event_id = str(node_data['id(event)'])
+            
             person = node_data['person']
             event_node = node_data['event']
-
+            event_id = str(node_data['tts_sysno']) + '入仕'
+            print('entry', event_id)
             event = self.createEvents(event_id)
             event.type = '入仕事件'
             field = 'c_year'
@@ -603,8 +599,8 @@ class EventManager(object):
         for result in results:
             method =  result['method']
             event_id = str(result['id(event)'])
-            self.createEvents(event_id).setTrigger('入仕')
-            self.createEvents(event_id).detail = str(method)
+            self.get(event_id).setTrigger('入仕')
+            self.get(event_id).detail = str(method)
             # self.createEvents(event_id).setTrigger(str(method))
         print('加载入仕方式')
 
@@ -616,8 +612,19 @@ class EventManager(object):
         return True
 
 
+    def get(self, node_id):
+        if 'event_'  not in str(node_id):
+            node_id = 'event_' + str(node_id)
+        id2event = self.id2event
+        if node_id in self.event_id_set:
+            return id2event[node_id]
+        else:
+            print(node_id, '不存在')
+            return None
+            
     def createEvents(self, node_id):
-        node_id = 'event_' + str(node_id)
+        if 'event_'  not in str(node_id):
+            node_id = 'event_' + str(node_id)
         id2event = self.id2event
         if node_id in self.event_id_set:
             return id2event[node_id]
@@ -629,9 +636,6 @@ class EventManager(object):
             self.event_array.append(new_event)
             self.event_id_set.add(node_id)
             return new_event
-
-    def registAll2vec(self, all2vec):
-        self.all2vec = all2vec
 
     # 计算第一项（人生中必有的高，人生中必有但是次数少的高）
     def calculateImporatnce1(self):
@@ -694,77 +698,16 @@ class EventManager(object):
 
     # 对不同的确实信息应该有不同的计算方式
     def caclute_sim(self, event1, event2):
-        all2vec = self.all2vec
-        # 计算地点的最小距离
-        addr_diff = 1
-        trigger_diff = 1
-        person_diff = 0
-        time_diff = 1
-        def isValidRange(event):
-            return event.time_range[0]!=-9999 and event.time_range[1]!=9999
-        if isValidRange(event1) and isValidRange(event2):
-            time_diff = dist_dif(event1.time_range, event2.time_range)/9999
-            # cos_sim( event1.time_range, event2.time_range )
-
-
-        for addr1 in event1.addrs:
-            for addr2 in event2.addrs:
-                if addr1.id in all2vec.addr2vec and addr2.id in all2vec.addr2vec:
-                    # v1 = all2vec.addr2vec[addr1.id]
-                    # v2 = all2vec.addr2vec[addr2.id]
-                    diff = all2vec.addr_model.similarity(addr1.id, addr2.id)
-                    if addr_diff>diff:
-                        addr_diff = diff
-                else:
-                    if addr1.id not in all2vec.addr2vec:
-                        print(addr1.name + '不存在')
-                    if addr2.id not in all2vec.addr2vec:
-                        print(addr2.name + '不存在')	
-
-        for role1 in event1.roles:
-            for role2 in event2.roles:
-                trigger_id1 = event1.trigger.name + ' ' + role1['role']
-                trigger_id2 = event2.trigger.name + ' ' + role2['role']
-                if trigger_id1 in all2vec.trigger2vec and trigger_id2 in all2vec.trigger2vec:
-                    # v1 = all2vec.trigger2vec[trigger_id1]
-                    # v2 = all2vec.trigger2vec[trigger_id2]
-                    diff = all2vec.trigger_model.similarity(trigger_id1, trigger_id2)
-                    if trigger_diff>diff:
-                        trigger_diff = diff
-
-        allperson = set()
-        for role1 in event1.roles:
-            for role2 in event2.roles:
-                person1 = role1['person']
-                person2 = role2['person']
-                allperson.add(person1)
-                allperson.add(person2)
-        allperson = list(allperson)
-        for person1 in allperson:
-            for person2 in allperson:
-                person_diff += self.person_graph.getSim(person1, person2)
-        person_diff /= 10   #理论上最大为10
-
-        return (addr_diff+trigger_diff*3+time_diff+person_diff*4)/9
+        return cos_dif(event1.vec, event2.vec)
 
     def getCertainEvents(self):
         return [event for event in self.event_array if event.isCertain()]
         
-# # 给每个事件返回一个多维的打分
-# class ScoreManager:
-# 	def __init__(self):
-# 		self.all2vec = eventManager.all2vec
-# 		self.score = triggerManager.trigger2type_score
-# 		return 
-
-# 	def getScore(self, event, person):
-
-
 class Event(object):
     def __init__(self, event_id):
         self.id = event_id
         self.time_range = [-9999, 9999]
-        self.type = None  #类型,没啥用，以后以trigger为主
+        # self.type = None  #类型,没啥用，以后以trigger为主
         self.trigger = None  #触发词
         self.is_state = False
         self.roles = []  #{person: , role:}   
@@ -774,7 +717,20 @@ class Event(object):
         self.setTrigger('未知')
         self.detail = ''
         self.related_tables = set()
-    
+
+        self.vec = []
+
+        self.type = 'event'
+
+    # 将各元素拼接生成一个数组,现在八成没用了
+    def toVec(self):
+        if(len(self.vec)==0):
+            print('没有计算向量表达了', self)
+        return list(self.vec)
+
+    def getPeople(self):
+        return [elm['person'] for elm in self.roles]
+
     def selfDestory(self):
         self.id = None
         self.time_range = None
@@ -788,141 +744,6 @@ class Event(object):
         self.detail = None
         self.related_tables = None
     
-
-    # 将各元素拼接生成一个数组
-    def toVec(self):
-        init_vec = np.array([])
-        all2vec = eventManager.all2vec
-
-        new_roles = [None, None]
-        for elm in self.roles:
-            person = elm['person']
-            role = elm['role']
-            if role == '主角':
-                new_roles[0] = elm
-            elif role == '对象':
-                new_roles[1] = elm
-
-        if new_roles[0] is None:
-            # print('主角咋也没了', self)
-            new_roles[0] = new_roles[1]
-
-        if new_roles[1] is None:
-            new_roles[1] = new_roles[0]
-
-        for role in new_roles:
-            person = role['person']
-            role = role['role']
-
-            # 主角和对象需要排下序列
-            if role!='主角' and role!='对象':
-                continue
-
-            trigger_id = self.trigger.name + ' ' + role
-            trigger_vec = None
-            if trigger_id in all2vec.trigger2vec:
-                trigger_vec = all2vec.trigger2vec[trigger_id]
-            else:
-                print(trigger_id, '不存在')
-
-            person_vec = None
-            person_vec = all2vec.year_person2vec[person.id + ',' + str(self.time_range[0])]
-            init_vec = np.append(init_vec,trigger_vec)
-            init_vec = np.append(init_vec,person_vec)
-
-            # role_vec = np.concatenate((trigger_vec, person_vec),axis=0)
-            # init_vec = np.concatenate((init_vec, role_vec), axis=0)
-
-        # 时间也应该可以分成多个矩阵
-        time_range = self.time_range
-        year_vec = np.ones((all2vec.vec_size))
-
-        year_vec = np.append(year_vec * time_range[0], year_vec * time_range[1])
-        year_vec = year_vec - 900
-        # print(year_vec)
-        # year_vec = np.concatenate((init_vec, year_vec), axis=0)
-        init_vec = np.append( init_vec, year_vec )
-
-        # 应该是有一个系数的，这个能够计算到这个矩阵中
-
-        addr_vecs = []
-        # 地址可能有多个，可以分成多个情况
-        if len(self.addrs)>0:
-            for addr in self.addrs:
-                addr2vec = all2vec.addr2vec
-                if addr.id in addr2vec:
-                    addr_vec = addr2vec[addr.id]
-                    addr_vec = np.append(addr_vec, init_vec)
-                    addr_vecs.append(addr_vec)
-                    # addr_vecs.append( np.concatenate((init_vec, addr_vec), axis=0))
-                else:
-                    print(addr, '不存在embedding')
-        else:
-            addr_vec = np.zeros(all2vec.vec_size)
-            addr_vecs.append( np.append(addr_vec, init_vec) )
-
-        return addr_vecs[0]
-    
-    # 我觉得这个方法其实很傻
-    # 将各元素拼接生成一个数组
-    def toVecDict(self):
-        init_vec = {}
-        all2vec = eventManager.all2vec
-
-        new_roles = [None, None]
-        for elm in self.roles:
-            person = elm['person']
-            role = elm['role']
-            if role == '主角':
-                new_roles[0] = elm
-            elif role == '对象':
-                new_roles[1] = elm
-
-        if new_roles[0] is None:
-            # print('主角咋也没了', self)
-            new_roles[0] = new_roles[1]
-
-        if new_roles[1] is None:
-            new_roles[1] = new_roles[0]
-
-        for role in new_roles:
-            person = role['person']
-            role = role['role']
-
-            # 主角和对象需要排下序列
-            if role!='主角' and role!='对象':
-                continue
-
-            trigger_id = self.trigger.name + ' ' + role
-            trigger_vec = all2vec.trigger2vec[trigger_id]
-
-            person_vec = None
-            person_vec = all2vec.year_person2vec[person.id + ',' + str(self.time_range[0])]
-            init_vec[role + 'trigger'] = trigger_vec.tolist()
-            init_vec[role] = person_vec.tolist()
-
-            # role_vec = np.concatenate((trigger_vec, person_vec),axis=0)
-            # init_vec = np.concatenate((init_vec, role_vec), axis=0)
-
-        # 时间也应该可以分成多个矩阵
-        # time_range = self.time_range
-        # year_vecs = [init_vec]
-        # for year in range(time_range[0], time_range[0]+1):
-        #     year_vec = np.ones((all2vec.vec_size))
-        #     temp_vec = init_vec.copy()
-        #     temp_vec['time0'] = year_vec * time_range[0] - 900
-        #     temp_vec['time1'] = year_vec * time_range[1] - 900
-        #     year_vecs.append(temp_vec)
-        # 应该是有一个系数的，这个能够计算到这个矩阵中
-
-
-        # 地址可能有多个，可以分成多个情况
-        # addr2vec = all2vec.addr2vec
-        # init_vec['addrs'] = [addr2vec[addr.id].tolist() for addr in self.addrs]
-
-        return init_vec
-
-
     def getScore(self, person):
         trigger = self.trigger
         if trigger.type == '官职':
@@ -1043,10 +864,12 @@ class Event(object):
 
     def __str__(self):
         string = '[(事件) id:{}, 时间:{}, 地点:{}, 触发词:{}, 角色: {}, 细节{}]'.format(
-            str(self.id), str(self.time_range),
+            str(self.id), 
+            str(self.time_range),
             '[' + ','.join([str(addr.name) for addr in self.addrs]) + ']', 
             str(self.trigger.name), 
-            str(','.join([ '【{}/{}】'.format(elm['person'].name, elm['role'], self.detail) for elm in self.roles])))
+            str(','.join([ '【{}/{}】'.format(elm['person'].name, elm['role']) for elm in self.roles]))
+            , self.detail)
         return string
 
     def __hash__(self):
@@ -1061,7 +884,9 @@ class Event(object):
             trigger = triggerManager.createTrigger('未知')
         if self.addrs is not None:
             addrs = self.addrs
-
+        # print(self.vec)
+        if(len(self.vec)==0):
+            print(self, '的向量依然为0')
         return {
             'id': self.id,
             'time_range': self.time_range,
@@ -1070,13 +895,12 @@ class Event(object):
             'roles': [{'person': elm['person'].id, 'role': elm['role']}  for elm in self.roles],
             'detail': self.detail,
             'sequence' : self.sequence,
-            # 'vec': self.toVecDict()
+            'vec': self.vec
             # 'is_state': self.is_state
         }
 
     def isCertain(self):
         return self.time_range[0]==self.time_range[1] and self.time_range[0]!=-9999 and self.time_range[1]!=9999
-
 
 
 # 管理触发词的分类计算
@@ -1174,6 +998,14 @@ class Trigger(object):
         self.parent_type = '未分类'
         self.score = 0
         self.id = 'trigger_' + str(name)
+        self.type = 'trigger'
+        self.vec = []
+
+    # 将各元素拼接生成一个数组,现在八成没用了
+    def toVec(self):
+        if(len(self.vec)==0):
+            print('没有计算向量表达了', self)
+        return list(self.vec)
 
     def selfDestory(self):
         self.name = None
@@ -1194,7 +1026,8 @@ class Trigger(object):
             'name': self.name,
             'type': self.type,
             'parent_type': self.parent_type,
-            'score': self.score
+            'score': self.score,
+            'vec': self.vec
         }
 
 triggerManager = EventTriggerManager()
