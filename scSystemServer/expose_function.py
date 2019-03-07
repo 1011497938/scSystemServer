@@ -31,10 +31,10 @@ personManager.registEventManager(eventManager)
 eventManager.getAll()
 
 event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
-event2vec.train(TOTAL_TIMES=100)
+# event2vec.train(TOTAL_TIMES=100)
 event2vec.load()
 event2vec.load2Manager()
-event2vec.saveToView()
+# event2vec.saveToView()
 
 # all2vec = All2vec(personManager, addrManager, eventManager)
 
