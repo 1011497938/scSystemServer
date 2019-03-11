@@ -19,7 +19,7 @@ from django.conf.urls import url
 # from .data_model.main import inferUncertainty
 from . import expose_function
 from .import test
-from . import communi_detection
+from . import community_detection
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,7 +35,8 @@ urlpatterns = [
     path('getSimLife/', expose_function.getSimLife),
     path('getRelatedPeopleEvents/', expose_function.getRelatedPeopleEvents),
     path('getPersonRelation/', expose_function.getPersonRelation),
-    path('getCommunity/', communi_detection.getCommunity),
+    path('getCommunity/', community_detection.getCommunity),
+    path('getRelatedObjects/', expose_function.getRelatedObjects),
     # url(r'^index/$', neo4jQuery.neo4jQuery),
     # url(r'^getPersonDetail/.*$', getPersonDetail.getPersonDetail),
 ]

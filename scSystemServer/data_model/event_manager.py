@@ -27,6 +27,8 @@ class EventManager(object):
         self.is_all = False
         self.is_sort = False
 
+        self.event2vec = None
+
     def selfDestory(self):
         for event in self.event_array:
             event.selfDestory()
@@ -48,8 +50,12 @@ class EventManager(object):
             true_index = int(row[2])
             for pair in pairs:
                 trigger2true[pair] = pairs[true_index]
-        need_clean_triggers = trigger2true.keys()
+            trigger0 = triggerManager.createTrigger(pairs[0])
+            trigger1 = triggerManager.createTrigger(pairs[1])
+            trigger0.pair_trigger = trigger1
+            trigger1.pair_trigger = trigger0
 
+        need_clean_triggers = trigger2true.keys()
         for event in self.event_array:
             trigger = event.trigger
             if trigger.name in need_clean_triggers:
@@ -118,8 +124,8 @@ class EventManager(object):
     def getAll(self, get_times = 30):
         if not self.is_all:	
             # threading_array = []
-            has1 = has2 = has3 = has4 = True
-            threading_array = []
+            # has1 = has2 = has3 = has4 = True
+            # threading_array = []
 
             EVENT_NUM_PER_TIMES = 10000
             for times in range(0,get_times):
@@ -165,6 +171,7 @@ class EventManager(object):
             # 	t.join()
         self.clean()
         personManager.calculateAllSongPeople()
+        triggerManager.reload()
         # 之后不需要再重新爬取了
         if True:  # get_times == 100:
             self.is_all = True
@@ -258,12 +265,14 @@ class EventManager(object):
         print('加载关系数据地址')
 
         # 加载触发词
-        results = graph.run('START n=node({}) MATCH (assoc:Assoc_codes)<-[r]-(n) RETURN assoc.c_assoc_desc_chn, id(n)'.format(id_list_str))
+        results = graph.run('START n=node({}) MATCH (assoc:Assoc_codes)<-[r]-(n) RETURN assoc.c_assoc_desc_chn, assoc.c_assoc_desc, id(n)'.format(id_list_str))
         results = results.data()
         for result in results:
             trigger_name =  result['assoc.c_assoc_desc_chn']
+            en_trigger_name = result['assoc.c_assoc_desc']
             event_id = result['id(n)']
-            self.get(event_id).setTrigger(trigger_name)
+            self.get(event_id).setTrigger(trigger_name, en_name=en_trigger_name)
+            # print(en_trigger_name)
             # print(self.createEvents(event_id).trigger)
         print('加载事件触发词')
 
@@ -294,7 +303,7 @@ class EventManager(object):
             event.type = '前往'
 
             event.addPerson(personManager.createPerson(person), '主角')
-            event.setTrigger('前往')
+            event.setTrigger('前往', en_name='had been to')
             event.type = '前往'
             event.detail = '前往某地'
 
@@ -309,7 +318,7 @@ class EventManager(object):
 
             event = self.createEvents('离开'+str(node_id))
             event.addPerson(personManager.createPerson(person), '主角')
-            event.setTrigger('离开')
+            event.setTrigger('离开', en_name='had left')
             event.type = '离开'
             event.detail = '离开某地'
 
@@ -355,7 +364,7 @@ class EventManager(object):
         # 加载原因
         print('加载迁移数据地址')
 
-        results = graph.run('START n=node({}) MATCH (addr:Biog_addr_codes)--(n) RETURN addr.c_addr_desc_chn as desc, id(n)'.format(id_list_str))
+        results = graph.run('START n=node({}) MATCH (addr:Biog_addr_codes)--(n) RETURN addr.c_addr_desc_chn as desc, addr.c_addr_desc as en_desc,id(n)'.format(id_list_str))
         results = results.data()
         # print(results)
         for result in results:
@@ -364,7 +373,7 @@ class EventManager(object):
             # print(addr_id)
 
             event = self.get(event_id)
-            event.setTrigger(desc)
+            event.setTrigger(desc, en_name=str(result['en_desc']))
             event.detail = event.detail + '由于' + desc
         print('加载迁移原因')
 
@@ -438,8 +447,8 @@ class EventManager(object):
             event1.addPerson(person, '主角')
             event2.addPerson(person, '主角')
 
-            event1.setTrigger('担任')
-            event2.setTrigger('卸任')
+            event1.setTrigger('担任', en_name='hold the post of')
+            event2.setTrigger('卸任', en_name='be relieved of one"s office')
 
         if len(id_list1)==0:
             return False
@@ -535,14 +544,14 @@ class EventManager(object):
         id_list_str = ','.join(id_list)
         # print(id_list_str)
         # 加载角色
-        results = graph.run('START event=node({}) MATCH (role:Text_role_codes)--(event) RETURN role.c_role_desc_chn AS role, id(event)'.format(id_list_str))
+        results = graph.run('START event=node({}) MATCH (role:Text_role_codes)--(event) RETURN role.c_role_desc_chn AS role, role.c_role_desc AS en_role, id(event)'.format(id_list_str))
         results = results.data()
         # print(results)
         for result in results:
             role =  result['role']
             event_id = str(result['id(event)'])
             self.get(event_id).addPerson(person, role)
-            event.setTrigger('文学作品'+role)
+            event.setTrigger('文学作品'+role, en_name= result['en_role'])
         print('加载文学事件角色')
 
 
@@ -599,7 +608,7 @@ class EventManager(object):
         for result in results:
             method =  result['method']
             event_id = str(result['id(event)'])
-            self.get(event_id).setTrigger('入仕')
+            self.get(event_id).setTrigger('入仕', en_name='post to office')
             self.get(event_id).detail = str(method)
             # self.createEvents(event_id).setTrigger(str(method))
         print('加载入仕方式')
@@ -714,13 +723,18 @@ class Event(object):
         self.addrs = []  #将原先的单一地址改为了多地址
         self.sequence = 10
         self.related_nodes = {}
-        self.setTrigger('未知')
+        self.setTrigger('未知', en_name='unknown')
         self.detail = ''
         self.related_tables = set()
 
         self.vec = []
 
         self.type = 'event'
+
+        self.prob_addr = None
+        self.prob_year = None
+        self.prob_person = None
+
 
     # 将各元素拼接生成一个数组,现在八成没用了
     def toVec(self):
@@ -749,6 +763,7 @@ class Event(object):
         if trigger.type == '官职':
             guanzhi = self.detail
             score = triggerManager.getGuanZhiScore(guanzhi)
+            return score
         else:
             trigger_id = trigger.name
             person_role = None
@@ -765,10 +780,11 @@ class Event(object):
                 return 0
 
             score = triggerManager.trigger2type_score[trigger_id]['score']
+            # print(score)
         if person_role == '主角':
-            return score['score']
+            return score
         else:
-            return score['score']/2
+            return score/2
 
     def getTriggerId(self, person):
         for role in self.roles:
@@ -858,8 +874,8 @@ class Event(object):
             self.roles.append(new_role)
             person.bind_event(self)
 
-    def setTrigger(self, trigger_name):
-        trigger = triggerManager.createTrigger(trigger_name)
+    def setTrigger(self, trigger_name, en_name=None):
+        trigger = triggerManager.createTrigger(trigger_name, en_name=en_name)
         self.trigger = trigger
 
     def __str__(self):
@@ -875,7 +891,7 @@ class Event(object):
     def __hash__(self):
         return hash(str(self.id + '事件'))
 
-    def toDict(self):
+    def toDict(self, need_infer = False):
         trigger = None
         addrs = []
         if self.trigger is not None:
@@ -884,9 +900,30 @@ class Event(object):
             trigger = triggerManager.createTrigger('未知')
         if self.addrs is not None:
             addrs = self.addrs
-        # print(self.vec)
+
         if(len(self.vec)==0):
             print(self, '的向量依然为0')
+
+        prob_addr = {}
+        prob_year = {}
+        prob_person = {}
+
+        if need_infer:
+            if self.prob_addr is None:
+                if eventManager.event2vec is not None:
+                    if not self.isCertain():
+                        prob_year = eventManager.event2vec.getEventProbYear(self)
+                    # prob_person = eventManager.event2vec.getEventProbPerson(self)
+                    # prob_addr = eventManager.event2vec.getEventProbAddr(self)
+                    self.prob_addr = prob_addr
+                    self.prob_year = prob_year
+                    self.prob_person = prob_person
+
+            else:
+                prob_addr = self.prob_addr
+                prob_year = self.prob_year
+                prob_person = self.prob_person
+                
         return {
             'id': self.id,
             'time_range': self.time_range,
@@ -895,7 +932,10 @@ class Event(object):
             'roles': [{'person': elm['person'].id, 'role': elm['role']}  for elm in self.roles],
             'detail': self.detail,
             'sequence' : self.sequence,
-            'vec': self.vec
+            'vec': self.vec,
+            'prob_year': prob_year,
+            'prob_addr': prob_addr,
+            'prob_person': prob_person,
             # 'is_state': self.is_state
         }
 
@@ -948,8 +988,25 @@ class EventTriggerManager(object):
         self.name2trigger = None
         self.trigger_set = None
 
+    # 更新了之前错误的type
+    def reload(self):
+        fs = open('scSystemServer/data_model/temp_data/trigger_score.csv','r', encoding='utf-8')
+        for line in fs:
+            columns = line.strip('\n').split(',')
+            if len(columns)!=5:
+                print(line)
+                continue
+            for trigger in self.trigger_set:
+                if trigger.name == columns[0]:
+                    trigger.type = columns[1]
+                    trigger.parent_type = columns[2]
+                    trigger.role2score[columns[3]] = float(columns[4])
+
     def getGuanZhiScore(self, guanzhi):
-        pingji = self.guanzhi_score[guanzhi]
+        if guanzhi not in self.guanzhi_score:
+            return 0
+        pingji = self.guanzhi_score[guanzhi]['品级']
+        # print(pingji)
         return self.ping_words2score[pingji]
 
     def getTriggerType(self, trigger_name):
@@ -975,14 +1032,16 @@ class EventTriggerManager(object):
             # else:
             # 	trigger.type = '其他'
                 
-    def createTrigger(self, trigger_name):
+    def createTrigger(self, trigger_name, en_name=None):
         if trigger_name in self.trigger_set:
             return self.name2trigger[trigger_name]
         else:
             new_trigger = Trigger(trigger_name)
             self.name2trigger[trigger_name] = new_trigger
             new_trigger.id = trigger_name + '_trigger'
-            # self.now_id += 1
+            if en_name is not None:
+                # print(en_name)
+                new_trigger.en_name = en_name
             self.trigger_set.add(trigger_name)
             self.set_trigger_type(new_trigger)
             return new_trigger
@@ -994,12 +1053,16 @@ class Trigger(object):
     """docstring for Trigger"""
     def __init__(self, name):
         self.name = name
+        self.en_name = ''
         self.type = '未分类'
         self.parent_type = '未分类'
         self.score = 0
         self.id = 'trigger_' + str(name)
-        self.type = 'trigger'
         self.vec = []
+
+        self.role2score = {}
+
+        self.pair_trigger = None
 
     # 将各元素拼接生成一个数组,现在八成没用了
     def toVec(self):
@@ -1021,13 +1084,20 @@ class Trigger(object):
         return hash(str(self))
     
     def toDict(self):
+        if self.pair_trigger is not None:
+            pair_trigger = self.pair_trigger.id
+        else:
+            pair_trigger = ''
         return {
             'id': self.id,
             'name': self.name,
+            'en_name': self.en_name,
             'type': self.type,
             'parent_type': self.parent_type,
             'score': self.score,
-            'vec': self.vec
+            'vec': self.vec,
+            'role2score': self.role2score,
+            'pair_trigger': pair_trigger
         }
 
 triggerManager = EventTriggerManager()

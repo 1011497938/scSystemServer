@@ -35,14 +35,28 @@ event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
 event2vec.load()
 event2vec.load2Manager()
 # event2vec.saveToView()
+# event2vec.saveToViewTrigger()
 
+eventManager.event2vec = event2vec
 # all2vec = All2vec(personManager, addrManager, eventManager)
+
+cached_person_set = set()
+def chacheFunction(person):
+    if person in cached_person_set:
+        return
+    cached_person_set.add(person)
+    events = person.getRelatedEvents(limit_depth=3)
+    print('加载缓存', len(events),person)
+    for event in events:
+        event.toDict()
+    print('缓存加载完成')
+threading.Thread(target=chacheFunction,args=(personManager.getPerson('person_3767'),)).start()
+
 
 # person_graph = PersonGraph(eventManager)
 person_rank = pageRank(eventManager.event_array, personManager.person_array)
 for person in personManager.person_array:
     person.page_rank = person_rank[person.id]
-
 
 trigger_name_imp = eventManager.calculateImporatnce1()
 # 有一些数据会在最初全部加载(对应的vec还没有加),还可以再优化的
@@ -58,10 +72,21 @@ init_data = json.dumps({
     'addrs': song_addrs, 
     'triggers': triggers, 
     'trigger_imp': trigger_name_imp,
-    'info': '初始化数据'
+    'year2vec': event2vec.getYear2Vec(),
+    'info': '初始化数据',
     })
 # open('scSystemServer/data_model/temp_data/预加载数据/data', 'w', encoding='utf-8').write(init_data)
 
+
+
+# trigger_lists = set()
+# for event in eventManager.event_array:
+#     trigger = event.trigger
+#     for elm in event.roles:
+#         trigger_lists.add('{},{},{},{},{}'.format(trigger.name, trigger.type, trigger.parent_type, elm['role'], str(event.getScore(elm['person']))))
+# ftrigger = open('scSystemServer/data_model/temp_data/trigger_score.csv', 'w', encoding='utf-8')
+# ftrigger.write('\n'.join(list(trigger_lists)))
+# ftrigger.close()
 
 print('共加载', len(eventManager.event_array), '事件')
 
@@ -72,7 +97,7 @@ def init(request):
         data = {'info': 'server is loading, please wait'}
         return HttpResponse(json.dumps(data))
 
-def events2dict(event_array):
+def events2dict(event_array, person_array=[], addr_array=[],need_infer = False):
     events = set()
     addrs = set()
     people = set()
@@ -86,9 +111,14 @@ def events2dict(event_array):
         for role in event.roles:
             people.add(role['person'])
     
+    for person in person_array:
+        people.add(person)
+    for addr in addr_array:
+        addrs.add(addr)
+
     #trigger 预加载已经加载好了
     results = {
-        'events': { item.id: item.toDict()  for item in events},
+        'events': { item.id: item.toDict(need_infer = need_infer)  for item in events},
         'addrs': { item.id: item.toDict()  for item in addrs if not item.isSong()},
         'people': { item.id: item.toDict()  for item in people  if not item.isSong()},
         # 'triggers': { item.id: item.toDict()  for item in triggers},   
@@ -101,7 +131,9 @@ def getPersonEvents(request):
     print('获取' + person_id + '事件')
     events = personManager.getPerson(person_id).event_array
     print(person_id + '事件数共有' + str(len(events)))
-    return HttpResponse(json.dumps(events2dict(events)))
+
+    threading.Thread(target=chacheFunction,args=(person,)).start()
+    return HttpResponse(json.dumps(events2dict(events, need_infer = True)))
 
 # 推断一些可能事件的可能时间  （还可以加上地点）
 def inferPersonsEvent(request):
@@ -115,12 +147,13 @@ def inferPersonsEvent(request):
     event2prob_year = {}
     for event in events:
         prob_year = event2vec.getEventProbYear(event)
-        print(event, prob_year)
-        prob_year = {year: prob_year[year] for year in prob_year.keys() if prob_year[year]>0.45 }
+        # print(event, prob_year)
+        prob_year = {year: prob_year[year] for year in prob_year.keys()}
         event2prob_year[event.id] = prob_year
 
     print('推测结束')
     return HttpResponse(json.dumps({ 'data':events2dict(events), 'infer': event2prob_year, 'info': '推测数据'}))
+
 
 require2renponse = {}
 def getRelatedEvents(request):
@@ -138,7 +171,7 @@ def getRelatedEvents(request):
         print('没有找到', event_id, '对应的事件')
         return HttpResponse(json.dumps({'info': '没有找到事件'}))
 
-    positive = [center_event]
+    # positive = [center_event]
     main_people = center_event.getPeople()
     # positive += main_people
     # positive += event.addrs
@@ -153,7 +186,7 @@ def getRelatedEvents(request):
     # related_events = event2vec.getRelatedObject(positive=positive, num=max_num*2)
     # related_events = [event for event in related_events if not isinstance(event, int) and event.type=='event'][:max_num]
     # related_events.append(event)
-    data = events2dict(related_events)
+    data = events2dict(related_events, need_infer = True)
     
     response = {'data':data, 'center_event':event_id, 'info': '找到相关事件'}
     require2renponse[require_id] = response
@@ -214,6 +247,43 @@ def getPersonRelation(request):
     print('找到了',len(all_people), '个人,共', len(result_events),'事件')
     result_events = events2dict(result_events)
     return HttpResponse(json.dumps({'data':result_events, 'info': '找到某人的所有关系'}))
+
+
+def patch(objects):
+    objects = list(set(objects))
+
+    type2objects = {}
+    type2objects['person'] = []
+    type2objects['addr'] = [] 
+    type2objects['event'] = []
+    type2objects['time'] = []
+
+    print(objects)
+    for elm in objects:
+        if isinstance (elm, str) :
+            type2objects['time'].append(elm)
+            continue
+        elm_type = elm.type
+        if elm_type not in type2objects:
+            type2objects[elm_type] = []
+            print(elm_type)
+        type2objects[elm_type].append(elm.toDict())
+    
+    return {elm_type: type2objects[elm_type] for elm_type in type2objects.keys()}
+
+def getRelatedObjects(request):
+    positive = request.GET.get('positive')
+    negative = request.GET.get('negative')
+    num = int(request.GET.get('num'))
+
+    positive = positive.split(',')
+    negative = negative.split(',')
+    positive = [elm for elm in positive if elm is not None and elm!='']
+    negative = [elm for elm in negative if elm is not None and elm!='']
+    print(positive, negative)
+    objects = event2vec.getRelatedObjectById(negative_ids=negative, positive_ids=positive, num=num)
+    # 分包
+    return HttpResponse(json.dumps({'data': patch(objects), 'info': '查找相似内容'}))
 
 def getSimLife(request):
     person_id = request.GET.get('person_id')

@@ -15,9 +15,9 @@ class PersonManager(object):
         self.id_set = set()
         self.person_array = []
         self.event_manager = None
-        self.all2vec = None
-        print('初始化人物')
 
+        print('初始化人物')
+        self.event2vec = None
         self.song_people = set()  #整理所有的宋朝人物
 
     def selfDestory(self):
@@ -52,7 +52,26 @@ class PersonManager(object):
                         # if not this_person.isSong():
                         self.song_people.add(this_person)
 
+        def allIsSong(event):
+            main_people = event.getPeople()
+            for person in main_people:
+                if not person.isSong():
+                    return False
+            return True
 
+        # events = []
+        # people = self.song_people
+        # for person in self.song_people:
+        #     person.event_array = [event  for event in person.event_array if allIsSong(event)]
+        #     events += person.event_array
+        # events = list(set(events))
+        # self.event_manager.event_array = events
+        # self.id2event = {event.id:event  for event in events}
+        # self.event_id_set = set([event.id  for event in events])
+
+        # self.id2person = {person.id:person  for person in people}  #c_personid
+        # self.id_set = set([person.id for person in people])
+        # self.person_array = people
 
     def createPerson(self,bio_main_node):
         new_id = 'person_' + bio_main_node['c_personid']
@@ -97,6 +116,8 @@ class Person(object):
         # from event_manager import eventManager
         self.id = 'person_' + bio_main_node['c_personid']
         self.name = bio_main_node['c_name_chn']
+
+        self.en_name = bio_main_node['c_name']
 
         self.birth_year = bio_main_node['c_birthyear']
         self.death_year = bio_main_node['c_deathyear']
@@ -152,6 +173,7 @@ class Person(object):
         self.score_array = None
 
         self.depth2related_events = {}
+        self.depth2related_people = {}
 
         self.vec = []
 
@@ -199,11 +221,20 @@ class Person(object):
 
         self.page_rank = None
     
+    def getRelatedPeople(self, limit_depth=2):
+        events = self.getRelatedEvents(limit_depth=limit_depth-1)
+        people = []
+        for event in events:
+            main_people = event.getPeople()
+            people += main_people
+        people = list(set(people))
+        return people
+
     def getRelatedEvents(self, limit_depth = 3):
         if limit_depth in self.depth2related_events:
             return self.depth2related_events[limit_depth]
 
-        print('开始爬取所有相关人员事件', self, limit_depth)
+        # print('开始爬取所有相关人员事件', self, limit_depth)
         has_pull = set()
         need_pull = set()
         person2depth = {}
@@ -339,8 +370,8 @@ class Person(object):
         return hash(str(self.id)+'人物')
 
     def toDict(self):
-        year2event = self.getYear2event()
-        years = year2event.keys()
+        # year2event = self.getYear2event()
+        # years = year2event.keys()
         return {
             'id': self.id,
             'name': self.name,
@@ -350,9 +381,10 @@ class Person(object):
             'events_num': len(self.event_array),
             'page_rank': self.page_rank,
             'dy': self.dy,
-            'vec': self.vec
+            'vec': self.vec,
+            'en_name': self.en_name,
             # 'events': [event.id for event in self.event_array]
-            # 'time_range': self.range
+            'time_range': self.getProbYearRange()
         }
 
     def isSong(self):

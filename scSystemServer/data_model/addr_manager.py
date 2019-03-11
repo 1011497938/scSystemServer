@@ -20,6 +20,10 @@ class AddrManager(object):
         self.place2xy_set = set(self.place2xy.keys())
         self.all2vec = None
 
+        self.song_addrs = None
+
+        self.event2vec = None
+        
         # 加载CBDB上的所有地址
         addr_data = graph.run('MATCH (n:Addr_codes) RETURN id(n), n').data()
         for data in addr_data:
@@ -182,6 +186,13 @@ class AddrManager(object):
         addrs = {str(addr.id):addr.toDict() for addr in self.addr_array }
         return addrs
 
+    def getSongAddrs(self):
+        if self.song_addrs:
+            return list(self.song_addrs)
+        song_addrs = [addr for addr in self.addr_array if addr.isSong()]
+        self.song_addrs = list(song_addrs)
+        return list(song_addrs)
+
     def toSongDict(self):
         has = set()
         left = set()
@@ -211,7 +222,7 @@ class Addr(object):
         # 3/5日加入，导致原先的模型不可用
         self.id = 'addr_' + addr_node['c_addr_id']
         self.name = addr_node['c_name_chn']
-
+        self.en_name = addr_node['c_name']
         self.first_year = addr_node['c_firstyear']
         self.last_year = addr_node['c_lastyear']
 
@@ -294,6 +305,7 @@ class Addr(object):
         return hash(str(self))
     
     def toDict(self):
+
         return {
             'id':self.id,
             'name':self.name,
@@ -301,6 +313,7 @@ class Addr(object):
             'last_year':self.last_year,
             'x':self.x,
             'y':self.y,
+            'en_name': self.en_name,
             'alt_names':self.alt_names,
             # 'time_range': self.time_range,
             'parents': [addr.id for addr in self.parents],
