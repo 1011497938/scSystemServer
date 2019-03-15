@@ -909,10 +909,10 @@ class Event(object):
         prob_person = {}
 
         if need_infer:
-            if self.prob_addr is None:
+            if self.prob_year is None:
                 if eventManager.event2vec is not None:
-                    if not self.isCertain():
-                        prob_year = eventManager.event2vec.getEventProbYear(self)
+                    # if not self.isCertain():
+                    prob_year = eventManager.event2vec.getEventProbYear(self)
                     # prob_person = eventManager.event2vec.getEventProbPerson(self)
                     # prob_addr = eventManager.event2vec.getEventProbAddr(self)
                     self.prob_addr = prob_addr
@@ -990,7 +990,7 @@ class EventTriggerManager(object):
 
     # 更新了之前错误的type
     def reload(self):
-        fs = open('scSystemServer/data_model/temp_data/trigger_score.csv','r', encoding='utf-8')
+        fs = open('scSystemServer/data_model/data/trigger_score.csv','r', encoding='utf-8')
         for line in fs:
             columns = line.strip('\n').split(',')
             if len(columns)!=5:
@@ -1001,6 +1001,25 @@ class EventTriggerManager(object):
                     trigger.type = columns[1]
                     trigger.parent_type = columns[2]
                     trigger.role2score[columns[3]] = float(columns[4])
+
+        for trigger in self.trigger_set:
+            if trigger.type=='未分类':
+                print(trigger, '没有分类')
+
+        trigger_lists = set()
+        trigger_set = set()
+        # for trigger_set in triggerManager.trigger_set:
+        #         trigger = event.trigger
+        for event in eventManager.event_array:
+            trigger = event.trigger
+            trigger_lists.add( '{},{}'.format(trigger.name, trigger.type))
+            trigger_lists.add('{},{}'.format(trigger.type, trigger.parent_type) )
+            trigger_set.add(trigger)
+        ftrigger = open('scSystemServer/data_model/data/trigger_type.csv', 'w', encoding='utf-8')
+        ftrigger.write('\n'.join(list(trigger_lists)))
+        ftrigger.close()
+        self.trigger_set = trigger_set
+        self.name2trigger = {trigger.id:trigger  for trigger in trigger_set}
 
     def getGuanZhiScore(self, guanzhi):
         if guanzhi not in self.guanzhi_score:
@@ -1097,7 +1116,7 @@ class Trigger(object):
             'score': self.score,
             'vec': self.vec,
             'role2score': self.role2score,
-            'pair_trigger': pair_trigger
+            # 'pair_trigger': pair_trigger
         }
 
 triggerManager = EventTriggerManager()

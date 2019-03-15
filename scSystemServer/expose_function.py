@@ -31,10 +31,10 @@ personManager.registEventManager(eventManager)
 eventManager.getAll()
 
 event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
-# event2vec.train(TOTAL_TIMES=100)
+# event2vec.train(TOTAL_TIMES=10)
 event2vec.load()
 event2vec.load2Manager()
-# event2vec.saveToView()
+# event2vec.saveToView() 
 # event2vec.saveToViewTrigger()
 
 eventManager.event2vec = event2vec
@@ -79,14 +79,7 @@ init_data = json.dumps({
 
 
 
-# trigger_lists = set()
-# for event in eventManager.event_array:
-#     trigger = event.trigger
-#     for elm in event.roles:
-#         trigger_lists.add('{},{},{},{},{}'.format(trigger.name, trigger.type, trigger.parent_type, elm['role'], str(event.getScore(elm['person']))))
-# ftrigger = open('scSystemServer/data_model/temp_data/trigger_score.csv', 'w', encoding='utf-8')
-# ftrigger.write('\n'.join(list(trigger_lists)))
-# ftrigger.close()
+
 
 print('共加载', len(eventManager.event_array), '事件')
 

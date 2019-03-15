@@ -388,7 +388,8 @@ class Person(object):
         }
 
     def isSong(self):
-        return (self.dy==15 or self.dy=='15' or self in personManager.song_people) # and len(self.event_array)>=10
+        #  or self in personManager.song_people
+        return (self.dy==15 or self.dy=='15')and len(self.event_array)>=50
 
     def getCertaintyLength(self):
         return len([ event for event in self.event_array if event.time_range[0]==event.time_range[1] and event.time_range[0]!=-9999])
