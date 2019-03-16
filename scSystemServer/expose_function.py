@@ -28,7 +28,7 @@ import math
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll()
+eventManager.getAll(10)
 
 event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
 # event2vec.train(TOTAL_TIMES=10)
