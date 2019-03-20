@@ -51,15 +51,15 @@ class AddrManager(object):
                     # value = int(value)/1000000
                     # xy.append(value)
                 if xy[0]>0:
-                    while xy[0]>180:
+                    while xy[0]>135:
                         xy[0] /= 10
-                    while xy[0]<6:
+                    while xy[0]<73:
                         xy[0] *= 10
 
                 if xy[1]>0:
-                    while xy[1]>90:
+                    while xy[1]>53:
                         xy[1] /= 10
-                    while xy[1]<6:
+                    while xy[1]<3:
                         xy[1] *= 10
 
                 # print( [addr.x, addr.y], xy)

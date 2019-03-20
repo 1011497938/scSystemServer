@@ -20,6 +20,20 @@ class PersonManager(object):
         self.event2vec = None
         self.song_people = set()  #整理所有的宋朝人物
 
+    def loadExtraData(self):
+        rows = db.runSelect('SELECT c_personid,c_alt_name,c_alt_name_chn from altname_data')
+        for row in rows:
+            person = self.getPerson(row[0])
+            if person is not None:
+                person.alt_name.append(row[2])
+                person.alt_name_en.append(row[1])
+        
+        rows = db.runSelect('SELECT c_personid,c_status_code from status_data')
+        for row in rows:
+            person = self.getPerson(row[0])
+            if person is not None:
+                person.status.append(row[1])
+
     def selfDestory(self):
         for person in self.person_array:
             person.selfDestory()
@@ -90,13 +104,13 @@ class PersonManager(object):
             person_id = 'person_' + str(person_id)
         if person_id in self.id_set:
             return self.id2person[person_id]
-        else:
-            print(person_id, '没有找到，到数据库中查找')
+        # else:
+        #     print(person_id, '没有找到，到数据库中查找')
             # print('run')
-            data = graph.run('MATCH (n:Biog_main{{c_personid:"{}"}}) RETURN n'.format(str(person_id))).data()
-            if len(data)!=0:
-                # print(data[0])
-                return self.createPerson(data[0]['n'])
+            # data = graph.run('MATCH (n:Biog_main{{c_personid:"{}"}}) RETURN n'.format(str(person_id))).data()
+            # if len(data)!=0:
+            #     # print(data[0])
+            #     return self.createPerson(data[0]['n'])
         return None
 
     def registEventManager(self, eventManager):
@@ -124,6 +138,14 @@ class Person(object):
 
         self.event_array = []  #所有出现的event
 
+        self.female = bio_main_node['c_female']
+        self.ethnicity = bio_main_node['c_ethnicity_code']
+
+        self.household_status = bio_main_node['c_household_status_code']  #户籍
+        self.alt_name = []
+        self.alt_name_en = []
+
+        self.status = []  #社会区分
         # 还要添加别名,籍贯等内容
         # self.range = [-9999,9999]  # range	暂时不计算,还有很多时间也没有添加
         
@@ -383,6 +405,13 @@ class Person(object):
             'dy': self.dy,
             'vec': self.vec,
             'en_name': self.en_name,
+
+            'alt_name': self.alt_name,
+            'alt_name_en': self.alt_name_en,
+            'status': self.status,
+            'household_status': self.household_status,
+            'ethnicity': self.ethnicity,
+            'female': self.female,
             # 'events': [event.id for event in self.event_array]
             'time_range': self.getProbYearRange()
         }

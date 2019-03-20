@@ -29,6 +29,7 @@ import math
 # 初始化
 personManager.registEventManager(eventManager)
 eventManager.getAll()
+personManager.loadExtraData()
 
 event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
 # event2vec.train(TOTAL_TIMES=10)
@@ -179,7 +180,7 @@ def getRelatedEvents(request):
     # related_events = event2vec.getRelatedObject(positive=positive, num=max_num*2)
     # related_events = [event for event in related_events if not isinstance(event, int) and event.type=='event'][:max_num]
     # related_events.append(event)
-    data = events2dict(related_events, need_infer = True)
+    data = events2dict(related_events, need_infer = False)
     
     response = {'data':data, 'center_event':event_id, 'info': '找到相关事件'}
     require2renponse[require_id] = response

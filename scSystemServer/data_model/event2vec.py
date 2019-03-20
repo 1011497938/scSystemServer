@@ -198,6 +198,7 @@ class Event2Vec(object):
     # 现在的id不是唯一的！！！
     def train(self, TOTAL_TIMES=20):
         model_path = self.model_path 
+        for time in range(0, TOTAL_TIMES):
             print(time, '/', TOTAL_TIMES, '次训练')
             walks = self.generate_data(8,8)
             if not os.path.exists(model_path):
@@ -209,9 +210,9 @@ class Event2Vec(object):
                 model = Word2Vec.load(model_path)
                 model.train(walks, total_examples=len(walks), epochs=5)
 
-            print('保存model')
-            model.save(model_path)
-            self.model = model
+        print('保存model')
+        model.save(model_path)
+        self.model = model
         self.finish_train()
         self.G = None
 
@@ -297,15 +298,20 @@ class Event2Vec(object):
         min_year = -2000
         max_year = 2000
         year2prob = {}
+
+        years = []
         for person in people:
-            time_range = person.getProbYearRange()
-            # print(time_range)
-            if time_range[0]>min_year:
-                min_year = time_range[0]
-            if time_range[1]<max_year:
-                max_year = time_range[1]
+            years +=  [event.time_range[0] for event in person.event_array if event.time_range[0]!=-9999]
+            years +=  [event.time_range[1] for event in person.event_array if event.time_range[1]!=9999]
+            # time_range = person.getProbYearRange()
+            # # print(time_range)
+            # if time_range[0]>min_year:
+            #     min_year = time_range[0]
+            # if time_range[1]<max_year:
+            #     max_year = time_range[1]
         # print(min_year, max_year)
-        for year in range(min_year-10, max_year+10):
+        years = list(set(years))
+        for year in years:
             if year not in year2prob:
                 year2prob[year] =  self.similar_by_object(year, event)
 
