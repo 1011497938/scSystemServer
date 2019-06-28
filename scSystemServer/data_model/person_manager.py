@@ -288,7 +288,7 @@ class Person(object):
                                 need_pull.add(related_person)
                     else:
                         person2depth[hash_vale] = now_depth+1
-                        if now_depth<limit_depth and related_person not in has_pull:
+                        if now_depth+1<limit_depth and related_person not in has_pull:
                             need_pull.add(related_person)
             # print(len(has_pull), person, person2depth[hash(person)])
 
@@ -391,7 +391,7 @@ class Person(object):
     def __hash__(self):
         return hash(str(self.id)+'人物')
 
-    def toDict(self):
+    def toDict(self, need_vec=False):
         # year2event = self.getYear2event()
         # years = year2event.keys()
         return {
@@ -417,8 +417,7 @@ class Person(object):
         }
 
     def isSong(self):
-        #  or self in personManager.song_people
-        return (self.dy==15 or self.dy=='15')and len(self.event_array)>=50
+        return (self.dy==15 or self.dy=='15') or self in personManager.song_people and len(self.event_array)>=20 #and 
 
     def getCertaintyLength(self):
         return len([ event for event in self.event_array if event.time_range[0]==event.time_range[1] and event.time_range[0]!=-9999])

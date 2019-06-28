@@ -4,3 +4,4 @@ fastdtw
 networkX
 cylouvain
 opencc-python-reimplemented
+gensim

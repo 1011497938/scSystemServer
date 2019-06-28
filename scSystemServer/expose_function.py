@@ -6,8 +6,8 @@ from .data_model.neo4j_manager import graph
 from py2neo import Graph,Node,Relationship,cypher
 from .data_model.time_manager import timeManager
 # from relation2type import getRelTypes
-from .data_model.page_rank import pageRank  #,PersonGraph
-# from .data_model.word2vec import All2vec
+from .data_model.page_rank import loadPageRank,savePageRank  #,PersonGraph
+from .data_model.word2vec import All2vec
 from .data_model.common_function import dist_dif
 from .data_model.event2vec import Event2Vec
 
@@ -28,59 +28,96 @@ import math
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll()
+eventManager.getAll(30, multi_process=True)
 personManager.loadExtraData()
 
+personManager.calculateAllSongPeople()
 event2vec= Event2Vec(personManager, eventManager, addrManager, triggerManager)
-# event2vec.train(TOTAL_TIMES=10)
+# event2vec.train(TOTAL_TIMES=5)
 event2vec.load()
 event2vec.load2Manager()
 # event2vec.saveToView() 
 # event2vec.saveToViewTrigger()
 
 eventManager.event2vec = event2vec
+
+# 加载trigger
+trigger_types = set()
+for elm in triggerManager.trigger_set:
+    trigger_types.add(elm.parent_type)
+    trigger_types.add(elm.type)
+trigger_type2vec = {elm: event2vec.getVec(elm).tolist() for elm in trigger_types}
+
 # all2vec = All2vec(personManager, addrManager, eventManager)
 
 cached_person_set = set()
 def chacheFunction(person):
-    if person in cached_person_set:
-        return
-    cached_person_set.add(person)
-    events = person.getRelatedEvents(limit_depth=3)
-    print('加载缓存', len(events),person)
-    for event in events:
-        event.toDict()
-    print('缓存加载完成')
+    # if person in cached_person_set:
+    #     return
+    # cached_person_set.add(person)
+    # events = person.getRelatedEvents(limit_depth=3)
+    # print('加载缓存', len(events),person)
+    # for event in events:
+    #     event.toDict(need_infer=True)
+    # print('缓存加载完成')
+    return
 threading.Thread(target=chacheFunction,args=(personManager.getPerson('person_3767'),)).start()
 
 
 # person_graph = PersonGraph(eventManager)
-person_rank = pageRank(eventManager.event_array, personManager.person_array)
-for person in personManager.person_array:
-    person.page_rank = person_rank[person.id]
+# savePageRank(eventManager.event_array, personManager.person_array)
+# person_rank = 
+loadPageRank(personManager.person_array)
+# for person in personManager.person_array:
+#     person.page_rank = person_rank[person.id]
 
 trigger_name_imp = eventManager.calculateImporatnce1()
 # 有一些数据会在最初全部加载(对应的vec还没有加),还可以再优化的
 # 宋代人物
-song_people = {person.id: person.toDict() for person in personManager.person_array if person.isSong()}
+init_people = {person.id: person.toDict() for person in personManager.person_array if person.isSong()}
 #宋代地点
-song_addrs = addrManager.toSongDict()
+init_addrs = addrManager.toSongDict()
 #所有触发词 
 triggers = triggerManager.toDict()
 # 转载
 init_data = json.dumps({
-    'people': song_people, 
-    'addrs': song_addrs, 
+    'people': init_people, 
+    'addrs': init_addrs, 
     'triggers': triggers, 
     'trigger_imp': trigger_name_imp,
     'year2vec': event2vec.getYear2Vec(),
     'info': '初始化数据',
-    })
+    'parent_trigger2vec': {}  #trigger_type2vec
+})
+
+open('scSystemServer/data_model/temp_data/trigger_imp.json', 'w', encoding='utf-8').write(json.dumps(trigger_name_imp, indent=2, ensure_ascii = False))
 # open('scSystemServer/data_model/temp_data/预加载数据/data', 'w', encoding='utf-8').write(init_data)
 
+# 获得苏轼和辛弃疾  3767 30359
+for person in [personManager.getPerson('3767'), personManager.getPerson('30359')]:
+    events = person.event_array
+    new_events = []
+    for event in events:
+        new_event = {
+            'time_range': event.time_range,
+            'roles': [{'role':elm['role'], 'person': elm['person'].name, 'page_rank':elm['person'].page_rank }  for elm in event.roles],
+            'trigger': {'name': event.trigger.name, 'score': event.trigger.score},
+        }
+        if(event.trigger.name=='担任'):
+            new_event['detail'] = event.detail
+        new_events.append(new_event)
+    open('scSystemServer/data_model/temp_data/' + person.name +'.json', 'w', encoding='utf-8').write(json.dumps(new_events, indent=2, ensure_ascii = False))
 
-
-
+# 获得词人的range
+# poets_names = open('scSystemServer/data_model/data/poets.csv', 'r', encoding='utf-8').read().strip('\n').split('\n')
+# poet2range = {}
+# for name in poets_names:
+#     people = personManager.person_array
+#     poet2range[name] = []
+#     for person in people:
+#         if person.name == name:
+#             poet2range[name].append(person.getProbYearRange())
+# open('scSystemServer/data_model/temp_data/poet2range', 'w', encoding='utf-8').write(json.dumps(poet2range, indent=2, ensure_ascii = False))
 
 print('共加载', len(eventManager.event_array), '事件')
 
@@ -126,7 +163,13 @@ def getPersonEvents(request):
     events = personManager.getPerson(person_id).event_array
     print(person_id + '事件数共有' + str(len(events)))
 
-    threading.Thread(target=chacheFunction,args=(person,)).start()
+    # threading.Thread(target=chacheFunction,args=(person,)).start()
+
+    # temp_events = set(events)
+    # for event in events:
+    #     sim_events = event2vec.getSimEvents(event)[0:5]
+    #     temp_events = temp_events.union(set(sim_events))
+    # events = list(temp_events)
     return HttpResponse(json.dumps(events2dict(events, need_infer = True)))
 
 # 推断一些可能事件的可能时间  （还可以加上地点）
@@ -175,11 +218,19 @@ def getRelatedEvents(request):
         events += person.getRelatedEvents(limit_depth=3)
     events = list(set(events))
     sim2event = {this_event: event2vec.similar_by_object(center_event, this_event)  for this_event in events}
-    related_events = sorted(events , key=lambda this_event: sim2event[this_event])[-max_num:]
+    related_events = sorted(events , key=lambda this_event: -sim2event[this_event])[0:max_num]
+    print(len(related_events), max_num)
     related_events.append(center_event)
+
     # related_events = event2vec.getRelatedObject(positive=positive, num=max_num*2)
     # related_events = [event for event in related_events if not isinstance(event, int) and event.type=='event'][:max_num]
     # related_events.append(event)
+
+    # # 根据情况判断要不要加
+    # for person in main_people:
+    #     related_events += person.event_array
+
+    related_events = list(set(related_events))
     data = events2dict(related_events, need_infer = False)
     
     response = {'data':data, 'center_event':event_id, 'info': '找到相关事件'}

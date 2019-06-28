@@ -43,7 +43,7 @@ class AddrManager(object):
 
         for addr in self.addr_array:
             if addr.x != 'None' and addr.x is not None:   #如果原先已有纪录
-                xy = [int(value)/1000000 for value in [addr.x, addr.y]]
+                xy = [abs(int(value)/1000000) for value in [addr.x, addr.y]]
                 # for value in [addr.x, addr.y]:
                     # if len(value)<9:
                     #     for time in range(9-len(value)):
@@ -59,7 +59,7 @@ class AddrManager(object):
                 if xy[1]>0:
                     while xy[1]>53:
                         xy[1] /= 10
-                    while xy[1]<3:
+                    while xy[1]<20:
                         xy[1] *= 10
 
                 # print( [addr.x, addr.y], xy)
@@ -257,7 +257,7 @@ class Addr(object):
         return list(self.vec)
 
     def isSong(self):
-        return (self.name=='宋朝' or (self.first_year<800 and self.last_year>1300))
+        return False #(self.name=='宋朝' or (self.first_year<800 and self.last_year>1300))
 
     def selfDestory(self):
         self.id = None
@@ -304,7 +304,7 @@ class Addr(object):
     def __hash__(self):
         return hash(str(self))
     
-    def toDict(self):
+    def toDict(self, need_vec=False):
 
         return {
             'id':self.id,

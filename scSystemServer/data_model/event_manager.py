@@ -121,54 +121,40 @@ class EventManager(object):
         # print('\n'.join([trigger.name for trigger in triggerManager.trigger_set]))
         return
 
-    def getAll(self, get_times = 30):
+    def getAll(self, get_times = 30, multi_process=False):
         if not self.is_all:	
-            # threading_array = []
-            # has1 = has2 = has3 = has4 = True
-            # threading_array = []
-
             EVENT_NUM_PER_TIMES = 10000
             for times in range(0,get_times):
-                t1= threading.Thread(target=self.loadRelationEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
-                t2= threading.Thread(target=self.loadPostOfficeEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
-                t3= threading.Thread(target=self.loadTextEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
-                t4= threading.Thread(target=self.loadEntryEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
-                t5= threading.Thread(target=self.loadAddrEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                if multi_process:
+                    t1= threading.Thread(target=self.loadRelationEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                    t2= threading.Thread(target=self.loadPostOfficeEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                    t3= threading.Thread(target=self.loadTextEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                    t4= threading.Thread(target=self.loadEntryEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
+                    t5= threading.Thread(target=self.loadAddrEvents,args=(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None))
 
-                t1.start()
-                time.sleep(0.1)
-                # threading_array.append(t1)
-                t2.start()
-                time.sleep(0.1)
-                # threading_array.append(t2)
-                t3.start()
-                time.sleep(0.1)
-                # threading_array.append(t3)
-                t4.start()
-                time.sleep(0.1)
-                # threading_array.append(t4)
-                t5.start()
-                time.sleep(0.1)
-                # threading_array.append(t5)
+                    t1.start()
+                    time.sleep(0.1)
+                    t2.start()
+                    time.sleep(0.1)
+                    t3.start()
+                    time.sleep(0.1)
+                    t4.start()
+                    time.sleep(0.1)
+                    t5.start()
+                    time.sleep(0.1)
 
-                t1.join()
-                t2.join()
-                t3.join()
-                t4.join()
-                t5.join()
-                # if has1:
-                # 	has1 = eventManager.loadRelationEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)   #person_id=3767 苏轼
-                # if has2:
-                # 	has2 = eventManager.loadPostOfficeEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)
-                # if has3:
-                # 	has3 = eventManager.loadTextEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)
-                # if has4:
-                # 	has4 = eventManager.loadEntryEvents(LIMIT = EVENT_NUM_PER_TIMES,SKIP = EVENT_NUM_PER_TIMES*times)
-                # if not has1  and not has2 and not has3 and not has4:
-                # 	break
-
-            # for t in threading_array:
-            # 	t.join()
+                    t1.join()
+                    t2.join()
+                    t3.join()
+                    t4.join()
+                    t5.join()
+                else:
+                    self.loadRelationEvents(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None)
+                    self.loadPostOfficeEvents(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None)
+                    self.loadTextEvents(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None)
+                    self.loadEntryEvents(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None)
+                    self.loadAddrEvents(EVENT_NUM_PER_TIMES,EVENT_NUM_PER_TIMES*times, None)
+                    
         self.clean()
         personManager.calculateAllSongPeople()
         triggerManager.reload()
@@ -213,7 +199,6 @@ class EventManager(object):
             event = self.createEvents(node_id)
             event.type = '关系事件'
 
-
             if 'c_sequence' in node_data.keys():
                 sequence = node_data['c_sequence']
                 if sequence != 'None' and sequence is not None:
@@ -225,6 +210,8 @@ class EventManager(object):
                 range_field = graph.getTableRange('assoc_data', 'c_assoc_year')
                 year_range = node_data[range_field]
                 event.addTimeAndRange(c_assoc_year, year_range)
+
+            event.text = node_data['c_text_title']
 
             # if 'c_assoc_nh_code' in node_data.keys():
             # 	nh_code = node_data['c_assoc_nh_code']
@@ -288,7 +275,7 @@ class EventManager(object):
         if person_id is None:
             query = 'MATCH (person:Biog_main)--(event:Biog_addr_data) RETURN person, event, id(event) SKIP {} LIMIT {} '.format(str(SKIP), str(LIMIT))
         else:
-            query = 'MATCH (person:Biog_main{{c_personid:"{}"}})-->(event:Biog_addr_data) RETURN person, event, id(event) SKIP {} LIMIT {} '.format(str(person_id),str(SKIP), str(LIMIT))
+            query = 'MATCH (person:Biog_main{{c_personid:"{}"}})--(event:Biog_addr_data) RETURN person, event, id(event) SKIP {} LIMIT {} '.format(str(person_id),str(SKIP), str(LIMIT))
 
         # print(query)
         results = graph.run(query).data()
@@ -306,7 +293,7 @@ class EventManager(object):
             event.setTrigger('前往', en_name='had been to')
             event.type = '前往'
             event.detail = '前往某地'
-
+            event.text = node_data['c_notes']
             field = 'c_firstyear'
             year = node_data[field]
             if year is not None and year!=0 and year!='0' and year!='None':
@@ -321,6 +308,7 @@ class EventManager(object):
             event.setTrigger('离开', en_name='had left')
             event.type = '离开'
             event.detail = '离开某地'
+            event.text = node_data['c_notes']
 
             field = 'c_lastyear'
             if field in node_data.keys():
@@ -409,7 +397,8 @@ class EventManager(object):
             event2 = self.createEvents('卸任'+node_id1)  #卸任
             event1.type = '官职事件'
             event2.type = '官职事件'
-
+            event1.text = node_data1['c_notes']
+            event2.text = node_data1['c_notes']
 
             field = 'c_firstyear'
             year = node_data1[field]
@@ -552,6 +541,7 @@ class EventManager(object):
             event_id = str(result['id(event)'])
             self.get(event_id).addPerson(person, role)
             event.setTrigger('文学作品'+role, en_name= result['en_role'])
+            event.detail = role
         print('加载文学事件角色')
 
 
@@ -563,9 +553,9 @@ class EventManager(object):
     def loadEntryEvents(self, LIMIT = 1000000,SKIP = 0, person_id = None):
         print('开始加载入仕数据', SKIP)
         if person_id is None:
-            query = 'MATCH (person:Biog_main)-[:参与人]->(event:Entry_data) RETURN person,event,id(event) SKIP {} LIMIT {} '.format(str(SKIP), str(LIMIT))
+            query = 'MATCH (person:Biog_main)--(event:Entry_data) RETURN person,event,id(event) SKIP {} LIMIT {} '.format(str(SKIP), str(LIMIT))
         else:
-            query = 'MATCH (person:Biog_main{{ c_personid:"{}" }})-[:参与人]->(event:Entry_data) RETURN person,event,id(event) SKIP {} LIMIT {} '.format(str(person_id),str(SKIP),str(LIMIT))
+            query = 'MATCH (person:Biog_main{{ c_personid:"{}" }})--(event:Entry_data) RETURN person,event,id(event) SKIP {} LIMIT {} '.format(str(person_id),str(SKIP),str(LIMIT))
         
         results = graph.run(query).data()
         id_list = []
@@ -573,13 +563,14 @@ class EventManager(object):
             
             person = node_data['person']
             event_node = node_data['event']
-            event_id = str(node_data['tts_sysno']) + '入仕'
-            print('entry', event_id)
+            event_id = str(node_data['id(event)'])
+            # print('entry', event_id)
             event = self.createEvents(event_id)
             event.type = '入仕事件'
             field = 'c_year'
             year = event_node[field]
 
+            event.text = event_node['c_notes']
             if year is not None and year!=0 and year!='0' and year!='None':
                 year = int(year)
                 range_field = graph.getTableRange('entry_data', field)
@@ -592,10 +583,11 @@ class EventManager(object):
                     event.sequence = int(sequence)
 
             id_list.append(event_id)
-
             person =  personManager.createPerson(person)
             event.addPerson(person, '主角')
-
+            event.setTrigger('入仕', en_name='post to office')
+            # print(event)
+            # print(event)
         if len(id_list)==0:
             return False
 
@@ -608,7 +600,6 @@ class EventManager(object):
         for result in results:
             method =  result['method']
             event_id = str(result['id(event)'])
-            self.get(event_id).setTrigger('入仕', en_name='post to office')
             self.get(event_id).detail = str(method)
             # self.createEvents(event_id).setTrigger(str(method))
         print('加载入仕方式')
@@ -714,6 +705,8 @@ class EventManager(object):
         
 class Event(object):
     def __init__(self, event_id):
+        self.certainty = None
+
         self.id = event_id
         self.time_range = [-9999, 9999]
         # self.type = None  #类型,没啥用，以后以trigger为主
@@ -735,6 +728,10 @@ class Event(object):
         self.prob_year = None
         self.prob_person = None
 
+        self.text = '宋人传记索引'   #文本
+        self.source = ''  #出处
+
+        self.sim_events = None
 
     # 将各元素拼接生成一个数组,现在八成没用了
     def toVec(self):
@@ -891,9 +888,10 @@ class Event(object):
     def __hash__(self):
         return hash(str(self.id + '事件'))
 
-    def toDict(self, need_infer = False):
+    def toDict(self, need_infer = False, need_vec=False):
         trigger = None
         addrs = []
+        certainty = False
         if self.trigger is not None:
             trigger = self.trigger
         else:
@@ -909,21 +907,9 @@ class Event(object):
         prob_person = {}
 
         if need_infer:
-            if self.prob_year is None:
-                if eventManager.event2vec is not None:
-                    # if not self.isCertain():
-                    prob_year = eventManager.event2vec.getEventProbYear(self)
-                    # prob_person = eventManager.event2vec.getEventProbPerson(self)
-                    # prob_addr = eventManager.event2vec.getEventProbAddr(self)
-                    self.prob_addr = prob_addr
-                    self.prob_year = prob_year
-                    self.prob_person = prob_person
-
-            else:
-                prob_addr = self.prob_addr
-                prob_year = self.prob_year
-                prob_person = self.prob_person
-                
+            prob_year = eventManager.event2vec.getEventProbYear(self)
+            prob_addr = eventManager.event2vec.getEventProbAddr(self)
+            # certainty = eventManager.event2vec.
         return {
             'id': self.id,
             'time_range': self.time_range,
@@ -936,6 +922,8 @@ class Event(object):
             'prob_year': prob_year,
             'prob_addr': prob_addr,
             'prob_person': prob_person,
+            'text': self.text,
+            'source': self.source,
             # 'is_state': self.is_state
         }
 
@@ -1035,13 +1023,19 @@ class EventTriggerManager(object):
             return None
 
     def set_trigger_type(self, trigger, type = None):
+        # 暂时用于补前面的bug
+        if trigger.name=='入仕':
+            print(trigger)
+            trigger.type = '入仕'
+            trigger.parent_type = '政治'
         if type is not None:
             trigger.type = type
-        elif trigger.name in self.trigger2type_score:
-                item = self.trigger2type_score[trigger.name ]
+        elif trigger.name in self.trigger2type_score: 
+                item = self.trigger2type_score[trigger.name]
                 trigger.parent_type = item['parent_type']
                 trigger.type = item['type']
                 trigger.score = item['score']
+
         # else:
         # 	print(str(trigger.name) + '不存在评分和类型')
 
@@ -1082,6 +1076,7 @@ class Trigger(object):
         self.role2score = {}
 
         self.pair_trigger = None
+
 
     # 将各元素拼接生成一个数组,现在八成没用了
     def toVec(self):
