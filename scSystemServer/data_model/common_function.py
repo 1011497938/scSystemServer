@@ -47,3 +47,5 @@ def cos_dif(vector_a, vector_b):
 
 def dist_dif(vector_a, vector_b):
 	return np.linalg.norm(np.mat(vector_a) - np.mat(vector_b))
+
+

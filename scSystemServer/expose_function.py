@@ -24,11 +24,12 @@ import numpy as np
 import math
 from multiprocessing import cpu_count
 import random
-import math
+
+from .evaluate import evaluateAccuracy, evalueForUsers
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll(60, multi_process=True)
+eventManager.getAll(5, multi_process=True)
 personManager.loadExtraData()
 
 personManager.calculateAllSongPeople()
@@ -41,35 +42,38 @@ event2vec.load2Manager()
 
 eventManager.event2vec = event2vec
 
+# evaluateAccuracy()
+# evalueForUsers()
+
 # 为了给宋词的系统下数据用的
-name2person = {}
-for person in personManager.person_array:
-    name = person.name
-    if name not in name2person:
-        name2person[name] = []
-    name2person[name].append(person)
-author_list = open('scSystemServer/data_model/data/author_list.csv', 'r', encoding='utf-8').read().strip('\n').split('\n')
-author_list = set(author_list)
-relation_set = set()
-for name in author_list:
-    if name in name2person:
-        people = name2person[name]
-        for person in people:
-            events = person.event_array
-            for event in events:
-                roles = event.roles
-                if len(roles)==2:
-                    ivl_names = [role['person'].name for role in roles]
-                    roles = [role['role'] for role in roles]
-                    if ivl_names[0] in author_list and ivl_names[1] in author_list:
-                        if roles[0] == '主角':
-                            row = ivl_names[0] + ',' + ivl_names[1] + ',' + event.trigger.name + ',0'
-                        elif roles[0] == '对象':
-                            row = ivl_names[1] + ',' + ivl_names[0] + ',' + event.trigger.name + ',0'
-                        else:
-                            row = ivl_names[1] + ',' + ivl_names[0] + ',' + event.trigger.name + ',1'
-                        relation_set.add(row)
-open('scSystemServer/诗人关系.csv', 'w', encoding='utf-8').write('\n'.join(relation_set))
+# name2person = {}
+# for person in personManager.person_array:
+#     name = person.name
+#     if name not in name2person:
+#         name2person[name] = []
+#     name2person[name].append(person)
+# author_list = open('scSystemServer/data_model/data/author_list.csv', 'r', encoding='utf-8').read().strip('\n').split('\n')
+# author_list = set(author_list)
+# relation_set = set()
+# for name in author_list:
+#     if name in name2person:
+#         people = name2person[name]
+#         for person in people:
+#             events = person.event_array
+#             for event in events:
+#                 roles = event.roles
+#                 if len(roles)==2:
+#                     ivl_names = [role['person'].name for role in roles]
+#                     roles = [role['role'] for role in roles]
+#                     if ivl_names[0] in author_list and ivl_names[1] in author_list:
+#                         if roles[0] == '主角':
+#                             row = ivl_names[0] + ',' + ivl_names[1] + ',' + event.trigger.name + ',0'
+#                         elif roles[0] == '对象':
+#                             row = ivl_names[1] + ',' + ivl_names[0] + ',' + event.trigger.name + ',0'
+#                         else:
+#                             row = ivl_names[1] + ',' + ivl_names[0] + ',' + event.trigger.name + ',1'
+#                         relation_set.add(row)
+# open('scSystemServer/诗人关系.csv', 'w', encoding='utf-8').write('\n'.join(relation_set))
 
 # person_info = {}
 # print(len(person_info.keys()))
@@ -90,18 +94,18 @@ trigger_type2vec = {elm: event2vec.getVec(elm).tolist() for elm in trigger_types
 
 # all2vec = All2vec(personManager, addrManager, eventManager)
 
-cached_person_set = set()
-def chacheFunction(person):
-    # if person in cached_person_set:
-    #     return
-    # cached_person_set.add(person)
-    # events = person.getRelatedEvents(limit_depth=3)
-    # print('加载缓存', len(events),person)
-    # for event in events:
-    #     event.toDict(need_infer=True)
-    # print('缓存加载完成')
-    return
-threading.Thread(target=chacheFunction,args=(personManager.getPerson('person_3767'),)).start()
+# cached_person_set = set()
+# def chacheFunction(person):
+#     # if person in cached_person_set:
+#     #     return
+#     # cached_person_set.add(person)
+#     # events = person.getRelatedEvents(limit_depth=3)
+#     # print('加载缓存', len(events),person)
+#     # for event in events:
+#     #     event.toDict(need_infer=True)
+#     # print('缓存加载完成')
+#     return
+# threading.Thread(target=chacheFunction,args=(personManager.getPerson('person_3767'),)).start()
 
 
 # person_graph = PersonGraph(eventManager)

@@ -702,7 +702,8 @@ class EventManager(object):
 
     def getCertainEvents(self):
         return [event for event in self.event_array if event.isCertain()]
-        
+
+
 class Event(object):
     def __init__(self, event_id):
         self.certainty = None

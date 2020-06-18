@@ -298,6 +298,7 @@ class Event2Vec(object):
             return center_event.prob_year
         # print(center_event, 'getEventProbYear')
         events = self.getSimEvents(center_event)[0:100]
+        events = [event for event in events if event != center_event]
         year2prob = {}
         for event in events:
             if event.isCertain():
