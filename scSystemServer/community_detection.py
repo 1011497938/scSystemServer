@@ -1,8 +1,10 @@
 # 用于存储社团发现算法(目前是无权重的)
 import networkx as nx
-import cylouvain
+# import cylouvain
 from django.http import HttpResponse
 import json
+
+import community
 
 def getCommunity(request):
     node_num = int(request.GET.get('num'))
@@ -19,6 +21,7 @@ def getCommunity(request):
         node_links.append((link[0], link[1]))  #cylouvain
     # print(node_links, graph.nodes) 
     graph.add_edges_from(node_links)
-    partition = cylouvain.best_partition(graph)
+    partition = community.best_partition(graph)
+    # cylouvain.best_partition(graph)
     # print(partition)
     return HttpResponse(json.dumps({ 'data':partition, 'info': '社团发现'}))

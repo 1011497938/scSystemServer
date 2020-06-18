@@ -28,7 +28,7 @@ import math
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll(30, multi_process=True)
+eventManager.getAll(60, multi_process=True)
 personManager.loadExtraData()
 
 personManager.calculateAllSongPeople()
@@ -40,6 +40,46 @@ event2vec.load2Manager()
 # event2vec.saveToViewTrigger()
 
 eventManager.event2vec = event2vec
+
+# 为了给宋词的系统下数据用的
+name2person = {}
+for person in personManager.person_array:
+    name = person.name
+    if name not in name2person:
+        name2person[name] = []
+    name2person[name].append(person)
+author_list = open('scSystemServer/data_model/data/author_list.csv', 'r', encoding='utf-8').read().strip('\n').split('\n')
+author_list = set(author_list)
+relation_set = set()
+for name in author_list:
+    if name in name2person:
+        people = name2person[name]
+        for person in people:
+            events = person.event_array
+            for event in events:
+                roles = event.roles
+                if len(roles)==2:
+                    ivl_names = [role['person'].name for role in roles]
+                    roles = [role['role'] for role in roles]
+                    if ivl_names[0] in author_list and ivl_names[1] in author_list:
+                        if roles[0] == '主角':
+                            row = ivl_names[0] + ',' + ivl_names[1] + ',' + event.trigger.name + ',0'
+                        elif roles[0] == '对象':
+                            row = ivl_names[1] + ',' + ivl_names[0] + ',' + event.trigger.name + ',0'
+                        else:
+                            row = ivl_names[1] + ',' + ivl_names[0] + ',' + event.trigger.name + ',1'
+                        relation_set.add(row)
+open('scSystemServer/诗人关系.csv', 'w', encoding='utf-8').write('\n'.join(relation_set))
+
+# person_info = {}
+# print(len(person_info.keys()))
+# for name in author_list:
+#     if name in name2person:
+#         people = name2person[name]
+#         person_info[name] = [elm.toDict()  for elm in people]
+# open('scSystemServer/data_model/temp_data/词人基本信息.json', 'w', encoding='utf-8').write(json.dumps(person_info, indent=1, ensure_ascii = False))
+
+
 
 # 加载trigger
 trigger_types = set()
@@ -227,8 +267,8 @@ def getRelatedEvents(request):
     # related_events.append(event)
 
     # # 根据情况判断要不要加
-    # for person in main_people:
-    #     related_events += person.event_array
+    for person in main_people:
+        related_events += person.event_array
 
     related_events = list(set(related_events))
     data = events2dict(related_events, need_infer = False)
