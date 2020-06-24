@@ -27,7 +27,7 @@ import random
 
 
 def evaluateAccuracy():
-    max_num = 15
+    max_num = 20
     num_true = {i+1: 0 for i in range(max_num)}
     num_count = {i+1: 0 for i in range(max_num)}
 
@@ -60,13 +60,21 @@ def evaluateAccuracy():
 # {1: 299229, 2: 183242, 3: 99436, 4: 73842, 5: 58331, 6: 50249, 7: 44286, 8: 38736, 9: 33741, 10: 29148, 11: 24624, 12: 20465, 13: 16726, 14: 13426, 15: 10875} 
 # {1: 0.12800898308653239, 2: 0.22689121489614827, 3: 0.4002071684299449, 4: 0.47783104466292897, 5: 0.5343642317121257, 6: 0.5687277358753408, 7: 0.5975703382558822, 8: 0.6198884758364313, 9: 0.6401707121899173, 10: 0.6581240565390422, 11: 0.675235542560104, 12: 0.6891277791351087, 13: 0.6947267726892263, 14: 0.6996871741397289, 15: 0.7069425287356322}
 
+# event_283460 1041年  王安石给程琳做祭文
+# event_228920 1142 秦桧 排挤王赏
+# event_离开352620 1069年 吕祖谦离开金华 还可以挖一下吕祖谦和金华的关系
+# event_268332 1174年 戚如圭和吕祖谦 从Y游
 
+
+
+# event_担任2327826 1180 吕祖谦担任 郝洲 两浙西路
+# 
 def evalueForUsers():
     events = eventManager.event_array[: 100]
     e_ids = [e.id for e in events]
     # print(eventManager.event_array)
-    del_time_es = e_ids
-    del_addr_es = e_ids
+    del_time_es = ['event_283460', 'event_228920', 'event_离开352620'] #e_ids
+    del_addr_es = ['event_268332'] #e_ids
 
     for e_id in del_time_es:
         event = eventManager.get(e_id)
@@ -75,5 +83,5 @@ def evalueForUsers():
     
     for e_id in del_addr_es:
         event = eventManager.get(e_id)
-        print(e_id, event,  [addr.name for addr in event.addrs])
+        # print(e_id, event,  [addr.name for addr in event.addrs])
         event.addr = []

@@ -29,7 +29,7 @@ from .evaluate import evaluateAccuracy, evalueForUsers
 
 # 初始化
 personManager.registEventManager(eventManager)
-eventManager.getAll(5, multi_process=True)
+eventManager.getAll(60, multi_process=True)
 personManager.loadExtraData()
 
 personManager.calculateAllSongPeople()
@@ -43,7 +43,7 @@ event2vec.load2Manager()
 eventManager.event2vec = event2vec
 
 # evaluateAccuracy()
-# evalueForUsers()
+evalueForUsers()
 
 # 为了给宋词的系统下数据用的
 # name2person = {}
